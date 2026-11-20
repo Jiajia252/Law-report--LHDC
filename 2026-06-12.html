@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年06月12日</title>
+<style>
+  :root {
+    --primary: #1a2a5e;
+    --primary-light: #2c3e7a;
+    --accent: #c9a84c;
+    --accent-light: #e0c878;
+    --bg: #f4f6fa;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --text-light: #666666;
+    --border: #e0e4ec;
+    --highlight: #d4380d;
+    --highlight-bg: #fff2e8;
+    --highlight-border: #ff7a45;
+    --shadow: 0 2px 12px rgba(26,42,94,0.08);
+    --shadow-hover: 0 6px 24px rgba(26,42,94,0.15);
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 20px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 400;
+  }
+  .header .date-badge {
+    display: inline-block;
+    margin-top: 14px;
+    background: rgba(201,168,76,0.25);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 4px 18px;
+    font-size: 14px;
+    color: var(--accent-light);
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+  }
+  /* 概览 */
+  .overview {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 24px;
+    margin-bottom: 28px;
+  }
+  .overview h2 {
+    font-size: 20px;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 18px;
+  }
+  .overview-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .stat-item {
+    flex: 1;
+    min-width: 140px;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .stat-item .num {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .stat-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+  /* 重点关注 */
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    position: relative;
+  }
+  .highlight-card .badge {
+    display: inline-block;
+    background: var(--highlight);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .highlight-card .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--highlight);
+    margin-bottom: 6px;
+  }
+  .highlight-card .desc {
+    font-size: 14px;
+    color: var(--text);
+  }
+  /* 章节 */
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-size: 20px;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .count {
+    font-size: 13px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-weight: 500;
+  }
+  /* 卡片 */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 22px;
+    margin-bottom: 18px;
+    transition: box-shadow 0.25s, transform 0.25s;
+    border: 1px solid var(--border);
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .card .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .card .doc-no {
+    font-size: 12px;
+    background: var(--primary);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+  .card .card-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card .card-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .card .card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card .card-meta .icon {
+    font-size: 14px;
+  }
+  .card .key-points {
+    margin-bottom: 14px;
+  }
+  .card .key-points h4 {
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .card .key-points ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card .key-points li {
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 18px;
+    position: relative;
+    color: var(--text);
+  }
+  .card .key-points li::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 8px;
+    top: 5px;
+  }
+  .card .impact {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-left: 3px solid var(--accent);
+  }
+  .card .impact strong {
+    color: var(--primary);
+  }
+  /* 法答网卡片 */
+  .qa-card .question {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .qa-card .answer {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.8;
+  }
+  .qa-card .qa-meta {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .qa-card .scope-hint {
+    font-size: 12px;
+    color: var(--accent);
+    background: rgba(201,168,76,0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  /* 空状态 */
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+    font-size: 15px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px dashed var(--border);
+  }
+  .empty-state .icon { font-size: 36px; margin-bottom: 10px; }
+  /* 往期 */
+  .history {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 22px;
+  }
+  .history h2 {
+    font-size: 20px;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 14px;
+  }
+  .history ul {
+    list-style: none;
+    padding: 0;
+  }
+  .history li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .history li:last-child { border-bottom: none; }
+  .history a {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .history a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 30px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .footer .brand {
+    font-weight: 600;
+    color: var(--primary);
+  }
+  /* 响应式 */
+  @media (max-width: 600px) {
+    .header h1 { font-size: 22px; }
+    .overview-stats { flex-direction: column; }
+    .stat-item { min-width: 100%; }
+    .card .card-meta { flex-direction: column; gap: 4px; }
+    .card .card-title { font-size: 15px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚖️ 联慧东城法规觅踪</h1>
+  <div class="subtitle">最高法院司法解释、批复与法答网精选答问每周追踪</div>
+  <div class="date-badge">📅 2026年06月12日 · 第26周</div>
+</div>
+
+<div class="container">
+
+  <!-- 一、本期概览 -->
+  <div class="overview">
+    <h2>一、本期概览</h2>
+    <div class="overview-stats">
+      <div class="stat-item">
+        <div class="num">3</div>
+        <div class="label">新发布司法解释</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">0</div>
+        <div class="label">新发布批复</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">0</div>
+        <div class="label">新发布法答网精选答问</div>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <div class="badge">🔴 本期重点关注</div>
+      <div class="title">法释〔2026〕11号 —— 刑事缺席审判程序规定正式施行</div>
+      <div class="desc">两高联合发布《关于适用刑事缺席审判程序若干问题的规定》，首次系统化缺席审判适用规则，明确七种境外送达方式，强化辩护权保障，缺席审判与违法所得没收程序可相互衔接转换，为反腐败追逃追赃提供高效司法路径。</div>
+      <br>
+      <div class="title">法释〔2026〕9号 —— 道交赔偿解释（二）6月30日即将施行</div>
+      <div class="desc">新解释明确"开门杀"纳入保险赔付、"好意同乘"重大过失不机械转化、超龄劳动者误工费获支持等，重塑道交损害赔偿裁判规则，施行日期临近，诉讼实务需即刻关注。</div>
+    </div>
+  </div>
+
+  <!-- 二、司法解释 -->
+  <div class="section">
+    <div class="section-title">
+      二、司法解释
+      <span class="count">3件</span>
+    </div>
+
+    <!-- 卡片1：刑事缺席审判 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="doc-no">法释〔2026〕11号</span>
+        <div class="card-title">最高人民法院 最高人民检察院关于适用刑事缺席审判程序若干问题的规定</div>
+      </div>
+      <div class="card-meta">
+        <span><span class="icon">📅</span> 发布：2026年05月21日</span>
+        <span><span class="icon">⏳</span> 施行：2026年05月22日</span>
+        <span><span class="icon">📋</span> 两高联合发布</span>
+      </div>
+      <div class="key-points">
+        <h4>核心要点</h4>
+        <ul>
+          <li>明确缺席审判适用于贪污贿赂犯罪、经最高检核准的严重危害国家安全犯罪和恐怖活动犯罪三类案件，数罪或共同犯罪中可对符合条件的部分单独适用缺席审判</li>
+          <li>列举七种境外送达方式（含使领馆代为送达、邮寄满三个月视为送达、传真/电子邮件/通讯软件送达等），破解跨境送达难题</li>
+          <li>完善辩护权保障：未委托律师的法院应通知法律援助机构指派；拒绝指派律师须有正当理由且五日内另行委托，再次拒绝不予准许</li>
+          <li>缺席判决生效后罪犯到案并对判决提出异议的（十日内），应撤销原判决裁定重新审理，财产处理确有错误的应予返还赔偿</li>
+          <li>缺席审判与违法所得没收程序可相互衔接转换，检察院可直接提起缺席审判公诉而无需先行没收程序</li>
+        </ul>
+      </div>
+      <div class="impact">
+        <strong>实务影响：</strong>为反腐败追逃追赃提供更高效司法路径，缺席审判可直接提起而无需先行违法所得没收程序，避免程序冗余；七种送达方式解决了跨境送达长期阻滞的痛点；强制法律援助及限制二次拒绝机制，兼顾程序公正与审判效率。
+      </div>
+    </div>
+
+    <!-- 卡片2：非法占用耕地 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="doc-no">法释〔2026〕10号</span>
+        <div class="card-title">最高人民法院 最高人民检察院关于办理非法占用耕地案件适用法律若干问题的规定</div>
+      </div>
+      <div class="card-meta">
+        <span><span class="icon">📅</span> 发布：2026年05月10日</span>
+        <span><span class="icon">⏳</span> 施行：2026年05月18日</span>
+        <span><span class="icon">📋</span> 两高联合发布 · 共二十一条</span>
+      </div>
+      <div class="key-points">
+        <h4>核心要点</h4>
+        <ul>
+          <li>明确行政法律责任主体：行为人为责任主体；行政机关经合理审慎调查仍无法确定行为主体的，以实际占有、使用土地且拒不配合处置的人为责任主体</li>
+          <li>非法占用耕地行为在耕地恢复至未被占用状态之前视为具有"继续状态"，追责期限从违法行为终了之日起计算，实质取消了违法占地行为的追责时效保护</li>
+          <li>涉耕地合同效力认定：约定占用耕地建房、建窑、挖砂、采石等违反土地管理法禁止性规定的约定无效，合同无效后按诚信和公平原则结合过错程度确定各方民事责任</li>
+          <li>非法占用农用地罪定罪量刑标准：非法占用并毁坏永久基本农田5亩以上或其他耕地10亩以上构成"数量较大"；曾有二次以上行政处罚又犯的，数量达标准一半即可入罪</li>
+          <li>执行标准以"维持或恢复耕地种植条件"为标准；检察院可就非法占用耕地破坏生态环境的行为提起公益诉讼</li>
+        </ul>
+      </div>
+      <div class="impact">
+        <strong>实务影响：</strong>罕见集行政、民事、刑事、公益诉讼及执行于一体的综合性司法解释，打通耕地保护全链条；"继续状态"认定大幅延长行政执法窗口期；合同无效认定对"以租代征""小产权房交易"等形成有力遏制；入罪标准细化与从宽修复激励机制并存，引导刑事政策走向。
+      </div>
+    </div>
+
+    <!-- 卡片3：道交赔偿解释二 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="doc-no">法释〔2026〕9号</span>
+        <div class="card-title">最高人民法院关于审理道路交通事故损害赔偿案件适用法律若干问题的解释（二）</div>
+      </div>
+      <div class="card-meta">
+        <span><span class="icon">📅</span> 发布：2026年05月06日</span>
+        <span><span class="icon">⏳</span> 施行：2026年06月30日（即将施行）</span>
+        <span><span class="icon">📋</span> 最高法发布</span>
+      </div>
+      <div class="key-points">
+        <h4>核心要点</h4>
+        <ul>
+          <li>租赁/借用机动车责任承担：使用人承担全部侵权责任，所有人、管理人有过错的在其过错范围内与使用人共同承担，赔偿总额不超出被侵权人应受偿损失</li>
+          <li>"开门杀"纳入保险赔付：乘车人开车门致人损害属于"机动车一方责任"，受害人可请求交强险和商业三者险赔付，交强险赔偿后仅可对故意造成损害的乘车人追偿</li>
+          <li>"好意同乘"重大过失认定：交警全责/主责认定不当然等同于机动车使用人对搭乘人构成"故意或重大过失"，需综合事故认定书、事故成因及具体行为等全案事实判断</li>
+          <li>超龄劳动者误工费获支持：超过法定退休年龄但有误工损失证据的应支持误工费；致残后在诉讼期间死亡的，残疾赔偿金仍按定型化方式计算</li>
+          <li>社保/路救基金追偿合并审理：医保基金、工伤保险基金已支付的医疗费用及路救基金垫付费用不得再向侵权人主张赔偿，但相关机构的追偿请求应合并审理</li>
+        </ul>
+      </div>
+      <div class="impact">
+        <strong>实务影响：</strong>新解释将于6月30日施行，"开门杀"纳入保险赔付将显著增加交强险/商业三者险赔付案件量；"好意同乘"减责空间更明确，鼓励互助善行；超龄劳动者误工费从"年龄形式标准"转向"损失实质标准"；追偿请求强制合并审理减少同一事故衍生多案。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 三、批复 -->
+  <div class="section">
+    <div class="section-title">
+      三、批复
+      <span class="count">0件</span>
+    </div>
+    <div class="empty-state">
+      <div class="icon">📋</div>
+      本期暂无新增批复<br>
+      <span style="font-size:13px;">最近一件批复为法释〔2026〕1号《关于基本医疗保险基金先行支付申请条件法律适用问题的批复》（2026年01月06日发布，2026年02月01日施行）</span>
+    </div>
+  </div>
+
+  <!-- 四、法答网精选答问 -->
+  <div class="section">
+    <div class="section-title">
+      四、法答网精选答问
+      <span class="count">0条</span>
+    </div>
+    <div class="empty-state">
+      <div class="icon">💬</div>
+      本期暂无新增法答网精选答问<br>
+      <span style="font-size:13px;">最新批次为第三十七批——执行工作专题（2026年02月05日发布），法答网可能即将发布新一批次答问，敬请关注</span>
+    </div>
+  </div>
+
+  <!-- 五、往期回顾 -->
+  <div class="history">
+    <h2>五、往期回顾</h2>
+    <ul>
+      <li style="color: var(--text-light); font-size: 14px;">本期为首期发布，暂无往期报告</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span class="brand">编制：腾讯云 ｜ WorkBuddy</span><br>
+  <span style="font-size:12px;">数据来源：最高人民法院官网（court.gov.cn）、中国法院网（chinacourt.org）、最高人民检察院官网（spp.gov.cn）</span><br>
+  <span style="font-size:12px;">报告生成时间：2026年06月12日 16:30</span>
+</div>
+
+</body>
+</html>

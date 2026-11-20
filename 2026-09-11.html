@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年09月11日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--accent);
+  }
+  .card-tag-blue {
+    display: inline-block;
+    background: var(--info-bg);
+    color: var(--info-text);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--info-border);
+  }
+  .card-meta {
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    background: #fafbfc;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-body { padding: 16px 20px; }
+  .key-points { padding-left: 20px; }
+  .key-points li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .key-points li strong { color: var(--primary); }
+
+  .practical-note {
+    margin: 12px 20px 16px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border-left: 4px solid var(--info-border);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .practical-note .prefix { color: var(--info-text); font-weight: 600; font-size: 12px; display: block; margin-bottom: 6px; }
+
+  .empty-notice {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  .reminder-card {
+    background: #f0f8ff;
+    border: 2px solid var(--info-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .reminder-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--info-text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .reminder-body { font-size: 14px; line-height: 1.8; color: var(--text); }
+  .reminder-body strong { color: var(--primary); }
+
+  /* 往期回顾 */
+  .prev-reports { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .prev-reports-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prev-report-item {
+    margin-bottom: 8px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .ext-icon { font-size: 12px; }
+  details { margin-top: 4px; margin-left: 4px; }
+  details summary {
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .detail-content {
+    padding: 10px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .hl-item { margin-bottom: 4px; }
+
+  /* 来源标注 */
+  .source-section {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .source-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .source-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .source-table a { color: var(--info-text); word-break: break-all; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .method-tag.websearch { background: #e3f2fd; color: #1565c0; }
+  .method-tag.webfetch { background: #e8f5e9; color: #2e7d32; }
+  .method-tag.portal { background: #fff8e1; color: #e65100; }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 10px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .overview-item { padding: 10px 8px; }
+    .overview-item .num { font-size: 24px; }
+    .card-header { flex-direction: column; gap: 8px; }
+    .card-meta { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+  <div class="header-date">第12期 · 2026年09月11日发布 · <a href="2026-09-11.html" target="_blank" style="color:#ffd58a;">[本期公网链接 ↗]</a></div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item"><div class="num">0</div><div class="label">新公布法律</div></div>
+    <div class="overview-item highlight"><div class="num">1</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item highlight"><div class="num">2</div><div class="label">新发布司法文件</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">⚠️ 本期重点关注</div>
+    <div class="highlight-desc">
+      <strong>1. 最高人民法院首次发布涉人工智能司法裁判规则文件</strong>：9月7日，《关于依法审理涉人工智能纠纷案件的意见》（法发〔2026〕10号）正式发布，共5部分24条，回应"AI换脸拟声""AI幻觉侵权""网络开盒""大数据杀熟""AI仿冒名人带货"、自动驾驶、AI模型训练、开源软件责任、专利授权确权等问题，明确涉人工智能侵权案件适用过错责任原则（法律另有规定的除外）。<strong>2. 国务院公布修订后的《电力安全事故应急处置和调查处理条例》</strong>（国务院令第845号），8月30日签署，2027年1月1日起施行，共38条：将储能、虚拟电厂等并网主体纳入监管，调整事故等级划分标准，增加电力调度机构事故报告责任。<strong>3. 最高人民法院印发《全国法院审理房地产开发企业破产案件座谈会纪要》</strong>（法〔2026〕137号），8部分36条，对房企破产案件管辖、债务人财产认定、购房人保护、续建融资、清偿顺位等核心问题作出系统回应。
+    </div>
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 二、全国人大新公布的法律</div>
+  <div class="empty-notice">
+    本期无新增全国人大法律。<br>
+    （十四届全国人大常委会第二十四次会议8月28日一次性通过的5部法律——医疗保障法、耕地保护和质量提升法、农业法修订、国防动员法修订、律师法修正——已于第11期收录。）
+  </div>
+</div>
+
+<!-- 三、国务院新发布的行政法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 三、国务院新发布的行政法规</div>
+
+  <!-- 1. 电力安全事故应急处置和调查处理条例（修订） -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">⚡</div>
+      <div>
+        <div class="card-title">电力安全事故应急处置和调查处理条例<span class="card-tag">国务院令第845号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 签发日期：2026年08月30日（李强总理签署）</div>
+      <div>📰 新华社发布：2026年09月04日</div>
+      <div>▶️ 施行日期：2027年01月01日</div>
+      <div>📊 篇幅：6章38条</div>
+      <div>🔄 修订基础：2011年国务院令第599号</div>
+      <div>📍 通过：2026年8月21日国务院第94次常务会议</div>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>立法目的与适用范围扩展（第一条、第五条）</strong>：为加强电力安全事故应急处置工作，规范事故调查处理，控制、减轻和消除事故损害修订条例；将储能、虚拟电厂等"电力企业、电力用户以外并入电网运行的主体"（其他并网主体）纳入条例适用范围，明确其相应的电力安全责任，厘清其与电力企业的权责边界。</li>
+        <li><strong>统一调度与隐患排查（第五条）</strong>：电力企业、电力用户以及其他并网主体应当遵守电力安全管理规定，服从统一调度，严格执行有关标准和 技术规范，在电力系统的规划、建设、运行等环节落实事故预防措施，加强事故隐患排查；电力调度机构应当严格依照相关法律、行政法规和国务院能源主管部门的规定开展电网运行控制。</li>
+        <li><strong>事故等级划分标准调整（第三条）</strong>：统筹考虑电网规模和结构变化、发电设备涉网性能、电网运行控制要求等因素，对事故等级划分标准作了调整完善；强化涉网安全管控，将涉网性能不达标、异常减出力等情形纳入事故等级判定因素，完善新能源安全风险管控制度；强化对主干网架、枢纽场站、电源集群等关键节点的安全管控。由单一输电线路或者单一变电站供电区域的事故等级划分标准由国务院能源主管部门另行制定。</li>
+        <li><strong>事故报告与应急救援（第八条至第十条、第十二条）</strong>：明确电力调度机构的事故报告责任；电力企业应当制定本单位事故应急救援预案并定期组织演练，应急救援预案报派出能源监管机构备案，并抄报所在地县级以上地方人民政府应急管理部门；事故报告可以先行报告已知情况，后续再报告详细情况。事故发生单位、电力调度机构及其有关人员不得迟报或者瞒报、谎报事故情况。</li>
+        <li><strong>大面积停电应急处置（第十四条至第二十条）</strong>：电力调度机构可发布开启或停运发电设备、调整发电设备有功和无功出力、调整电网运行方式、调整调度计划等电力调度命令；事故导致某一区域电力系统全部停止运行的，电力调度机构应当立即确定恢复供电方案，必要时启动系统内具备独立启动和孤网运行能力的发电设备，或者调度外来电源，尽快恢复电力系统运行；恢复供电应当优先保证重要发电厂厂用电源、重要输变电设备、电力主干网架的恢复。</li>
+        <li><strong>事故调查与监察介入（第二十一条至第二十六条）</strong>：调查组由有关人民政府及其能源、应急管理部门和其他负有安全生产监督管理职责的部门、消防救援机构派人组成，邀请公安机关、人民检察院等单位派人参加；事故调查组应当及时向监察机关通报事故情况，并邀请监察机关介入事故调查；事故调查报告应当依法及时向社会公布；国务院能源主管部门或派出能源监管机构应在事故调查报告批复后一年内组织对事故防范和整改措施落实情况进行评估，并及时向社会公开评估结果。</li>
+        <li><strong>法律责任（第二十七条至第三十四条）</strong>：完善对事故发生单位、主要负责人、直接负责的主管人员和其他直接责任人员的罚款标准（一般事故30万-100万元，特别重大事故1000万-2000万元，情节特别严重的可按数额的2-5倍罚款）；主要负责人受到撤职及以上处分或刑事处罚的，5年内不得担任任何生产经营单位主要负责人；新增对电力调度机构及其责任人员的处分规定。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>
+      本次修订对发电企业、电网企业、储能、虚拟电厂等并网主体影响重大。建议新能源企业、储能项目业主立即启动以下合规整改：①梳理企业现行事故应急预案与演练记录，确保2027年1月1日前向派出能源监管机构备案并抄报应急管理部门；②排查场内涉网性能指标，对不达标项实施技改；③建立完善的事故即时报告机制，确保事故发生后无迟报、瞒报、谎报；④重新评估调度命令执行SOP，避免被认定为"不配合调度"。
+    </div>
+  </div>
+</div>
+
+<!-- 四、最高人民法院新发布司法解释/司法文件 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📜</span> 四、最高人民法院新发布司法文件</div>
+
+  <!-- 1. 关于依法审理涉人工智能纠纷案件的意见 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🤖</div>
+      <div>
+        <div class="card-title">最高人民法院关于依法审理涉人工智能纠纷案件的意见<span class="card-tag">法发〔2026〕10号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 发布日期：2026年09月07日</div>
+      <div>▶️ 施行日期：自发布之日起施行</div>
+      <div>📊 篇幅：5部分24条</div>
+      <div>🏛️ 签发机关：最高人民法院</div>
+      <div>🌟 性质：首部由国家最高审判机构发布的涉人工智能司法裁判规则文件</div>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>指导思想与基本原则（第一条、第二条）</strong>：以习近平新时代中国特色社会主义思想为指导，深入贯彻习近平法治思想，坚持发展和安全并重、促进创新和依法治理相结合；提出<strong>坚持以人为本</strong>、<strong>支持创新发展</strong>、<strong>筑牢安全底线</strong>三项基本原则，注重防范和消除算法歧视，依法保障个人在自动化决策中的知情权和选择权；区分通用与专用、开源与闭源等不同类型大模型在技术原理、风险外溢与控制能力上的差异，对开发者、提供者、使用者等主体的法律责任作出合理划分。</li>
+        <li><strong>侵权责任归责原则（第三条）</strong>：利用人工智能侵害民事权益产生的法律责任，<strong>法律没有明确规定适用无过错责任或者过错推定责任的，应当依照民法典第一千一百六十五条第一款规定的过错责任原则认定</strong>；判断行为人有无过错及过错程度时，应综合考量人工智能应用的具体场景、自主化程度、技术与信息透明度、潜在风险及影响范围，相关主体预防和减少侵权所采取措施及技术可能性，使用者的预见能力与控制能力等因素。</li>
+        <li><strong>人格权侵权规制（第四条、第五条）</strong>：未经自然人同意，利用人工智能处理其姓名、肖像等生成可识别该自然人的虚拟数字形象并使用、公开的，构成对姓名权、肖像权等人格权益的侵害；未经同意使用自然人声音作为训练语料，模仿其音色、语调和发音风格等生成能够识别该自然人的合成人声的，构成对声音权益的侵害。<strong>AI换脸、拟声、AI复活逝者、网络开盒、人肉搜索等行为</strong>依法认定为侵权。操控生成合成的虚拟数字形象、声音实施不当行为或发表不实言论降低社会评价的，构成对名誉权的侵害。</li>
+        <li><strong>个人信息权益保护（第六条）</strong>：为人工智能模型训练，在合理范围内处理个人自行公开的或者其他已经合法公开的个人信息，且个人未明确拒绝的，<strong>一般不认定为侵害个人信息权益的行为</strong>；但对个人权益有重大影响的，应当依照法律规定取得个人同意。在认定"合理范围"时应综合考量处理目的与模型功能的必要性和适当性，所涉个人信息的类型、敏感程度及对个人权益的潜在影响，个人公开信息时的场景及可合理预期的使用范围。</li>
+        <li><strong>生成式人工智能服务提供者责任（第七条）</strong>：生成式人工智能自动生成的内容侵害他人名誉权、隐私权等人格权益，经权利人通知后服务提供者未及时采取停止生成侵权内容等必要措施的，应当对造成的损害依法承担侵权责任；网络用户通过输入侵权提示词等方式恶意诱导生成侵权内容的，该网络用户依法承担侵权责任。</li>
+        <li><strong>人工智能产品责任（第九条）</strong>：<strong>应当严格依据产品质量法关于"产品"的定义，将人工智能产品限定为以实物为载体的产品</strong>（如智能机器人、自动驾驶汽车等），将没有实物载体的人工智能服务排除在外；人工智能产品存在缺陷造成损害的，生产者、销售者依法承担产品责任；认定缺陷时应综合考量产品性质与用途、自主学习能力、升级更新情况、用户对系统的控制程度，以及生产者、销售者是否就适用场景、固有局限及可预见风险进行真实说明和明确警示。</li>
+        <li><strong>消费者权益保护与"大数据杀熟"（第十条）</strong>：针对同一商品或者服务，经营者利用算法在交易价格等交易条件上实行不合理的差别待遇，侵害他人合法权益造成损害的，依法认定承担侵权责任；<strong>利用人工智能"仿冒名人带货"且构成欺诈，消费者主张惩罚性赔偿的，依法予以支持</strong>。</li>
+        <li><strong>自动驾驶与辅助驾驶交通事故责任（第十一条）</strong>：自动驾驶汽车、具备辅助驾驶功能汽车上道路行驶发生交通事故造成损害的，依据民法典和道路交通安全法有关规定承担赔偿责任；具备辅助驾驶功能的汽车因车辆缺陷与驾驶人过错行为结合导致同一损害的，<strong>当事人可以同时请求驾驶人和车辆生产者或者销售者承担赔偿责任</strong>；为查明事故原因，人民法院可以要求数据控制方在必要范围内提供真实、完整的自动驾驶、辅助驾驶事件记录。</li>
+        <li><strong>知识产权侵权认定（第十二条）</strong>：人工智能生成内容侵害他人著作权的，综合考量人工智能服务类型、行业特点、训练数据来源、各方参与度、采取的必要措施以及获利情况等因素认定开发者、提供者、使用者的责任；<strong>人工智能开发者提出不侵权抗辩的，应当责令其提供训练数据来源、训练过程记录、模型运行模式以及科学理论依据等予以佐证</strong>；利用人工智能实施侵权假冒、虚假宣传、刷量刷单等行为，依法承担相应责任。</li>
+        <li><strong>开源软件责任豁免（第十三条）</strong>：认定开源软件相关方侵权责任，应综合考量开源许可协议类型、权利限制的具体内容、安全合规举措和信息披露程度等因素，<strong>依法给予开源软件开发者、提供者适当的责任豁免</strong>；开源软件开发者、提供者以免费开源的方式提供涉人工智能软件研发所需要的部分代码模块，并公开说明其功能和安全风险的，他人使用该代码模块导致侵权的，人民法院可以认定不承担侵权责任。</li>
+        <li><strong>专利授权确权与技术合同（第十四条、第十五条）</strong>：涉人工智能发明创造采用遵循自然规律的技术手段，解决了技术问题，实现了符合自然规律的技术效果的，应当依法认定其为专利法所保护的客体；<strong>自然人使用人工智能完成的发明创造，该自然人对发明创造的实质性特点作出创造性贡献的，应当认定该自然人为发明人</strong>。审理涉人工智能技术开发、转让、许可、咨询、服务合同纠纷，充分考量人工智能技术研发特点、技术开发方是否尽到合理努力等情形依法认定违约责任。</li>
+        <li><strong>证据审查与虚假诉讼规制（第十八条、第十九条）</strong>：对大数据分析报告类证据应重点审查原始数据来源、清洗规则及分析方法的科学性；对区块链存证类证据应重点审查上链前数据的真实性及技术平台的可靠性；当事人将人工智能生成内容作为侵权证据的，应综合考量提示词设计及对生成结果影响、生成内容与主张权利作品的相似程度、重复测试一致性等因素认定。<strong>诉讼参与人利用人工智能伪造证据的，依据民事诉讼法第一百一十四条规定处理</strong>；提交诉讼文书、案例检索报告等材料如系使用人工智能生成，应当在提交法庭前认真核实，并在提交法庭时对使用人工智能辅助情况作出说明。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>
+      本意见对人工智能产业链上下游企业均有重大影响。建议AI开发者和提供者立即开展：①<strong>训练数据来源台账建设</strong>，留存训练数据来源、训练过程记录、模型运行模式等技术文档，以便在版权侵权诉讼中举证；②<strong>个人信息授权机制升级</strong>，对"合理范围"内的已公开个人信息进行使用评估，对重大影响事项单独获取同意；③<strong>侵权通知响应SOP</strong>，确保"权利人通知→停止生成→屏蔽指令"全流程可追溯；④<strong>车辆数据合规</strong>，智能网联汽车生产企业完善辅助驾驶事件记录留存机制以备司法取证；⑤<strong>标识合规</strong>，生成式AI输出需保留生成合成内容标识、删除篡改将构成虚假诉讼关键证据；⑥<strong>开源软件风险隔离</strong>，对外开源代码模块需公开功能和安全风险说明。
+    </div>
+  </div>
+
+  <!-- 2. 全国法院审理房地产开发企业破产案件座谈会纪要 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏘️</div>
+      <div>
+        <div class="card-title">全国法院审理房地产开发企业破产案件座谈会纪要<span class="card-tag">法〔2026〕137号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 印发日期：2026年09月04日</div>
+      <div>📰 公布日期：2026年09月07日</div>
+      <div>▶️ 施行日期：自印发之日起施行</div>
+      <div>📊 篇幅：8部分36条</div>
+      <div>🏛️ 签发机关：最高人民法院</div>
+      <div>📍 来源：2025年12月30日最高法召开的全国法院审理房地产企业破产案件座谈会</div>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>总体要求（第一部分）</strong>：坚持党的绝对领导、以人民为中心、系统观念、市场化法治化四项原则；完善<strong>"政府主导风险管控和事务协调，法院主导司法程序"</strong>的常态化破产府院协调工作机制；区分集团公司与项目公司的权利义务，注意防止风险外溢，避免影响正常房地产项目的建设交付。</li>
+        <li><strong>案件管辖（第一条）</strong>：原则上以开发项目所在地确定破产管辖法院；项目分散在同一设区市不同县域的，由该设区市中级人民法院管辖；分散在同一省内不同设区市的，由高级人民法院指定其中一家中级人民法院管辖；项目跨省级行政区域的，报请最高人民法院指定管辖。</li>
+        <li><strong>关联企业破产与实质合并（第二条）</strong>：<strong>不得仅以关联企业之间存在资金互相调拨、互相担保、人员交叉任职等情形为由适用实质合并破产程序</strong>；只有证据证明存在法人人格高度混同、区分财产成本过高、严重损害债权人公平清偿利益时，才可适用实质合并审理。</li>
+        <li><strong>管理人指定（第三条）</strong>：一般应当通过竞争方式依法选定；管理人团队中应当注意吸收具备房地产开发、建设工程等相关领域专业知识和实务经验的人员；<strong>预重整阶段债务人、金融机构债权人委员会或债权额占三分之二以上的债权人聘请的中介机构</strong>，在破产申请受理后经债权人同意、法院审查，可指定作为破产案件的管理人。</li>
+        <li><strong>债务人财产认定（第五条）</strong>：<strong>废止《最高人民法院关于审理企业破产案件若干问题的规定》第七十一条第五项、第六项的规定内容</strong>——这意味着大量已付全款但未过户的房屋将纳入债务人财产；但仍明确：破产申请受理前已办理产权登记，或者依法定程序作出的拍卖/变卖/以房抵债裁定已送达买受人/债权人的，买受人或债权人可主张取回。</li>
+        <li><strong>"三代"合同效力（第八条）</strong>：因保交楼、保交房需要，相关主体经地方政府有关部门协调与房地产开发企业签订<strong>代管、代持、代建</strong>等协议的，<strong>管理人不得依据企业破产法第十八条解除，管理人或者其他债权人不得依据第三十一条、第三十二条、第三十三条撤销或确认协议无效</strong>；保护地方政府主导的保交楼安排。</li>
+        <li><strong>消费性购房人权利保护（第十条）</strong>：破产申请受理前签订合法有效书面购房合同，且所购房屋系用于满足<strong>刚性或者改善型住房等居住需求</strong>的房屋买卖合同应当继续履行；购房人权利依据<strong>《最高人民法院关于商品房消费者权利保护问题的批复》（法释〔2023〕1号）</strong>确定。征收拆迁安置户通过产权调换方式在拆迁补偿协议明确约定以位置特定、用途特定的房屋予以补偿安置的，参照适用该批复。</li>
+        <li><strong>预告登记买受人保护（第十一条）</strong>：已签订合法有效书面购房合同并办理预告登记，<strong>管理人以购房人未支付全部价款为由主张解除合同的，人民法院不予支持</strong>；破产程序终结前符合办理本登记条件的，管理人应当予以办理。</li>
+        <li><strong>已交付占有房屋保护（第十二条）</strong>：非消费性购房人在破产受理时已合法占有房屋的，<strong>管理人请求解除合同收回房屋的，人民法院不予支持</strong>；以交付钥匙、办理物业入住手续及实际管理控制等事实支配行为综合判断是否实际占有。</li>
+        <li><strong>以房抵债规则（第十三条至第十五条）</strong>：①以房抵偿普通金钱债权，履行期限届满前达成的按担保型处理（不支持继续履行交付）；届满后达成且不存在恶意损害第三人等情形时有效；②以房抵偿优先债权（受理前6个月内对担保债权、工程款、劳动报酬以房抵债的），<strong>管理人不得以个别清偿为由撤销</strong>；③以房屋买卖担保债务履行的，<strong>人民法院不予支持债权人要求继续履行交付房屋</strong>，债权人应按原债权债务关系申报债权（但已办所有权登记的可就登记房屋优先受偿）。</li>
+        <li><strong>商品房担保贷款合同处理（第十八条）</strong>：房屋买卖合同被确认无效或撤销、解除致使担保贷款合同目的无法实现的，担保贷款合同可解除，开发企业将贷款本息分别返还银行和购房人；<strong>管理人请求注销购房贷款抵押登记或者抵押预告登记的，人民法院不予支持</strong>；贷款银行有权就购房人欠付的贷款本息申报债权，并可就担保物优先受偿。<strong>贷款银行就未受清偿债权要求购房人继续承担清偿责任的，人民法院不予支持</strong>。</li>
+        <li><strong>实际施工人债权（第二十一条）</strong>：建设工程价款债权一般由承包人申报；借用资质且发包人知道、承包人已申报全部的，借用资质单位或个人可在已结算价款范围内申报，与承包人作为同一笔债权登记；实际施工人享有的工程价款请求权<strong>不包括管理费或挂靠费等费用</strong>；农民工工资未在前述范围内足额清偿的部分，可参照职工债权进行清偿。</li>
+        <li><strong>续建融资（第二十六条）</strong>：续建融资债权一般应当按照共益债务清偿（随时清偿）；已设定抵押的房地产项目，<strong>续建融资债权可在项目续建增值范围内优先受偿</strong>，但不得优先于续建产生的建设工程价款债权；经与相关优先权人协商一致，续建融资债权可优先于破产受理前产生的建设工程价款债权或抵押债权受偿。</li>
+        <li><strong>财产处置原则（第二十八条、第二十九条）</strong>：处置遵循价值最大化原则，<strong>一般应当优先采取房地产项目整体出售的方式进行</strong>；整体出售时，继续履行的购房合同以及土地出让金等相关公共费用债务一并转让，受让人继续履行交付房屋、协助办证、缴纳公用费用等义务。<strong>破产财产变价出售应当以拍卖方式为原则</strong>（但债权人会议另有决议的除外）。闲置存量土地被政府无偿收回的，<strong>相关主体请求注销该土地使用权上已设立的抵押登记的，人民法院不予支持</strong>。</li>
+        <li><strong>抵押权优先范围限制（第三十条）</strong>：<strong>受理前在建工程抵押权的优先受偿范围以破产申请受理时已完工部分价值为限</strong>；续建部分增值部分应当依次优先清偿续建产生的建设工程价款债权、续建融资债权。该规则对金融机构在建工程抵押权产生重大影响。</li>
+        <li><strong>九级清偿顺位（第三十一条）</strong>：房地产开发企业被裁定宣告破产且房屋买卖合同因房屋不能交付且无实际交付可能而被解除或终止的，按下列顺序清偿：①商品房消费购房人已支付的购房款、尚未归还的个人按揭贷款；②享有优先权的建设工程价款债权；③对债务人特定财产享有担保权的债权；④破产费用；⑤共益债务；⑥职工工资和医疗、伤残补助、抚恤费用等；⑦欠缴的社会保险费用和税款；⑧普通破产债权；⑨惩罚性债权（滞纳金、民事惩罚性赔偿金、行政罚款、刑事罚金等）。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>
+      本纪要对房地产开发商、按揭银行、建设工程承包人、消费购房人、地方政府、AMC机构等各方主体的利益格局均产生重大影响，建议：①<strong>金融机构</strong>需重新评估在建工程抵押额度的覆盖范围，重点关注续建增值部分如何分配；②<strong>按揭银行</strong>在房屋买卖合同解除后，仅可就担保物优先受偿，<strong>不得要求购房人继续承担未受清偿部分</strong>，按揭贷款风控逻辑需重新梳理；③<strong>消费购房人</strong>应尽早签订合法有效合同、办理预告登记或取得实际占有，以最大化保护层级；④<strong>施工方</strong>关注实际施工人代位申报债权规则变化，及时与转包人/出借资质方办理工程价款结算；⑤<strong>地方政府</strong>主导的保交楼"代管/代持/代建"安排受保护，房企债权人不得主张解除/撤销。
+    </div>
+  </div>
+</div>
+
+<!-- 五、最高人民法院批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 五、最高人民法院批复</div>
+  <div class="empty-notice">
+    本期无新增最高人民法院批复。<br>
+    （最近一批新增批复已收录于第11期之前各期；本期court.gov.cn司法文件列表未见新增批复类文件。）
+  </div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💬</span> 六、最高人民法院"法答网"精选答问</div>
+  <div class="empty-notice">
+    本期无新增"法答网精选答问"。<br>
+    （最新一批仍为第38批，发布于2026年7月2日，已在第11期之前的报告中收录；本期已通过 court.gov.cn 检索确认无新增批次。）
+  </div>
+</div>
+
+<!-- 七、提醒事项 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔔</span> 七、本期合规提醒</div>
+
+  <div class="reminder-card">
+    <div class="reminder-title">📌 提醒1：AI意见施行日</div>
+    <div class="reminder-body">
+      <strong>《关于依法审理涉人工智能纠纷案件的意见》自2026年9月7日发布之日起施行</strong>。建议所有人工智能相关企业、平台立即组织专题学习，重点关注第三条（过错责任原则）、第六条（训练数据合理范围）、第九条（人工智能产品定义）、第十一条（自动驾驶数据提供义务）、第十二条（举证倒置）、第十九条（AI伪造证据民事诉讼法第114条）。
+    </div>
+  </div>
+
+  <div class="reminder-card">
+    <div class="reminder-title">📌 提醒2：电力条例过渡期</div>
+    <div class="reminder-body">
+      <strong>《电力安全事故应急处置和调查处理条例》自2027年1月1日起施行</strong>，距今不足4个月。储能、虚拟电厂等新型并网主体应在过渡期内完成：①应急预案备案；②隐患排查制度建立；③与电力调度机构指令对接流程；④自查涉网性能指标。
+    </div>
+  </div>
+
+  <div class="reminder-card">
+    <div class="reminder-title">📌 提醒3：房企破产纪要追溯适用</div>
+    <div class="reminder-body">
+      <strong>《全国法院审理房地产开发企业破产案件座谈会纪要》自印发之日（2026年9月4日）起施行</strong>。对施行前已受理未审结案件，主流观点倾向：①已终审不适用；②程序性事项可参照；③实体权利重大调整事项参照应更加审慎；④纪要发布前已完成的表决、债权表、重整计划不重新处理。在办案件律师应及时根据纪要重新评估风险预案与诉讼策略。
+    </div>
+  </div>
+</div>
+
+<!-- 八、往期回顾 -->
+<div class="prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 八、往期回顾</div>
+
+  <!-- 第11期 2026-08-28 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-28.html" target="_blank">📄 第11期 · 2026-08-28 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>5件新公布法律</strong>：医疗保障法（主席令第八十号）、耕地保护和质量提升法（第八十一号）、农业法修订（第八十二号）、国防动员法修订（第八十三号）、律师法修正（第八十四号）</div>
+        <div class="hl-item"><strong>0件国务院法规</strong>、<strong>0件司法解释</strong>、<strong>0件批复</strong>、<strong>0条法答网答问</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第10期 2026-08-21 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-21.html" target="_blank">📄 第10期 · 2026-08-21 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>司法解释</strong>：最高人民法院《关于审理侵害知识产权民事案件适用惩罚性赔偿若干问题的解释》（法释〔2026〕18号）</div>
+        <div class="hl-item"><strong>批复</strong>：最高人民法院《关于审理涉及驰名商标保护相关纠纷案件若干问题的批复》（法释〔2026〕17号）</div>
+        <div class="hl-item"><strong>0件新法律</strong>、<strong>0件国务院法规</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第9期 2026-08-14 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-14.html" target="_blank">📄 第9期 · 2026-08-14 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>国务院法规</strong>：国务院令第844号《行政执法监督条例》（自2026年11月1日起施行）</div>
+        <div class="hl-item"><strong>司法文件</strong>：最高人民法院发布《关于审理建设工程施工合同纠纷案件适用法律若干问题的解释（二）》（法释〔2026〕16号）</div>
+        <div class="hl-item"><strong>0件新法律</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第8期 2026-08-07 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-07.html" target="_blank">📄 第8期 · 2026-08-07 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>司法解释</strong>：最高人民法院、最高人民检察院《关于办理环境污染刑事案件适用法律若干问题的解释（二）》</div>
+        <div class="hl-item"><strong>司法解释修改</strong>："两高"对6件生态环境保护司法解释集中修改</div>
+        <div class="hl-item"><strong>0件新法律</strong>、<strong>0件国务院法规</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第7期 2026-07-31 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-31.html" target="_blank">📄 第7期 · 2026-07-31 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>国务院法规</strong>：国务院令第843号《稀土管理条例》</div>
+        <div class="hl-item"><strong>司法文件</strong>：最高检印发《人民检察事业发展"十五五"规划》</div>
+        <div class="hl-item"><strong>0件新法律</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第6期 2026-07-24 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-24.html" target="_blank">📄 第6期 · 2026-07-24 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>司法解释修改</strong>："两高"修改《关于办理内幕交易、泄露内幕信息刑事案件具体应用法律若干问题的解释》</div>
+        <div class="hl-item"><strong>0件新法律</strong>、<strong>0件国务院法规</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第5期 2026-07-10 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-10.html" target="_blank">📄 第5期 · 2026-07-10 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>3件新公布法律</strong>（均2026-07-01施行）：农村集体经济组织法（主席令第七十八号）、农村集体经济组织法实施条例、民事执行案件财产处置规定</div>
+        <div class="hl-item"><strong>0件国务院法规、司法解释、批复、法答网答问</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第4期 2026-07-03 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">📄 第4期 · 2026-07-03 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>1件新公布法律</strong>：中华人民共和国海警法（修订，主席令第七十七号）</div>
+        <div class="hl-item"><strong>0件国务院法规、司法解释、批复、法答网答问</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第3期 2026-06-26 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">📄 第3期 · 2026-06-26 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>国务院法规</strong>：国务院令第842号《行政执法监督条例（草案征求意见稿）》</div>
+        <div class="hl-item"><strong>0件新法律、司法解释、批复、法答网答问</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第2期 2026-06-22 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">📄 第2期 · 2026-06-22 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item"><strong>1件新公布法律</strong>：中华人民共和国传染病防治法（修订，主席令第七十六号，2026-09-01施行）</div>
+        <div class="hl-item"><strong>0件国务院法规、司法解释、批复、法答网答问</strong></div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 第1期 2026-06-12 -->
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">📄 第1期 · 2026-06-12 <span class="ext-icon">↗</span></a>
+    <details>
+      <summary>本期摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首次发布，建立分类追踪体系（全国人大法律 / 国务院法规 / 司法解释 / 批复 / 法答网精选答问）</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">🔗 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr>
+        <th style="width: 35%;">内容条目</th>
+        <th style="width: 18%;">获取方式</th>
+        <th>来源URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>国务院令第845号《电力安全事故应急处置和调查处理条例》（修订）</td>
+        <td><span class="method-tag webfetch">WebFetch</span><span class="method-tag websearch">WebSearch</span></td>
+        <td>
+          ① <a href="https://www.gov.cn/zhengce/content/202609/content_7080188.htm" target="_blank">https://www.gov.cn/zhengce/content/202609/content_7080188.htm</a> （中国政府网官方原文）<br>
+          ② <a href="https://www.yy.gov.cn/col/col1229396854/art/2026/art_8c6f886ce84648b68b01c0b4950ddd96.html" target="_blank">https://www.yy.gov.cn/col/col1229396854/art/2026/art_8c6f886ce84648b68b01c0b4950ddd96.html</a> （新华社2026-09-06授权发布稿）
+        </td>
+      </tr>
+      <tr>
+        <td>法发〔2026〕10号《关于依法审理涉人工智能纠纷案件的意见》</td>
+        <td><span class="method-tag webfetch">WebFetch</span><span class="method-tag websearch">WebSearch</span></td>
+        <td>
+          ① <a href="https://www.court.gov.cn/zixun/xiangqing/511101.html" target="_blank">https://www.court.gov.cn/zixun/xiangqing/511101.html</a> （最高人民法院官网全文）<br>
+          ② <a href="https://www.court.gov.cn/" target="_blank">https://www.court.gov.cn/</a> （最高人民法院首页）
+        </td>
+      </tr>
+      <tr>
+        <td>法〔2026〕137号《全国法院审理房地产开发企业破产案件座谈会纪要》</td>
+        <td><span class="method-tag webfetch">WebFetch</span><span class="method-tag websearch">WebSearch</span></td>
+        <td>
+          ① <a href="https://www.court.gov.cn/fabu/xiangqing/511091.html" target="_blank">https://www.court.gov.cn/fabu/xiangqing/511091.html</a> （最高人民法院"权威发布"专栏全文）<br>
+          ② <a href="https://www.court.gov.cn/fabu/gengduo/17.html" target="_blank">https://www.court.gov.cn/fabu/gengduo/17.html</a> （最高人民法院"司法文件"栏目列表）
+        </td>
+      </tr>
+      <tr>
+        <td>最高人民法院 第38批"法答网"精选答问（最近一批）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td>
+          ① court.gov.cn 法答网官方栏目（本期经检索确认无新增批次，最近一批为第三十八批，发布于2026-07-02）
+        </td>
+      </tr>
+      <tr>
+        <td>本期无新增最高人民法院批复</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td>
+          ① <a href="https://www.court.gov.cn/fabu/gengduo/17.html" target="_blank">https://www.court.gov.cn/fabu/gengduo/17.html</a> （本期"司法文件"栏目列表）
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 12px; font-size: 12px; color: var(--text-light);">
+    标签说明：<span class="method-tag websearch">WebSearch</span> 通过搜索引擎定位目标内容；<span class="method-tag webfetch">WebFetch</span> 从目标URL直接获取完整原文；<span class="method-tag portal">Portal列表</span> 从官方栏目页归纳汇总。所有"法答网精选答问"内容均仅引用最高人民法院官网 court.gov.cn 来源；本期无新增，故未引用任何媒体转载。
+  </p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  报告期次：第12期（2026年09月11日） · 追踪周期：2026-08-29 至 2026-09-11
+</div>
+
+</div>
+</body>
+</html>

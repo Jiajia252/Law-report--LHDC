@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年07月03日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --success: #38a169;
+    --info: #3182ce;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  /* Overview */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  /* Highlight Card */
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .highlight-card::before {
+    content: '⚠️ 本期重点关注';
+    position: absolute;
+    top: -14px; left: 20px;
+    background: var(--highlight-border);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .highlight-title {
+    font-size: 17px; font-weight: 700;
+    color: #b45309;
+    margin-bottom: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .card-icon { font-size: 22px; flex-shrink: 0; }
+  .card-title {
+    font-size: 17px; font-weight: 700;
+    color: var(--primary);
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .card-tag.new-effective {
+    background: var(--success);
+  }
+  .card-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .card-meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .key-points {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .key-points li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .key-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .practical-note {
+    background: #f7fafc;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .practical-note .prefix {
+    font-weight: 600;
+    color: var(--info);
+  }
+
+  /* Fada Card */
+  .fada-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .fada-answer {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .fada-source {
+    font-size: 12px;
+    color: var(--text-light);
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+  }
+
+  /* Empty */
+  .empty-notice {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-light);
+    font-size: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  /* Previous Reports */
+  .prev-reports { margin-top: 32px; }
+  .prev-reports-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+  }
+  .prev-report-item {
+    margin-bottom: 12px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover { color: var(--accent); }
+  .prev-report-link .ext-icon { font-size: 12px; }
+  details {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary-light);
+    font-size: 14px;
+  }
+  details .detail-content {
+    font-size: 13px;
+    color: var(--text-light);
+    padding-top: 8px;
+    line-height: 1.6;
+  }
+  .detail-content .hl-item {
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  /* Source Annotations */
+  .source-section { margin-top: 32px; }
+  .source-title {
+    font-size: 16px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .source-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .source-table tr:nth-child(even) td { background: #f7fafc; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #fff;
+  }
+  .method-tag.websearch { background: #3182ce; }
+  .method-tag.webfetch { background: #38a169; }
+  .method-tag.portal { background: #d69e2e; }
+
+  /* New-effective notice */
+  .effective-notice {
+    background: #e6ffed;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #276749;
+  }
+  .effective-notice strong { color: #22543d; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 12px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">⚖️ 联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网答问</div>
+  <div class="header-date">2026年07月03日 · 第4期</div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item"><div class="num">2</div><div class="label">新公布法律</div></div>
+    <div class="overview-item"><div class="num">2</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item"><div class="num">1</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">4</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">📌 《商标法》四十余年首次全面修订通过；建工合同纠纷司法解释（二）发布施行</div>
+    <div class="highlight-desc">
+      2026年6月26日，十四届全国人大常委会第二十三次会议通过《商标法》修订（主席令第七十七号）及注册会计师法修改决定（主席令第七十八号），均自2027年1月1日施行。6月29日，最高法发布建工合同纠纷司法解释（二），次日即施行。本期内容密集，建议重点关注商标法全面修订对知识产权实务的影响及建工解释二对施工合同纠纷裁判规则的重大调整。
+    </div>
+  </div>
+
+  <div class="effective-notice">
+    <strong>🔔 新施行提醒：</strong>《行政法规制定程序条例》（修订）（国务院令第838号）已于2026年7月1日起正式施行（5月19日公布，本期已生效）。该条例上期（6月26日）已作详细报道，此处仅作施行提醒。
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 二、全国人大新公布的法律</div>
+
+  <!-- 商标法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">《中华人民共和国商标法》（2026年修订）<span class="card-tag">主席令第七十七号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 修订通过：2026年6月26日</span>
+      <span>⏳ 施行日期：2027年1月1日</span>
+    </div>
+    <ul class="key-points">
+      <li>篇章结构调整（第八条）：原"8章73条"扩展为"9章87条"，增设"商标注册的条件"专章</li>
+      <li>严格规制"心机商标"（第五十六条）：以误导公众方式使用注册商标，违法经营额5万元以上可处5倍以下罚款；逾期不改正可撤销注册商标</li>
+      <li>遏制恶意抢注与囤积（第十九条）：不以使用为目的、明显超出正常生产经营需要的商标注册申请不予注册；恶意申请可处10万元以下罚款（第五十四条）</li>
+      <li>完善驰名商标制度（第六十三条）：确认驰名商标不再区分注册与否均禁止跨类抢注；增加不正当竞争案件中确认驰名商标的规定</li>
+      <li>加强商标代理监管（第六十五条至第六十八条）：代理机构须备案；从业人员违规可处5万至10万元罚款；代理机构情节严重可暂停受理业务</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>商标法四十余年首次全面修订，企业应重点关注：①恶意抢注认定标准收紧，"囤积商标"行为将受行政处罚；②"心机商标"规制力度大幅加强，商品包装与宣传用语需合规审查；③驰名商标确认机制变化，跨类保护不再以注册为前提；④商标代理机构合规要求升级，委托代理须核实备案状态。
+    </div>
+  </div>
+
+  <!-- 注册会计师法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">《全国人民代表大会常务委员会关于修改〈中华人民共和国注册会计师法〉的决定》<span class="card-tag">主席令第七十八号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 通过日期：2026年6月26日</span>
+      <span>⏳ 施行日期：2027年1月1日</span>
+    </div>
+    <ul class="key-points">
+      <li>增加党的领导条款（新增第二条）：注册会计师行业坚持中国共产党的领导，为国民经济和社会发展服务</li>
+      <li>新增行业支持条款（新增第七条）：国家支持注册会计师行业加强诚信建设、提高审计质量、拓展服务网络</li>
+      <li>新增监督管理专章（新增第六章，第四十二条至第四十六条）：财政部门对会计师事务所执业情况实施监督检查；审计工作底稿和档案应存放中国境内，未经批准不得出境（第四十五条）</li>
+      <li>大幅提高处罚力度（修改第四十七条）：会计师事务所出具虚假报告，违法所得50万元以上可处1至10倍罚款；无违法所得或不足50万可处500万元以下罚款；故意犯罪终身禁止从业</li>
+      <li>新增串通唆使处罚（新增第四十九条）：委托人或被审计单位串通、唆使注册会计师出具虚假报告，可处500万元以下罚款</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>注册会计师法修改后处罚力度大幅提升，对会计师事务所和注册会计师的影响深远：①审计档案出境管理趋严，涉外审计项目须注意合规；②"串通唆使"条款新增，企业方不得暗示或要求会计师出具不当报告；③有限所不得从事证券审计等特定业务，事务所组织形式选择需重新考量。
+    </div>
+  </div>
+</div>
+
+<!-- 三、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏢</span> 三、国务院新发布的法律法规</div>
+
+  <!-- 退役军人就业创业促进条例 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📜</div>
+      <div>
+        <div class="card-title">《退役军人就业创业促进条例》<span class="card-tag">国务院令第840号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 公布日期：2026年6月30日</span>
+      <span>⏳ 施行日期：2026年8月1日</span>
+    </div>
+    <ul class="key-points">
+      <li>明确总体要求（第二条）：坚持普惠与优待叠加原则，采取政府推动、市场引导、社会支持相结合的方式</li>
+      <li>教育培训政策（第九条至第二十五条）：退役军人参加国家教育考试享受优待和资助；职业技能培训纳入终身培训体系；适应性培训不得少于国家规定时长</li>
+      <li>就业优待措施（第二十八条至第三十二条）：机关、事业单位、国有企业招录可放宽年龄学历条件，同等条件下优先招录退役军人；设置基层公务员职位面向服役满5年高校退役军人招考</li>
+      <li>创业扶持举措（第三十六条至第四十一条）：个体经营依法享受税收优惠；创业担保贷款及贴息支持；创业基地优先服务退役军人</li>
+      <li>法律责任（第四十三条至第四十六条）：弄虚作假骗取待遇将追缴非法所得并依法处分；主管部门失职渎职将追究责任</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>条例首次系统性规定退役军人就业创业促进制度。用人单位须关注：①招录退役军人享有税收优惠，同等条件下须优先招录；②国有企业可设置一定比例岗位专门招聘退役军人；③退役军人服现役年限计算为工龄，与所在单位工作年限累计。
+    </div>
+  </div>
+
+  <!-- 行政法规制定程序条例 施行提醒 -->
+  <div class="card" style="border-left: 3px solid var(--success);">
+    <div class="card-header">
+      <div class="card-icon">🔔</div>
+      <div>
+        <div class="card-title">《行政法规制定程序条例》（修订）<span class="card-tag new-effective">7月1日起施行</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 公布日期：2026年5月19日</span>
+      <span>✅ 施行日期：2026年7月1日（已生效）</span>
+    </div>
+    <div class="practical-note" style="margin-bottom:0;">
+      本条例已于2026年7月1日起正式施行。核心修订要点包括：完善总体要求（坚持党的领导、科学民主依法立法）、加强立法统筹（突出重点新兴涉外领域）、健全工作机制（全过程人民民主、前置评估）、适应改革需要（暂时调整法规规定的评估论证机制）。详细内容见上期（6月26日）报告。
+    </div>
+  </div>
+</div>
+
+<!-- 四、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 四、司法解释</div>
+
+  <!-- 建工解释二 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📄</div>
+      <div>
+        <div class="card-title">《最高人民法院关于审理建设工程施工合同纠纷案件适用法律问题的解释（二）》<span class="card-tag">法释〔2026〕12号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 发布日期：2026年6月29日</span>
+      <span>⏳ 施行日期：2026年6月30日</span>
+      <span>📝 审委会：2026年3月17日第1969次会议通过</span>
+    </div>
+    <ul class="key-points">
+      <li>维护公平竞争招标投标秩序（第一条至第二条）：不再属于必须招标的项目，起诉时仅以未招标认定合同无效不予支持；招标前就实质性内容谈判或先签合同后走招标程序的，认定中标合同无效</li>
+      <li>否定资质借用行为（第三条至第五条）：出借资质合同无效，借用资质费不予支持；发包人不知情时借用资质人不得直接向发包人主张折价补偿；表见代理仍可追究出借企业责任</li>
+      <li>明确合同无效、解除情形下处理（第六条至第十二条、第十四至第十五条）：转包或违法分包的接受方可参照合同请求折价补偿，但不得向无合同关系的发包人主张；固定总价合同解除后可按比例法确定已施工部分价款</li>
+      <li>促进工程价款及时结算（第十三条）：约定以审计结果确定价款的，审计未在合理期限内出具或与合同明显不符，可申请司法鉴定；合理期限最长不超过提交竣工结算之日起一年</li>
+      <li>明确建设工程价款优先受偿权行使规则（第十七条至第二十一条）：判决主文须明确享有优先受偿权的价款数额及相应工程；停工窝工损失不享有优先受偿权；折价协议行使优先受偿权须满足四项条件</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>建工解释二是建设工程领域近年最重要的司法解释，共23条，次日起施行。实务影响巨大：①招投标阶段"暗箱操作""围标串标"将导致合同无效；②资质借用全面否定，借用费不予支持且借用资质人向发包人主张受限；③固定总价合同解除后结算有了明确规则（比例法）；④审计结算困境有了解出路（可司法鉴定）；⑤优先受偿权行使期限起算点明确化。建筑企业及房地产开发商须立即调整合同模板与风控流程。
+    </div>
+  </div>
+</div>
+
+<!-- 五、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📝</span> 五、批复</div>
+  <div class="empty-notice">本期暂无新增批复。</div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💡</span> 六、法答网精选答问</div>
+  <div style="font-size:13px;color:var(--text-light);margin-bottom:12px;">法答网精选答问（第三十八批）——刑事审判专题 | 发布日期：2026年7月2日 | 来源：court.gov.cn</div>
+
+  <!-- 问题1 -->
+  <div class="card">
+    <div class="fada-question">问题1：在拘役缓刑考验期内发现判决宣告以前还有应当判处有期徒刑之漏罪的，实行数罪并罚时，是否应当将因被判拘役之罪而先行羁押的期限折抵刑期？</div>
+    <div class="fada-answer">
+      <strong>答问要旨：</strong>刑法第六十九条第二款规定有期徒刑和拘役并罚采取吸收原则（有期徒刑吸收拘役），第四十七条规定先行羁押一日折抵有期徒刑刑期一日。二者是基于不同目的的不同刑罚制度，不能混同。因此，因被判处拘役之罪而先行羁押的期限，仍应折抵数罪并罚决定执行的有期徒刑刑期。撤销缓刑后并罚执行有期徒刑的，拘役先行羁押期限同样应折抵。
+    </div>
+    <div class="fada-source">
+      咨询人：重庆市高级人民法院刑一庭 邹小莉 ｜ 答疑专家：最高人民法院研究室 王庆刚
+    </div>
+  </div>
+
+  <!-- 问题2 -->
+  <div class="card">
+    <div class="fada-question">问题2：开设赌场罪与聚众型赌博罪的法定刑相差较大，对二者应当如何准确区分？</div>
+    <div class="fada-answer">
+      <strong>答问要旨：</strong>开设赌场罪与聚众型赌博罪可从三方面界分：（1）开放性——开设赌场面向不特定多数人、参赌人可自由加入，聚众赌博以"熟人"为对象不具有开放性；（2）经营性——开设赌场形成相对稳定的经营模式，聚众赌博系临时聚集；（3）持续性——开设赌场在一定时间内持续开展，聚众赌博通常不会持续进行。此外可结合组织强度、控制程度、赌博场所、规模等综合考量。群众娱乐活动（少量财物输赢）不以赌博犯罪论处。
+    </div>
+    <div class="fada-source">
+      咨询人：重庆市高级人民法院刑二庭 廖建斌 ｜ 答疑专家：最高人民法院研究室 丁鹏
+    </div>
+  </div>
+
+  <!-- 问题3 -->
+  <div class="card">
+    <div class="fada-question">问题3：被告人在十八周岁以前因犯走私、贩卖、运输、制造、非法持有毒品罪被判刑，十八周岁之后又实施毒品犯罪的，能否认定为毒品再犯？</div>
+    <div class="fada-answer">
+      <strong>答问要旨：</strong>毒品再犯（刑法第三百五十六条）是分则针对毒品犯罪的特殊制度安排，与总则累犯规定属特别条款与一般条款关系。刑法修正案（八）增设不满十八周岁不构成累犯，但未修改毒品再犯规定。未成年人犯罪记录封存办法第十八条第二款规定，成年后又故意犯罪的，法院应在裁判文书中载明前犯罪记录。因此，不满十八周岁因毒品犯罪被判刑、成年后又实施毒品犯罪的，依法可成立毒品再犯，但在从重处罚时可酌情考虑未成年情节。
+    </div>
+    <div class="fada-source">
+      咨询人：北京市高级人民法院刑一庭 魏炜 ｜ 答疑专家：最高人民法院研究室 王庆刚
+    </div>
+    <div class="practical-note" style="margin-top:8px;">
+      <span class="prefix">适用范围提示：</span>毒品再犯认定不受未成年人累犯排除规则影响，但量刑时可酌情考量未成年情节。刑事辩护中，对成年后毒品犯罪案件须审查是否存在未成年前罪记录并据此提出酌情从宽建议。
+    </div>
+  </div>
+
+  <!-- 问题4 -->
+  <div class="card">
+    <div class="fada-question">问题4：刑期计算中，刑期起始日期为2月28日、刑期为8个月时，结束日期应为10月27日还是10月30日？</div>
+    <div class="fada-answer">
+      <strong>答问要旨：</strong>刑诉法解释第二百零二条第二款三句话存在适用顺位关系，符合前一种情形即不再判断后续规则。刑期起算日2月28日、刑期8个月，符合第一句话"自本月某日至下月同日的前一日为一个月"（到期月有对应日则为对应日的前一日），即10月27日；不应适用第二句话得出10月30日。同理，刑期起算日4月30日、刑期1个月，到期日应为5月29日而非5月30日。
+    </div>
+    <div class="fada-source">
+      咨询人：北京市高级人民法院刑二庭 蔡秀 ｜ 答疑专家：最高人民法院研究室 李静
+    </div>
+  </div>
+</div>
+
+<!-- 七、往期回顾 -->
+<div class="section prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 七、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📅 2026年06月26日（第3期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 1件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">③ 《行政法规制定程序条例》（国务院令第838号，修订）——5月19日公布，7月1日施行</div>
+        <div class="hl-item">立法动态：商标法修订草案（二审）、注册会计师法修正草案（二审）正在审议</div>
+        <div class="hl-item">法答网第37批（执行工作专题）：以物抵债与破产受理冲突、次债务人异议效力、股权多次转让后追加被执行人、保全复议管辖、执行担保与债务加入</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📅 2026年06月22日（第2期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 2件 · 新发布司法解释 2件 · 法答网精选答问 3条</div>
+        <div class="hl-item">① 《中华人民共和国国家发展规划法》（主席令第七十二号）——3月12日公布并施行</div>
+        <div class="hl-item">② 法律清理决定（主席令第七十三号）——3月12日公布</div>
+        <div class="hl-item">③ 法释〔2026〕9号 道交赔偿解释（二）——5月6日发布</div>
+        <div class="hl-item">④ 法释〔2026〕3号 行政诉讼起诉期限解释——4月30日发布</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📅 2026年06月12日（第1期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首期试运行报告</div>
+        <div class="hl-item">涵盖法律、法规、司法解释、批复、法答网答问五类内容追踪</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr><th>内容条目</th><th>获取方式</th><th>来源URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>《商标法》（2026年修订）主席令第七十七号</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.cnipa.gov.cn/art/2026/6/26/art_95_206942.html" target="_blank">cnipa.gov.cn 商标法全文</a>；<a href="https://www.qstheory.cn/20260626/400cbeb7adf8435f8955255c9bc87816/c.html" target="_blank">求是网 主席令</a>；<a href="https://finance.sina.com.cn/wm/2026-06-29/doc-inifauhn5283890.shtml" target="_blank">新浪 四大核心变化</a></td>
+      </tr>
+      <tr>
+        <td>注册会计师法修改决定 主席令第七十八号</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.gov.cn/yaowen/liebiao/202606/content_7073453.htm" target="_blank">gov.cn 主席令</a>；<a href="https://www.news.cn/20260626/9ec39dc8fc5842b1a7a4f72cefe9a61e/c.html" target="_blank">新华网 修改决定全文</a></td>
+      </tr>
+      <tr>
+        <td>《退役军人就业创业促进条例》国务院令第840号</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/content/202606/content_7073788.htm" target="_blank">gov.cn 全文</a>；<a href="https://finance.sina.com.cn/jjxw/2026-06-30/doc-inifesxq4768766.shtml" target="_blank">新浪 报道</a>；<a href="http://www.scio.gov.cn/zdgz/jj/202607/t20260701_996995.html" target="_blank">国新办</a></td>
+      </tr>
+      <tr>
+        <td>《行政法规制定程序条例》（修订）国务院令第838号</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/zhengceku/202605/content_7069474.htm" target="_blank">gov.cn 全文</a>；<a href="https://www.gov.cn/yaowen/liebiao/202605/content_7069477.htm" target="_blank">gov.cn 报道</a></td>
+      </tr>
+      <tr>
+        <td>建工合同纠纷司法解释（二）法释〔2026〕12号</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/xiangqing/504221.html" target="_blank">court.gov.cn 发布</a>；<a href="https://finance.sina.com.cn/cj/2026-06-29/doc-inifaiss5418619.shtml" target="_blank">新浪 全文</a>；<a href="http://society.people.com.cn/n1/2026/0630/c1008-40750374.html" target="_blank">人民网</a></td>
+      </tr>
+      <tr>
+        <td>法答网精选答问第三十八批（刑事审判专题）</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/zixun/xiangqing/504661.html" target="_blank">court.gov.cn 官方页面</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  <span style="font-size:12px;">数据来源：全国人大官网、国务院官网、最高人民法院官网、国家知识产权局等权威渠道</span>
+</div>
+
+</div>
+</body>
+</html>

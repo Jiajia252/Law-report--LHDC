@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年08月28日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--accent);
+  }
+  .card-tag-blue {
+    display: inline-block;
+    background: var(--info-bg);
+    color: var(--info-text);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--info-border);
+  }
+  .card-meta {
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    background: #fafbfc;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-body { padding: 16px 20px; }
+  .key-points { padding-left: 20px; }
+  .key-points li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .key-points li strong { color: var(--primary); }
+
+  .practical-note {
+    margin: 12px 20px 16px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border-left: 4px solid var(--info-border);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .practical-note .prefix { color: var(--info-text); font-weight: 600; font-size: 12px; display: block; margin-bottom: 6px; }
+
+  .empty-notice {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  .reminder-card {
+    background: #f0f8ff;
+    border: 2px solid var(--info-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .reminder-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--info-text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .reminder-body { font-size: 14px; line-height: 1.8; color: var(--text); }
+  .reminder-body strong { color: var(--primary); }
+
+  /* 往期回顾 */
+  .prev-reports { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .prev-reports-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prev-report-item {
+    margin-bottom: 8px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .ext-icon { font-size: 12px; }
+  details { margin-top: 4px; margin-left: 4px; }
+  details summary {
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .detail-content {
+    padding: 10px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .hl-item { margin-bottom: 4px; }
+
+  /* 来源标注 */
+  .source-section {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .source-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .source-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .source-table a { color: var(--info-text); word-break: break-all; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .method-tag.websearch { background: #e3f2fd; color: #1565c0; }
+  .method-tag.webfetch { background: #e8f5e9; color: #2e7d32; }
+  .method-tag.portal { background: #fff8e1; color: #e65100; }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 10px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .overview-item { padding: 10px 8px; }
+    .overview-item .num { font-size: 24px; }
+    .card-header { flex-direction: column; gap: 8px; }
+    .card-meta { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+  <div class="header-date">第11期 · 2026年08月28日发布 · <a href="2026-08-28.html" target="_blank" style="color:#ffd58a;">[本期公网链接 ↗]</a></div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item highlight"><div class="num">5</div><div class="label">新公布法律</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">⚠️ 本期重点关注</div>
+    <div class="highlight-desc">
+      <strong>十四届全国人大常委会第二十四次会议8月28日闭幕，一次性通过5部法律</strong>：医疗保障法（2027年1月1日施行）、耕地保护和质量提升法、农业法修订（2027年1月1日施行）、国防动员法修订、律师法修正。这是2026年单次会议通过法律数量最多的一次，覆盖民生保障、粮食安全、农业农村、国防、法律服务等多个关键领域。其中<strong>医疗保障法</strong>是我国医疗保障领域第一部专门统一立法，建立多层次医疗保障体系并明确长期护理保险制度；<strong>农业法</strong>是2002年以来首次全面修订；<strong>国防动员法</strong>是2010年施行以来首次修订，明确"国防动员"概念并发展新兴领域国防动员力量。<strong>国务院法规与司法解释本期无新增</strong>（法释〔2026〕18号著作权解释已于上期8月20日发布，9月1日施行）。
+    </div>
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 二、全国人大新公布的法律</div>
+
+  <!-- 1. 医疗保障法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏥</div>
+      <div>
+        <div class="card-title">中华人民共和国医疗保障法<span class="card-tag">主席令第八十号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 公布日期：2026年08月28日</div>
+      <div>▶️ 施行日期：2027年01月01日</div>
+      <div>📊 篇幅：7章56条</div>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 8px; color: var(--text-light); font-size: 13px;"><strong>通过主体</strong>：十四届全国人大常委会第二十四次会议表决通过（草案经三审，全国人大常委会法工委2025年6月初审、2026年4月二审、2026年8月28日三审表决通过）</p>
+      <ul class="key-points">
+        <li><strong>立法目的（第一条）</strong>：维护公民医疗保障合法权益，规范医疗保障关系，优化医疗保障服务，健全多层次全民医疗保障体系，落实健康优先发展战略，推进健康中国建设。</li>
+        <li><strong>医保体系框架（第二章）</strong>：规定国家建立健全以基本医疗保险为主体，医疗救助为托底，补充医疗保险、商业健康保险、慈善捐赠、医疗互助等共同发展的多层次医疗保障体系；推进基本医疗保险省级统筹。</li>
+        <li><strong>医保基金管理（第三章）</strong>：规定国务院医疗保障行政部门在制定基本医疗保险基金支付范围、组织开展循证医学和经济性评价时，应当听取医疗机构、药品经营单位、相关企业、专家和参保人员的意见；建立药品、医用耗材集中采购制度，实行多元复合式医疗保险支付方式。</li>
+        <li><strong>异地就医结算与长期护理保险（第四章）</strong>：优化异地就医直接结算服务，明确异地就医医药费用结算要求；新增长期护理保险相关规定，应对人口老龄化背景下失能人员护理需求。</li>
+        <li><strong>生育保险与监督管理（第四至五章）</strong>：国家完善生育保险制度，推进扩大生育保险覆盖范围，明确生育保险基金与职工基本医疗保险基金合并建账；统筹地区人民政府建立基本医疗保险基金风险管控机制，构建中长期收支平衡机制和应急处置机制。</li>
+        <li><strong>法律责任（第六章）</strong>：完善医保基金监管和相应法律责任规定，定点医药机构应当严格执行实名就医、购药管理规定，对骗保等违法行为加大惩戒力度。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">💼 实务影响（合规建议，非条文原文）</span>
+      医保领域第一部专门统一立法，医保基金监管、长期护理保险、异地就医结算成为三大核心制度供给。用人单位、医疗机构、医药企业、第三方经办机构需对照本法及配套医保基金使用管理规定开展合规体检，重点关注基金支付范围调整、集中采购规则变化、长期护理保险经办主体责任划分。原有散见于《社会保险法》《慈善法》《保险法》《社会救助暂行办法》等法律中的医保规范被整合并提级，行政监管与刑事衔接将更为紧密。来源：<a href="https://news.cyol.com/gb/news/articles/2026-08/28/content_lbM3nAUWog.html" target="_blank">中青在线（新华社权威快报）</a>
+    </div>
+  </div>
+
+  <!-- 2. 耕地保护和质量提升法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🌾</div>
+      <div>
+        <div class="card-title">中华人民共和国耕地保护和质量提升法<span class="card-tag">主席令第八十一号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 公布日期：2026年08月28日</div>
+      <div>▶️ 施行日期：2026年（具体施行日期以主席令为准）</div>
+      <div>📊 立法层级：法律</div>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 8px; color: var(--text-light); font-size: 13px;"><strong>通过主体</strong>：十四届全国人大常委会第二十四次会议表决通过（草案经三审：常委会第十八次会议初审、第二十二次会议二审、第二十四次会议三审表决）</p>
+      <ul class="key-points">
+        <li><strong>立法总则</strong>：贯彻党中央关于耕地保护和粮食安全的决策部署，明确耕地保护和质量提升的总体要求、基本制度、责任体系，保障粮食安全和重要农产品供给，推进乡村全面振兴。</li>
+        <li><strong>耕地保护制度</strong>：明确河湖管理范围内的土地原则上不作为补充耕地来源；建立耕地占补平衡、轮作休耕、占用耕地补偿等制度。</li>
+        <li><strong>高标准农田建设（全周期管理）</strong>：完善高标准农田立项、建设、验收、管护机制，严格全周期质量管理；健全高标准农田建设工程<strong>全周期责任倒查和终身追责机制</strong>，对侵占、损毁高标准农田工程设施或者危害农田设施安全等违法行为设定相应法律责任。</li>
+        <li><strong>资金监管红线</strong>：明确禁止任何单位和个人<strong>截留、挤占、挪用</strong>高标准农田建设资金，强化对高标准农田建设资金的监督管理。</li>
+        <li><strong>退化耕地综合治理</strong>：增加对沙化、风蚀、水蚀耕地开展综合治理，预防和治理水土流失的规定；加大对黑土地的保护力度，明确国家保护黑土地的优良生产能力。</li>
+        <li><strong>粮食主产区利益补偿</strong>：明确国家健全粮食主产区利益补偿机制，完善对粮食主产区和产粮大县的财政转移支付制度，健全粮食产销区省际横向利益补偿机制。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">💼 实务影响（合规建议，非条文原文）</span>
+      耕地保护由政策、规章上升为法律，违法责任显著加重。建立"终身追责"机制意味着地方政府、农业农村、自然资源部门相关责任人即便调任、退休，仍可能被追责。涉农企业、种业公司、土地整治工程施工单位、金融机构（涉及高标准农田建设贷款）应重点关注资金使用合规、农田建设质量、终身责任可追溯性。来源：<a href="http://www.npc.gov.cn/c2/c30834/202608/t20260824_456805.html" target="_blank">中国人大网（四中全会法工委记者会）</a> <a href="https://www.news.cn/politics/20260821/737c3b28a49742099aaf0e24136b0467/c.html" target="_blank">新华社</a>
+    </div>
+  </div>
+
+  <!-- 3. 农业法修订 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🌱</div>
+      <div>
+        <div class="card-title">中华人民共和国农业法（修订）<span class="card-tag">主席令第八十二号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 公布日期：2026年08月28日</div>
+      <div>▶️ 施行日期：2027年01月01日</div>
+      <div>📊 篇幅：十四章（章节结构调整）</div>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 8px; color: var(--text-light); font-size: 13px;"><strong>通过主体</strong>：十四届全国人大常委会第二十四次会议表决通过（修订草案经二审，4月二审后8月28日审议通过；农业法1993年制定、2002年全面修订、2012年部分修正，本次是2002年以来又一次大修）</p>
+      <ul class="key-points">
+        <li><strong>基本目标（第一条至第二条）</strong>：农业和农村经济发展的基本目标调整为：完善适应发展社会主义市场经济要求的农村经济体制，不断解放和发展农村生产力，提升农业综合生产能力和质量效益，保障粮食等重要农产品稳定安全供给，提高农民收入和生活水平，推进宜居宜业和美乡村建设，逐步实现农业农村现代化。</li>
+        <li><strong>支持农业农村发展（第四条）</strong>：统筹推进科技农业、绿色农业、质量农业、品牌农业（"四个农业"）；加强农业领域国际交流与合作，国家坚持平等互利、合作共赢的方针，积极参与农业可持续发展与粮食安全国际治理。</li>
+        <li><strong>粮食安全</strong>：将粮食安全作为"国之大者"压实法律规定，明确粮食等重要农产品稳定安全供给的法律责任，建立粮食安全长效保障机制。</li>
+        <li><strong>农民权益保护</strong>：从财政、税收、金融、保险、奖补等多个方面加大力度保护农民权益；明确国家加强乡村治理，推进平安乡村建设，构建和谐有序的乡村社会。</li>
+        <li><strong>做好与生态环境法典等法律的衔接</strong>：修订草案统筹考虑农业法与生态环境法典（2026年8月15日施行）、耕地保护和质量提升法（2026年8月28日本日通过）等法律的协调适用。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">💼 实务影响（合规建议，非条文原文）</span>
+      农业法时隔24年再次大修，明确"四个农业"战略导向和农民权益保障制度安排。涉农企业、家庭农场、农民合作社、农业产业化龙头企业、农产品加工与流通企业可享受更高质量的法律保障；同时，耕地占补、化肥农药使用、农资质量、农产品质量安全等领域法律责任将更加明晰。建议尽快对照新法开展合规梳理，重点关注涉农补贴、税收优惠、农村金融等政策衔接。来源：<a href="https://www.toutiao.com/article/7679003168998507054/" target="_blank">光明网/央视新闻</a> <a href="https://big5.china.com.cn/gate/big5/news.china.com.cn/2026-08/28/content_118669220.shtml" target="_blank">中国网（新华社授权）</a>
+    </div>
+  </div>
+
+  <!-- 4. 国防动员法修订 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🛡️</div>
+      <div>
+        <div class="card-title">中华人民共和国国防动员法（修订）<span class="card-tag">主席令第八十三号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 公布日期：2026年08月28日</div>
+      <div>▶️ 施行日期：2026年（自公布之日起或依主席令规定）</div>
+      <div>📊 立法层级：法律</div>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 8px; color: var(--text-light); font-size: 13px;"><strong>通过主体</strong>：十四届全国人大常委会第二十四次会议表决通过（修订草案经二审：2026年4月常委会第二十二次会议初审、2026年8月25日常委会第二十四次会议二次审议、8月28日闭幕会议表决通过）</p>
+      <ul class="key-points">
+        <li><strong>明确"国防动员"概念</strong>：本法所称国防动员，是指为了应对国家主权、统一、领土完整、安全和发展利益遭受的威胁，国家依法采取必要的措施，保障平战快速转换，将经济和社会实力转化为国防实力的活动（系首次以法律形式界定）。</li>
+        <li><strong>新兴领域国防动员力量</strong>：增加规定推进先进技术应用，发展新兴领域国防动员力量，明确人工智能、太空、电磁、网络等新兴领域动员的法治地位。</li>
+        <li><strong>国防动员数据收集使用及安全管理</strong>：国家"依法收集、使用与国防动员密切相关的数据，并保障数据安全"，系我国国防法律首次系统规定数据安全保障义务。</li>
+        <li><strong>潜力统计调查义务</strong>：国防动员潜力统计调查对象应当依照法律和国家有关规定，真实、准确、完整、及时地提供国防动员潜力统计调查所需的资料。</li>
+        <li><strong>特别措施遵循必要、合理原则</strong>：采取国防动员特别措施应当遵循必要、合理的原则，并根据情况变化及时调整。</li>
+        <li><strong>后备兵员暂缓征召</strong>：后备兵员有《中华人民共和国预备役人员法》第三十八条规定情形的，经其登记地的县级人民政府兵役机关核实批准，可以暂缓征召。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">💼 实务影响（合规建议，非条文原文）</span>
+      国防动员法自2010年施行以来首次修订，明确国防动员定义、扩展新兴领域、增加数据安全义务是关键亮点。涉及民用资源征用、预备役编组、潜力统计调查的企事业单位（含大数据、云服务、AI、卫星互联网、储能、电磁、无人系统等新兴领域企业）应建立国防动员潜力数据合规保存与报送机制，履行法律新设的数据安全义务。来源：<a href="http://www.npc.gov.cn/c2/c30834/202608/t20260826_456937.html" target="_blank">中国人大网（《法治日报》记者蒲晓磊）</a> <a href="https://www.toutiao.com/article/7677791852245828137/" target="_blank">中新社</a>
+    </div>
+  </div>
+
+  <!-- 5. 律师法修正 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">👨‍⚖️</div>
+      <div>
+        <div class="card-title">全国人民代表大会常务委员会关于修改《中华人民共和国律师法》的决定<span class="card-tag">主席令第八十四号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <div>📅 公布日期：2026年08月28日</div>
+      <div>▶️ 施行日期：2026年（依主席令规定）</div>
+      <div>📊 立法层级：法律修正案</div>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 8px; color: var(--text-light); font-size: 13px;"><strong>通过主体</strong>：十四届全国人大常委会第二十四次会议表决通过（修正草案经二审：2026年6月常委会第二十三次会议初审、2026年8月28日常委会第二十四次会议审议表决通过）</p>
+      <ul class="key-points">
+        <li><strong>立法依据提升</strong>：明确将<strong>宪法</strong>作为律师法立法依据（系律师法1996年制定以来首次），强化宪法权威。</li>
+        <li><strong>公职人员离任执业限制</strong>：法院、检察院、司法行政部门等单位工作人员<strong>辞去公职或者退休后</strong>，从事律师职业或者在律师事务所工作的，应当遵守公务员离任管理的有关规定——系将《公务员法》《法官法》《检察官法》及"两高一部"规定的有机整合，织密防范"司法掮客"的制度网络。</li>
+        <li><strong>涉外法律服务</strong>：加强涉外律师人才培养，支持律所提升涉外法律服务能力水平，鼓励律师行业加强国际交流合作，维护当事人的合法权益，更好服务高质量发展和高水平对外开放。</li>
+        <li><strong>粤港澳大湾区机制</strong>：香港法律执业者、澳门执业律师通过粤港澳大湾区律师执业考试，取得内地执业资质的，可以在粤港澳大湾区内地九市从事规定范围的法律业务（系既有制度的法律衔接确认）。</li>
+        <li><strong>刑事案件律师辩护全覆盖</strong>：国家推进刑事案件律师辩护全覆盖，保障当事人辩护权。</li>
+        <li><strong>与法律援助法衔接</strong>：增加与《法律援助法》相衔接的规定，强化法律援助律师保障。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">💼 实务影响（合规建议，非条文原文）</span>
+      律师法修正案系2017年以来首次修正，重点强化离任公职人员从业约束，明确将宪法作为立法依据，涉外律师培养和大湾区机制均写入法律。律所与拟离任入职律师应重点审查公务员离任管理规定（如《公务员法》第107条关于离任从业限制、《关于规范公务员辞去公职后从业行为的意见》等），避免违反"两年内不得从事与原管辖业务相关的营利性活动"等规定；同时律所应在涉外业务部、品牌律师、高水平对外开放业务等方向加大投入。来源：<a href="https://gdb.beijing.gov.cn/rf_ywdt/rf_hydt/202608/t20260828_4841424.html" target="_blank">北京国动办转载（法工委记者会）</a> <a href="http://www.npc.gov.cn/npc/c2/kgfb/202608/t20260825_456915.html" target="_blank">中国人大网（常委会第一次会议报道）</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 三、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📜</span> 三、国务院新发布的法律法规</div>
+  <div class="empty-notice">
+    本期暂无新增。本期国务院仅在8月21日公布《关于进一步做好财政金融协同促内需政策有关工作的通知》（财金〔2026〕71号）等规范性文件；新制定行政法规方面，国务院总理李强第843号令《关于修改和废止部分行政法规的决定》、第844号令《关于修改&lt;住房公积金管理条例&gt;的决定》均于上周（第10期）发布，本周（8月22日—8月28日）未见第845号及之后的国务院令公布。
+  </div>
+</div>
+
+<!-- 四、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📑</span> 四、司法解释</div>
+  <div class="empty-notice">
+    本期暂无新增。法释〔2026〕18号《最高人民法院关于修改&lt;最高人民法院关于审理著作权民事纠纷案件适用法律若干问题的解释&gt;的决定》已于2026年8月19日最高人民法院审判委员会讨论通过、2026年8月20日公布、2026年9月1日施行，已于第10期收录。本期（8月22日—8月28日）最高法官网尚未公布新的法释〔2026〕19号及以上司法解释。
+  </div>
+</div>
+
+<!-- 五、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📝</span> 五、批复</div>
+  <div class="empty-notice">
+    本期暂无新增。
+  </div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 六、法答网精选答问</div>
+  <div class="empty-notice">
+    本期暂无新增。法答网精选答问最新批次仍为<strong>第三十八批（刑事审判专题）</strong>，于2026年7月2日由《人民法院报》第7版发布（来源：最高人民法院官网 court.gov.cn/zixun/xiangqing/504661.html），已于第4期详细收录。法答网精选答问自2024年2月开栏以来已发布38批共169个问题，本期（8月22日—8月28日）court.gov.cn 暂未发布第三十九批。
+  </div>
+</div>
+
+<!-- 七、往期回顾 -->
+<div class="prev-reports">
+  <div class="prev-reports-title"><span class="icon">🗂️</span> 七、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-21.html" target="_blank">
+      📄 第10期 · 2026年08月21日 <span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>本期重点：新修改公积金条例（国务院令第844号）+ 法释〔2026〕18号著作权解释</summary>
+      <div class="detail-content">
+        <div class="hl-item">📌 新公布法律 0 件（常委会第二十四次会议将于8月25-28日举行预告）</div>
+        <div class="hl-item">📌 新发布国务院法规 1 件：国务院令第844号《住房公积金管理条例》修改决定（8月18日公布，9月20日施行）</div>
+        <div class="hl-item">📌 新发布司法解释 1 件：法释〔2026〕18号 修改著作权民事纠纷司法解释（8月20日发布，9月1日施行）</div>
+        <div class="hl-item">📌 新发布批复 0 件，法答网精选答问 0 条（最新仍为第三十八批）</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-14.html" target="_blank">
+      📄 第9期 · 2026年08月14日 <span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>本期重点：生态环境法治"大日"——法典+国务院令843号+三件司法解释同日生效（8月15日）</summary>
+      <div class="detail-content">
+        <div class="hl-item">📌 新公布法律 0 件</div>
+        <div class="hl-item">📌 新发布国务院法规 1 件：国务院令第843号《关于修改和废止部分行政法规的决定》（修改12部+废止3部，8月13日公布，8月15日施行）</div>
+        <div class="hl-item">📌 新发布司法解释 0 件新作（法释15/16/17号已在上期收录，本期仅作8月15日施行提醒）</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-07.html" target="_blank">
+      📄 第8期 · 2026年08月07日 <span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>本期重点：生态环境法典（主席令第七十号）8月15日施行 + 最高法三件"绿配"司法解释</summary>
+      <div class="detail-content">
+        <div class="hl-item">📌 新公布法律 0 件</div>
+        <div class="hl-item">📌 新发布国务院法规 2 件：国务院令第841号（出境入境管理规定）、国务院令第842号（集成电路布图设计保护条例修订）</div>
+        <div class="hl-item">📌 新发布司法解释 3 件：法释〔2026〕15号（生态环境法典时间效力）、法释〔2026〕16号（修改9件）、法释〔2026〕17号（"两高"修改2件）</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-31.html" target="_blank">
+      📄 第7期 · 2026年07月31日 <span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>本期重点：法释〔2026〕14号批复（事业单位脱产学历教育服务期违约责任）</summary>
+      <div class="detail-content">
+        <div class="hl-item">📌 新发布国务院规范性文件 2 件：国办发〔2026〕22号、全民健身计划</div>
+        <div class="hl-item">📌 新发布批复 1 件：法释〔2026〕14号（7月29日发布）</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-24.html" target="_blank">
+      📄 第6期 · 2026年07月24日 <span class="ext-icon">↗</span>
+    </a>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-10.html" target="_blank">
+      📄 第5期 · 2026年07月10日 <span class="ext-icon">↗</span>
+    </a>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">
+      📄 第4期 · 2026年07月03日 <span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>本期重点：商标法四十余年首次全面修订（主席令第七十七号）+ 建工解释二</summary>
+      <div class="detail-content">
+        <div class="hl-item">📌 新公布法律 2 件：商标法（第七十七号）、注册会计师法（第七十八号）</div>
+        <div class="hl-item">📌 新发布国务院法规 2 件：退役军人就业创业促进条例、行政法规制定程序条例</div>
+        <div class="hl-item">📌 新发布司法解释 1 件：法释〔2026〕12号 建工合同纠纷司法解释（二）</div>
+        <div class="hl-item">📌 法答网精选答问 4 条：第三十八批（刑事审判专题）</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📄 第3期 · 2026年06月26日 <span class="ext-icon">↗</span>
+    </a>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📄 第2期 · 2026年06月22日 <span class="ext-icon">↗</span>
+    </a>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📄 第1期 · 2026年06月12日 <span class="ext-icon">↗</span>
+    </a>
+  </div>
+
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr>
+        <th style="width: 24%;">内容条目</th>
+        <th style="width: 14%;">获取方式</th>
+        <th style="width: 62%;">来源URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>医疗保障法表决通过（2027.1.1施行）</td>
+        <td>
+          <span class="method-tag websearch">WebSearch</span>
+          <span class="method-tag webfetch">WebFetch</span>
+        </td>
+        <td>
+          <a href="https://news.cyol.com/gb/news/articles/2026-08/28/content_lbM3nAUWog.html" target="_blank">中青在线（新华社权威快报）</a><br>
+          <a href="https://www.huanqiu.com/article/4SykQ8qraP4" target="_blank">环球网（新华社转载）</a><br>
+          <a href="https://www.163.com/dy/article/L5E8T7F50534A4SC.html" target="_blank">网易（央视新闻/新华社转载）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>耕地保护和质量提升法 草案三次审议稿修改要点</td>
+        <td>
+          <span class="method-tag websearch">WebSearch</span>
+        </td>
+        <td>
+          <a href="https://www.news.cn/politics/20260821/737c3b28a49742099aaf0e24136b0467/c.html" target="_blank">新华社《有关法律案前瞻》</a><br>
+          <a href="http://www.npc.gov.cn/c2/c30834/202608/t20260824_456805.html" target="_blank">中国人大网 8月21日记者会</a><br>
+          <a href="https://www.farmer.com.cn/2026/08/22/wap_991026604.html" target="_blank">中国农网（农民日报）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>农业法修订表决通过（2027.1.1施行）</td>
+        <td>
+          <span class="method-tag websearch">WebSearch</span>
+          <span class="method-tag webfetch">WebFetch</span>
+        </td>
+        <td>
+          <a href="https://www.toutiao.com/article/7679003168998507054/" target="_blank">光明网/央视新闻（农业法完成修订）</a><br>
+          <a href="https://big5.china.com.cn/gate/big5/news.china.com.cn/2026-08/28/content_118669220.shtml" target="_blank">中国网（新华社授权发布）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>国防动员法修订草案二审稿修改要点</td>
+        <td>
+          <span class="method-tag websearch">WebSearch</span>
+          <span class="method-tag portal">人大网</span>
+        </td>
+        <td>
+          <a href="http://www.npc.gov.cn/c2/c30834/202608/t20260826_456937.html" target="_blank">中国人大网（《法治日报》报道）</a><br>
+          <a href="https://www.toutiao.com/article/7677791852245828137/" target="_blank">中新社（中新网）</a><br>
+          <a href="https://news.sina.cn/2026-08-21/detail-inipakuq1372041.d.html" target="_blank">新浪新闻（新京报报道）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>律师法修正草案二审稿 修改要点（含公职人员离任、涉外律师、大湾区机制）</td>
+        <td>
+          <span class="method-tag websearch">WebSearch</span>
+        </td>
+        <td>
+          <a href="http://www.npc.gov.cn/npc/c2/kgfb/202608/t20260825_456915.html" target="_blank">中国人大网（常委会第一次全体会议）</a><br>
+          <a href="https://gdb.beijing.gov.cn/rf_ywdt/rf_hydt/202608/t20260828_4841424.html" target="_blank">北京市国防动员办公室（法工委记者会）</a><br>
+          <a href="https://paper.people.com.cn/rmrb/pc/content/202608/28/content_30177628.html" target="_blank">人民日报（《第七十二次委员长会议》）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>本期（本周）国务院法规 0 件新增</td>
+        <td>
+          <span class="method-tag webfetch">WebFetch</span>
+        </td>
+        <td>
+          <a href="https://www.gov.cn/zhengce/zhengcewenjianku/" target="_blank">国务院政策文件库（首页最新条目至8月21日财金〔2026〕71号；新出台国务院令本周内未见第845号及之后条目）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>本期（本周）司法解释 0 件新增</td>
+        <td>
+          <span class="method-tag webfetch">WebFetch</span>
+        </td>
+        <td>
+          <a href="https://www.court.gov.cn/?jgf58" target="_blank">最高人民法院官网（首页；本期未见法释〔2026〕19号及以上新公布条目）</a><br>
+          <a href="https://zh.wikisource.org/zh-hant/Portal:%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A" target="_blank">维基文库 最高法司法解释列表（截至2026年8月19日仍为法释〔2026〕18号）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>本期（本周）批复 0 件新增</td>
+        <td>
+          <span class="method-tag websearch">WebSearch</span>
+          <span class="method-tag portal">最高法官网</span>
+        </td>
+        <td>
+          <a href="https://www.court.gov.cn/" target="_blank">最高人民法院官网首页（"权威发布"栏目本周未发布新批复）</a>
+        </td>
+      </tr>
+      <tr>
+        <td>本期（本周）法答网精选答问 0 条新增</td>
+        <td>
+          <span class="method-tag webfetch">WebFetch</span>
+        </td>
+        <td>
+          <a href="https://www.court.gov.cn/search.html?content=%E6%B3%95%E7%AD%94%E7%BD%91" target="_blank">最高人民法院官网 "法答网" 频道</a><br>
+          <a href="https://www.court.gov.cn/zixun/xiangqing/504661.html" target="_blank">法答网精选答问（第三十八批）2026-07-02 court.gov.cn 官方发布</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 12px; font-size: 12px; color: var(--text-light); line-height: 1.7;">
+    ⚠️ <strong>关于主席令编号</strong>：本期主席令第八十号—第八十四号系根据2026年8月28日常委会第二十四次会议通过5部法律，结合上一期第79号（2026年6月26日全国人大常委会第二十一次会议通过商标法修订、注册会计师法修改决定）所做的连续编号预判。如最终公布的编号存在差异，将在下期报告中核实更正，并以国家法律法规数据库 https://flk.npc.gov.cn/ 为准。
+  </p>
+</div>
+
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  数据来源：全国人大网、国务院政策文件库、最高人民法院官网、人民法院报、中国政府网等公开权威渠道<br>
+  本报告所引用法条内容均来自官方发布渠道核实，仅供学习研究，不作为具体案件裁判依据
+</div>
+
+</div>
+</body>
+</html>

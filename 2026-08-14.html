@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年08月14日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--accent);
+  }
+  .card-tag-blue {
+    display: inline-block;
+    background: var(--info-bg);
+    color: var(--info-text);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--info-border);
+  }
+  .card-meta {
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    background: #fafbfc;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-body { padding: 16px 20px; }
+  .key-points { padding-left: 20px; }
+  .key-points li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .key-points li strong { color: var(--primary); }
+
+  .practical-note {
+    margin: 12px 20px 16px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border-left: 4px solid var(--info-border);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .practical-note .prefix { color: var(--info-text); font-weight: 600; font-size: 12px; display: block; margin-bottom: 6px; }
+
+  .empty-notice {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  .reminder-card {
+    background: #fffbe6;
+    border: 2px solid #f0a030;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .reminder-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #b7791f;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .reminder-body { font-size: 14px; line-height: 1.8; color: var(--text); }
+  .reminder-body strong { color: var(--danger-text); }
+
+  /* 往期回顾 */
+  .prev-reports { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .prev-reports-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prev-report-item {
+    margin-bottom: 8px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .ext-icon { font-size: 12px; }
+  details { margin-top: 4px; margin-left: 4px; }
+  details summary {
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .detail-content {
+    padding: 10px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .hl-item { margin-bottom: 4px; }
+
+  /* 来源标注 */
+  .source-section {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .source-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .source-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .source-table a { color: var(--info-text); word-break: break-all; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .method-tag.websearch { background: #e3f2fd; color: #1565c0; }
+  .method-tag.webfetch { background: #e8f5e9; color: #2e7d32; }
+  .method-tag.portal { background: #fff8e1; color: #e65100; }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 10px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .overview-item { padding: 10px 8px; }
+    .overview-item .num { font-size: 24px; }
+    .card-header { flex-direction: column; gap: 8px; }
+    .card-meta { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+  <div class="header-date">第9期 · 2026年08月14日发布</div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item"><div class="num">0</div><div class="label">新公布法律</div></div>
+    <div class="overview-item highlight"><div class="num">1</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">⚠️ 本期重点关注</div>
+    <div class="highlight-desc">
+      <strong>2026年8月15日为生态环境法治"大日"：</strong>《中华人民共和国生态环境法典》（主席令第七十号）正式施行，同日配套生效的包括——国务院令第843号《国务院关于修改和废止部分行政法规的决定》（修改12部行政法规、废止3部行政法规）、法释〔2026〕15号《时间效力规定》、法释〔2026〕16号《修改九件司法解释的决定》、法释〔2026〕17号《"两高"修改两件司法解释的决定》。<strong>国务院令第843号系本期新发布文件</strong>（8月8日公布），其余三项司法解释已于上期（第8期）收录，本期作为施行提醒列示。
+    </div>
+  </div>
+</div>
+
+<!-- 施行提醒 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔔</span> 二、8月15日施行提醒（上期已收录文件）</div>
+
+  <div class="reminder-card">
+    <div class="reminder-title">📅 2026年8月15日同步施行的法律文件清单</div>
+    <div class="reminder-body">
+      <p>以下文件此前已在《联慧东城法规觅踪》第8期（2026年8月7日）中详细收录，因均于<strong>2026年8月15日</strong>正式施行，特作施行提醒：</p>
+      <ul style="padding-left: 20px; margin-top: 8px;">
+        <li style="margin-bottom: 6px;"><strong>《中华人民共和国生态环境法典》</strong>（主席令第七十号）——3月12日通过，8月15日施行</li>
+        <li style="margin-bottom: 6px;"><strong>法释〔2026〕15号</strong>《最高人民法院关于适用〈中华人民共和国生态环境法典〉时间效力的若干规定》——8月5日发布，8月15日施行</li>
+        <li style="margin-bottom: 6px;"><strong>法释〔2026〕16号</strong>《最高人民法院关于修改〈最高人民法院关于审理船舶油污损害赔偿纠纷案件若干问题的规定〉等九件司法解释的决定》——8月5日发布，8月15日施行</li>
+        <li style="margin-bottom: 6px;"><strong>法释〔2026〕17号</strong>《"两高"关于修改〈最高人民法院、最高人民检察院关于办理海洋自然资源与生态环境公益诉讼案件若干问题的规定〉等两件司法解释的决定》——8月5日发布，8月15日施行</li>
+      </ul>
+      <p style="margin-top: 10px;">此外，本期新发布的<strong>国务院令第843号</strong>亦于8月15日同步施行，详见下文。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 三、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 三、全国人大新公布的法律</div>
+  <div class="empty-notice">
+    本期暂无新增。全国人大常委会近期未召开会议，最近一次会议（第二十三次会议）于6月26日闭幕，通过的法律（商标法修订、注册会计师法修改）已于第4期收录。
+  </div>
+</div>
+
+<!-- 四、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 四、国务院新发布的法律法规</div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-icon">📜</span>
+      <div>
+        <div class="card-title">国务院关于修改和废止部分行政法规的决定<span class="card-tag">国务院令第843号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 公布日期：2026年08月08日</span>
+      <span>🗓️ 施行日期：2026年08月15日</span>
+      <span>🏢 国务院第93次常务会议通过</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>清理目的</strong>：为全面有效贯彻实施《中华人民共和国生态环境法典》，确保生态环境法律制度体系逻辑统一、规则协调，对涉及的行政法规进行清理</li>
+        <li><strong>修改12部行政法规</strong>：全国污染源普查条例、快递暂行条例、黄河水量调度条例、病原微生物实验室生物安全管理条例、南水北调工程供用水管理条例、地下水管理条例、进出口商品检验法实施条例、生态环境监测条例、城镇排水与污水处理条例、民用建筑节能条例、碳排放权交易管理暂行条例、消耗臭氧层物质管理条例</li>
+        <li><strong>废止3部行政法规</strong>：防治陆源污染物污染损害海洋环境管理条例、防治海岸工程建设项目污染损害海洋环境管理条例、淮河流域水污染防治暂行条例</li>
+        <li><strong>修改类型</strong>：①适应性修改——将引用的法律名称统一修改为"生态环境法典"；②实质性修改——如地下水管理条例罚款上限从10万元提至20万元、碳排放权交易管理条例未足额清缴罚款提至100万-500万元、生态环境监测条例增加吊销许可证规定等</li>
+        <li><strong>废止原因</strong>：3部条例的内容已被生态环境法典及相关法律全面涵盖，且部分制度已不适应高质量发展和生态文明建设的新要求</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>
+      企业需注意：①碳排放权交易管理条例大幅提高了未足额清缴配额的罚款（100万-500万元，限期内未完成再加处5-10倍罚款），重点排放单位应严格按期清缴；②地下水管理条例提高了罚款上限，化工园区、加油站、采油厂等需加强地下水污染防治；③城镇排水与污水处理条例新增了"焚烧污泥"的禁止行为及相应高额罚款（最高500万元），污水处理企业需规范污泥处置流程；④生态环境监测条例新增"吊销许可证"处罚，第三方监测机构应确保监测数据真实。
+    </div>
+  </div>
+</div>
+
+<!-- 五、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📖</span> 五、司法解释</div>
+  <div class="empty-notice">
+    本期暂无新增。最高人民法院最近一批司法解释（法释〔2026〕15号、16号、17号）已于第8期（8月7日）详细收录，均于8月15日施行，参见上方"施行提醒"。
+  </div>
+</div>
+
+<!-- 六、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">✍️</span> 六、批复</div>
+  <div class="empty-notice">
+    本期暂无新增。最高人民法院最近一件批复为法释〔2026〕14号（事业单位脱产全日制学历教育服务期违约责任），已于第7期（7月31日）收录。
+  </div>
+</div>
+
+<!-- 七、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💬</span> 七、法答网精选答问</div>
+  <div class="empty-notice">
+    本期暂无新增。法答网精选答问最新仍为第三十八批（刑事审判专题，2026年7月2日发布），已于第4期收录。
+  </div>
+</div>
+
+<!-- 八、往期回顾 -->
+<div class="section prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 八、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-08-07.html" target="_blank">
+      📅 2026年08月07日（第8期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 2件 · 新发布司法解释 3件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 国务院令第841号 《国务院关于出境入境管理的规定》——7月22日公布，9月15日施行</div>
+        <div class="hl-item">② 国务院令第842号 《集成电路布图设计保护条例》（修订）——8月5日公布，公布之日施行</div>
+        <div class="hl-item">③ 法释〔2026〕15号 生态环境法典时间效力规定——8月5日发布，8月15日施行</div>
+        <div class="hl-item">④ 法释〔2026〕16号 修改九件司法解释的决定——8月5日发布，8月15日施行</div>
+        <div class="hl-item">⑤ 法释〔2026〕17号 "两高"修改两件司法解释的决定——8月5日发布，8月15日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-31.html" target="_blank">
+      📅 2026年07月31日（第7期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院规范性文件 2件 · 新发布司法解释 0件 · 新发布批复 1件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 国办发〔2026〕22号《关于国务院行政复议案件处理程序的若干规定》——7月22日施行</div>
+        <div class="hl-item">② 国务院《全民健身计划（2026—2030年）》——7月19日印发</div>
+        <div class="hl-item">③ 法释〔2026〕14号 事业单位工作人员脱产全日制学历教育服务期违约责任批复——7月29日发布，7月30日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-24.html" target="_blank">
+      📅 2026年07月24日（第6期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 0件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 法释〔2026〕13号 "两高"关于修改内幕交易、泄露内幕信息刑事案件司法解释的决定——2026年7月24日发布，7月27日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-10.html" target="_blank">
+      📅 2026年07月10日（第5期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新施行法律 3件 · 新发布国务院法规 0件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 社会救助法（主席令第七十五号）——4月30日通过，7月1日施行</div>
+        <div class="hl-item">② 民用航空法（主席令第六十五号）——2025年12月27日修订，7月1日施行</div>
+        <div class="hl-item">③ 民族团结进步促进法（主席令第七十一号）——3月12日通过，7月1日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">
+      📅 2026年07月03日（第4期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 2件 · 新发布国务院法规 2件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 商标法（2026年修订）主席令第七十七号——6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">② 注册会计师法修正 主席令第七十八号——6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">③ 退役军人就业创业促进条例 国务院令第840号——6月30日公布，8月1日施行</div>
+        <div class="hl-item">④ 行政法规制定程序条例（修订）国务院令第838号——7月1日施行</div>
+        <div class="hl-item">⑤ 法释〔2026〕12号 建工合同纠纷司法解释（二）——6月29日发布，次日施行</div>
+        <div class="hl-item">⑥ 法答网精选答问（第三十八批）——刑事审判专题，7月2日发布</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📅 2026年06月26日（第3期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 1件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 行政法规制定程序条例（修订）国务院令第838号——7月1日施行</div>
+        <div class="hl-item">② 法答网精选答问（第三十七批）——执行工作专题</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📅 2026年06月22日（第2期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 2件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 对外投资的规定 国务院令第837号——7月1日施行</div>
+        <div class="hl-item">② 矿产资源法实施条例 国务院令第839号——6月15日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📅 2026年06月12日（第1期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首期试运行报告，涵盖法律、法规、司法解释、批复、法答网答问五类内容追踪</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr><th>内容条目</th><th>获取方式</th><th>来源URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>国务院令第843号 《国务院关于修改和废止部分行政法规的决定》全文</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://new.qq.com/rain/a/20260814A05VMM00" target="_blank">腾讯新闻 转载中国政府网全文</a><br><a href="https://so.html5.qq.com/page/real/search_news?docid=70000021_9516a7e923c56252" target="_blank">新华社8月13日电</a></td>
+      </tr>
+      <tr>
+        <td>国家行政法规库（司法部官网）现行有效行政法规目录</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.moj.gov.cn/pub/sfbgw/flfggz/flfggzxzfg/" target="_blank">moj.gov.cn 司法部 国家行政法规库</a></td>
+      </tr>
+      <tr>
+        <td>生态环境法典8月15日施行 + 配套司法解释清理情况</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/zixun/xiangqing/508071.html" target="_blank">court.gov.cn 最高法新闻发布会报道</a><br><a href="https://www.court.gov.cn/fabu/xiangqing/508001.html" target="_blank">court.gov.cn 时间效力规定全文</a><br><a href="https://www.court.gov.cn/fabu/xiangqing/508041.html" target="_blank">court.gov.cn 修改九件司法解释决定全文</a><br><a href="https://www.court.gov.cn/fabu/xiangqing/508011.html" target="_blank">court.gov.cn "两高"修改两件司法解释决定全文</a></td>
+      </tr>
+      <tr>
+        <td>全国人大新公布法律检索（2026年8月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="http://npc.gov.cn" target="_blank">中国人大网 npc.gov.cn</a><br><a href="https://www.ccdi.gov.cn/toutun/202606/t20260626_498186_m.html" target="_blank">ccdi.gov.cn 第二十三次常委会闭幕报道</a></td>
+      </tr>
+      <tr>
+        <td>国务院令2026年发布目录</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://zh.wikisource.org/zh-hant/Portal:%E4%B8%AD%E8%8F%AF%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9C%8B%E5%9C%8B%E5%8B%99%E9%99%A2%E4%BB%A4/2026%E5%B9%B4" target="_blank">Wikisource 2026年国务院令目录</a></td>
+      </tr>
+      <tr>
+        <td>最高人民法院司法解释、批复栏目检索（2026年8月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/gengduo/16.html" target="_blank">court.gov.cn 司法解释栏目</a><br><a href="http://gongbao.court.gov.cn/ArticleList.html?serial_no=sf" target="_blank">court.gov.cn 最高法公报司法解释目录</a></td>
+      </tr>
+      <tr>
+        <td>法答网精选答问最新批次检索</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.thepaper.cn/newsDetail_forward_33512311" target="_blank">澎湃新闻 第三十八批（2026年7月2日发布，转载court.gov.cn）</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  联慧东城法规觅踪 · 第9期 · 2026年08月14日<br>
+  数据截止至2026年8月14日13:30
+</div>
+
+</div>
+</body>
+</html>

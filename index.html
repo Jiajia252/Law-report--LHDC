@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 · 报告总目录</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #eef1f6; color:#1f2329; line-height:1.7; padding:28px 16px 60px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg,#0f2c52 0%,#1c4b82 100%);
+    color:#fff; border-radius:16px; padding:34px 32px; position:relative; overflow:hidden;
+    box-shadow:0 10px 30px rgba(15,44,82,.18);
+  }
+  .hero::after {
+    content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px;
+    border-radius:50%; background:rgba(255,255,255,.05);
+  }
+  .hero h1 { font-size:26px; letter-spacing:1px; margin-bottom:10px; font-weight:600; }
+  .hero .sub { font-size:14px; opacity:.82; }
+  .hero .gold { display:inline-block; width:46px; height:3px; background:#d4a545; border-radius:2px; margin-bottom:16px; }
+  .stat { display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
+  .stat div { background:rgba(255,255,255,.1); border-radius:8px; padding:8px 16px; font-size:13px; }
+  .stat b { color:#ffd58a; font-size:16px; margin-right:4px; }
+  .pdf-btn {
+    display:inline-block; margin-top:16px; padding:9px 18px; font-size:13px;
+    color:#0f2c52; background:#d4a545; border-radius:8px; text-decoration:none;
+    font-weight:600; transition:all .2s ease;
+  }
+  .pdf-btn:hover { background:#e8bd60; transform:translateY(-1px); }
+  .list { margin-top:24px; display:grid; gap:12px; }
+  .row {
+    background:#fff; border-radius:12px; padding:16px 20px; display:flex; align-items:center;
+    justify-content:space-between; gap:14px; text-decoration:none; color:inherit;
+    box-shadow:0 2px 10px rgba(15,44,82,.06); transition:all .2s ease; border-left:4px solid #1c4b82;
+  }
+  .row:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(15,44,82,.14); border-left-color:#d4a545; }
+  .row .no { font-size:13px; font-weight:700; color:#1c4b82; min-width:58px; }
+  .row .dt { font-size:15px; font-weight:600; }
+  .row .tag { font-size:12px; color:#6b7785; margin-top:2px; }
+  .row .arrow { color:#d4a545; font-size:18px; }
+  .row.latest { background:linear-gradient(90deg,#fffdf6,#fff); border-left-color:#d4a545; }
+  .row.latest .no::after { content:"NEW"; display:inline-block; background:#c0392b; color:#fff; font-size:10px; padding:1px 5px; border-radius:3px; margin-left:6px; vertical-align:1px; }
+  footer { text-align:center; font-size:12px; color:#8a949f; margin-top:34px; line-height:1.9; }
+  /* 搜索区 */
+  .search-box { margin-top:22px; position:relative; }
+  .search-box input {
+    width:100%; padding:14px 18px 14px 46px; font-size:15px; border:none; border-radius:12px;
+    outline:none; background:#fff; box-shadow:0 2px 10px rgba(15,44,82,.08);
+    font-family:inherit; color:#1f2329; transition:box-shadow .2s ease;
+  }
+  .search-box input:focus { box-shadow:0 4px 18px rgba(28,75,130,.2); }
+  .search-box .icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:16px; color:#8a949f; }
+  .search-box .clear {
+    position:absolute; right:12px; top:50%; transform:translateY(-50%); border:none; background:#eef1f6;
+    color:#6b7785; border-radius:50%; width:24px; height:24px; cursor:pointer; font-size:12px; display:none; line-height:1;
+  }
+  .search-hint { font-size:12px; color:#8a949f; margin-top:8px; padding-left:4px; }
+  .results { margin-top:20px; display:none; }
+  .results .r-head { font-size:13px; color:#1c4b82; font-weight:700; margin-bottom:10px; }
+  .results .r-head b { color:#c0392b; }
+  .r-item {
+    background:#fff; border-radius:12px; padding:16px 20px; margin-bottom:10px; cursor:pointer;
+    box-shadow:0 2px 10px rgba(15,44,82,.06); border-left:4px solid #1c4b82; transition:all .2s ease;
+  }
+  .r-item:hover { border-left-color:#d4a545; box-shadow:0 6px 18px rgba(15,44,82,.14); }
+  .r-item .r-meta { font-size:12px; color:#8a949f; margin-bottom:6px; }
+  .r-item .r-meta .rn { color:#1c4b82; font-weight:700; margin-right:8px; }
+  .r-item .r-snippet { font-size:13px; color:#3d4653; line-height:1.8; word-break:break-all; }
+  .r-item mark { background:#ffe9b3; color:#8a5a00; padding:0 2px; border-radius:2px; }
+  .r-more { font-size:12px; color:#8a949f; margin-top:4px; }
+  .r-empty { background:#fff; border-radius:12px; padding:18px 20px; text-align:center; color:#8a949f; font-size:13px; }
+  @media (max-width:600px){
+    body { padding:16px 10px 40px; }
+    .hero { padding:24px 20px; border-radius:12px; }
+    .hero h1 { font-size:20px; }
+    .row { padding:13px 14px; }
+    .row .no { min-width:48px; font-size:12px; }
+    .row .dt { font-size:14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="gold"></span>
+    <h1>联慧东城法规觅踪</h1>
+    <div class="sub">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+    <div class="stat">
+      <div><b>19</b>期报告</div>
+      <div>最新一期 <b>2026年11月20日</b></div>
+      <div>每周五更新</div>
+    </div>
+    <a class="pdf-btn" href="2026-11-20.pdf" download>下载本期 PDF</a>
+  </div>
+
+  <div class="search-box">
+    <span class="icon">🔍</span>
+    <input id="q" type="text" placeholder="搜索标题或全文，如：司法解释、拒执罪、主席令、继承编…" autocomplete="off">
+    <button class="clear" id="qclear" title="清空">✕</button>
+  </div>
+  <div class="search-hint" id="shint">输入关键词可跨 19 期报告全文检索；留空显示全部期次目录</div>
+
+  <div class="results" id="results"></div>
+
+  <div class="list" id="list">
+    <a class="row latest" href="2026-11-20.html">
+      <div><div class="no">第19期</div></div>
+      <div style="flex:1">
+        <div class="dt">2026年11月20日</div>
+        <div class="tag">追踪周期 11月14日—11月20日 · 地方委员会工作条例修订发布、"两高一部"拒执罪典型案例、继承编解释（二）征求意见截止</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-11-13.html">
+      <div><div class="no">第18期</div></div>
+      <div style="flex:1">
+        <div class="dt">2026年11月13日</div>
+        <div class="tag">追踪周期 11月7日—11月13日 · 主席令第86—90号闭环、中医药传统知识保护条例、基金会管理条例修订</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-11-06.html">
+      <div><div class="no">第17期</div></div>
+      <div style="flex:1">
+        <div class="dt">2026年11月6日</div>
+        <div class="tag">追踪周期 10月24日—11月6日 · 常委会第25次会议通过四部法律</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-10-30.html">
+      <div><div class="no">第16期</div></div>
+      <div style="flex:1">
+        <div class="dt">2026年10月30日</div>
+        <div class="tag">追踪周期 10月24日—10月30日 · 补发</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-10-23.html">
+      <div><div class="no">第15期</div></div>
+      <div style="flex:1"><div class="dt">2026年10月23日</div><div class="tag">追踪周期 10月17日—10月23日</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-10-16.html">
+      <div><div class="no">第14期</div></div>
+      <div style="flex:1"><div class="dt">2026年10月16日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-10-09.html">
+      <div><div class="no">第13期</div></div>
+      <div style="flex:1"><div class="dt">2026年10月9日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-09-11.html">
+      <div><div class="no">第12期</div></div>
+      <div style="flex:1"><div class="dt">2026年9月11日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-08-28.html">
+      <div><div class="no">第11期</div></div>
+      <div style="flex:1"><div class="dt">2026年8月28日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-08-21.html">
+      <div><div class="no">第10期</div></div>
+      <div style="flex:1"><div class="dt">2026年8月21日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-08-14.html">
+      <div><div class="no">第9期</div></div>
+      <div style="flex:1"><div class="dt">2026年8月14日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-08-07.html">
+      <div><div class="no">第8期</div></div>
+      <div style="flex:1"><div class="dt">2026年8月7日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-07-31.html">
+      <div><div class="no">第7期</div></div>
+      <div style="flex:1"><div class="dt">2026年7月31日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-07-24.html">
+      <div><div class="no">第6期</div></div>
+      <div style="flex:1"><div class="dt">2026年7月24日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-07-10.html">
+      <div><div class="no">第5期</div></div>
+      <div style="flex:1"><div class="dt">2026年7月10日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-07-03.html">
+      <div><div class="no">第4期</div></div>
+      <div style="flex:1"><div class="dt">2026年7月3日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-06-26.html">
+      <div><div class="no">第3期</div></div>
+      <div style="flex:1"><div class="dt">2026年6月26日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-06-22.html">
+      <div><div class="no">第2期</div></div>
+      <div style="flex:1"><div class="dt">2026年6月22日</div><div class="tag">周度法规追踪</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="row" href="2026-06-12.html">
+      <div><div class="no">第1期</div></div>
+      <div style="flex:1"><div class="dt">2026年6月12日</div><div class="tag">创刊号</div></div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <footer>
+    编制：腾讯云 ｜ WorkBuddy<br>
+    本页所有报告均为独立 HTML 文件，点击即可在线阅读
+  </footer>
+</div>
+
+<script>
+(function(){
+  var listEl = document.getElementById('list');
+  var rows = Array.prototype.slice.call(listEl.querySelectorAll('a.row'));
+  var resultsEl = document.getElementById('results');
+  var input = document.getElementById('q');
+  var clearBtn = document.getElementById('qclear');
+  var hintEl = document.getElementById('shint');
+
+  // 期次元数据（从目录行提取）
+  var issues = rows.map(function(a){
+    var no = a.querySelector('.no'), dt = a.querySelector('.dt'), tag = a.querySelector('.tag');
+    return { href: a.getAttribute('href'), no: no ? no.textContent : '', dt: dt ? dt.textContent : '', tag: tag ? tag.textContent : '' };
+  });
+
+  // ---------- 全文索引（按需单文件加载） ----------
+  // 预建索引 search-index.json：19 期正文合并为一个 JSON 文件。
+  // 只在用户首次输入搜索词时加载一次，避免打开目录就发起 19 个请求。
+  var indexData = null, loading = false;
+
+  function loadIndex(cb){
+    if (indexData) { cb(); return; }
+    if (loading) { setTimeout(function(){ loadIndex(cb); }, 500); return; }
+    loading = true;
+    fetch("search-index.json").then(function(r){ return r.json(); }).then(function(data){
+      indexData = data; loading = false; cb();
+    }).catch(function(){ loading = false; cb(); });
+  }
+
+  // ---------- 高亮 ----------
+  function hi(text, kw){
+    var esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return text.replace(new RegExp(esc, 'gi'), function(m){ return '<mark>' + m + '</mark>'; });
+  }
+
+  // ---------- 搜索 ----------
+  function snippet(text, kw, len){
+    var i = text.toLowerCase().indexOf(kw.toLowerCase());
+    if (i < 0) return '';
+    var start = Math.max(0, i - 40), end = Math.min(text.length, i + kw.length + (len || 120));
+    var s = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+    return hi(s, kw);
+  }
+
+  function doSearch(){
+    var kw = input.value.trim();
+    if (!kw) { showAll(); return; }
+    var kws = kw.split(/\s+/).filter(Boolean);
+
+    // 标题筛选
+    var shown = 0;
+    rows.forEach(function(a, i){
+      var it = issues[i];
+      var hay = (it.no + ' ' + it.dt + ' ' + it.tag).toLowerCase();
+      var hit = kws.every(function(k){ return hay.indexOf(k.toLowerCase()) >= 0; });
+      a.style.display = hit ? '' : 'none';
+      if (hit) shown++;
+    });
+
+    // 全文检索（首次输入时才加载索引，单文件一次请求）
+    loadIndex(function(){
+      var html = '';
+      if (!indexData) {
+        html += '<div class="r-head">全文检索</div><div class="r-empty">索引加载失败，请稍候重试</div>';
+      } else {
+        var matched = [];
+        indexData.forEach(function(it){
+          var lower = it.x.toLowerCase();
+          var ok = kws.every(function(k){ return lower.indexOf(k.toLowerCase()) >= 0; });
+          if (ok) {
+            var mm = it.t.match(/第(\d+)期/);
+            var label = mm ? ('第' + mm[1] + '期') : '';
+            var sn = snippet(it.x, kws[0], 140);
+            var extra = '';
+            if (kws.length > 1) {
+              var sn2 = snippet(it.x, kws[1], 100);
+              if (sn2) extra = '<div class="r-snippet" style="margin-top:4px">' + sn2 + '</div>';
+            }
+            matched.push('<div class="r-item" data-href="' + it.f + '">' +
+              '<div class="r-meta"><span class="rn">' + label + '</span>点击打开本期报告</div>' +
+              '<div class="r-snippet">' + sn + '</div>' + extra + '</div>');
+          }
+        });
+        if (matched.length) {
+          html += '<div class="r-head">全文检索：在 <b>' + matched.length + '</b> 期报告中命中「' + kw.replace(/</g,'&lt;') + '」</div>' + matched.join('');
+        } else {
+          html += '<div class="r-head">全文检索</div><div class="r-empty">19 期正文中未命中「' + kw.replace(/</g,'&lt;') + '」</div>';
+        }
+      }
+      resultsEl.innerHTML = html;
+      Array.prototype.forEach.call(resultsEl.querySelectorAll('.r-item'), function(el){
+        el.addEventListener('click', function(){ location.href = el.getAttribute('data-href'); });
+      });
+    });
+
+    resultsEl.style.display = 'block';
+    hintEl.textContent = '目录中 ' + shown + ' 期标题匹配；全文检索加载中…';
+  }
+
+  function showAll(){
+    rows.forEach(function(a){ a.style.display = ''; });
+    resultsEl.style.display = 'none';
+    resultsEl.innerHTML = '';
+    hintEl.textContent = '输入关键词可跨 19 期报告全文检索；留空显示全部期次目录';
+  }
+
+  input.addEventListener('input', function(){
+    clearBtn.style.display = input.value ? 'block' : 'none';
+    if (input.value.trim().length >= 2) doSearch(); else showAll();
+  });
+  clearBtn.addEventListener('click', function(){
+    input.value = ''; clearBtn.style.display = 'none'; showAll(); input.focus();
+  });
+})();
+</script>
+</body>
+</html>

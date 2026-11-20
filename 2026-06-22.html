@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年06月22日</title>
+<style>
+  :root {
+    --primary: #1a2a4a;
+    --primary-light: #2c4270;
+    --accent: #c9a84c;
+    --accent-light: #e8d59c;
+    --bg: #f5f6f8;
+    --card-bg: #ffffff;
+    --text: #333333;
+    --text-secondary: #666666;
+    --border: #e0e3e8;
+    --danger: #d44a3a;
+    --danger-bg: #fef2f0;
+    --success: #2a7d4f;
+    --info: #3a6fb5;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--accent));
+  }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .header .subtitle { font-size: 15px; opacity: 0.85; font-weight: 300; }
+  .header .accent-dot { color: var(--accent); }
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* Overview stats */
+  .overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.25s;
+  }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .stat-num { font-size: 36px; font-weight: 800; color: var(--primary); line-height: 1.2; }
+  .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+  /* Highlight card */
+  .highlight {
+    background: linear-gradient(135deg, #fef2f0 0%, #fff8f5 100%);
+    border: 2px solid var(--danger);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .highlight h3 { color: var(--danger); font-size: 17px; margin-bottom: 8px; }
+  .highlight p { color: #7a2e22; font-size: 14px; line-height: 1.8; }
+  .highlight-item { margin-bottom: 8px; }
+  .highlight-item:last-child { margin-bottom: 0; }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 22px; }
+  .section-empty {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-light);
+    transition: all 0.25s;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .card-tag {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: var(--accent-light);
+    color: #6b4e16;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .card h3 { font-size: 17px; color: var(--primary); margin-bottom: 10px; padding-right: 80px; }
+  .card .meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .card .meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .card h4 { font-size: 14px; color: var(--primary-light); margin-bottom: 8px; margin-top: 4px; }
+  .card ul { padding-left: 20px; margin-bottom: 14px; }
+  .card ul li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .card ul li strong { color: var(--primary); }
+
+  /* Official source link */
+  .card .source-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--info);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--info);
+  }
+  .card .source-link:hover { color: var(--primary-light); border-color: var(--primary-light); }
+
+  /* Impact box */
+  .impact {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    line-height: 1.8;
+    border: 1px dashed var(--border);
+  }
+  .impact strong { color: var(--danger); }
+
+  /* History */
+  .history-card-wrapper { position: relative; margin-bottom: 16px; }
+  .history-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    margin-bottom: 8px;
+    background: var(--primary);
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .history-link:hover { background: var(--primary-light); transform: translateY(-1px); }
+  .history-link::after { content: '↗'; font-size: 11px; }
+  .history-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .history-card[open] { border-color: var(--accent-light); }
+  .history-summary {
+    padding: 16px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    list-style: none;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .history-summary::-webkit-details-marker { display: none; }
+  .history-summary::before {
+    content: '▶';
+    font-size: 10px;
+    color: var(--accent);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .history-card[open] .history-summary::before { transform: rotate(90deg); }
+  .history-summary:hover { background: #fafbfd; }
+  .history-date { color: var(--text-secondary); font-weight: 400; font-size: 13px; min-width: 90px; }
+  .history-label {
+    background: var(--primary-light);
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .history-tag {
+    background: #e8f5e9;
+    color: var(--success);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .history-content { padding: 0 24px 20px; }
+  .history-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .hstat {
+    text-align: center;
+    padding: 8px 14px;
+    background: var(--bg);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    min-width: 70px;
+  }
+  .hstat-num { font-size: 20px; font-weight: 700; color: var(--primary); display: block; }
+  .history-items { display: flex; flex-direction: column; gap: 12px; }
+  .history-item {
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .history-item-meta { color: var(--text-secondary); font-size: 12px; display: block; margin-top: 2px; }
+  .history-item-desc { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .footer .brand { font-weight: 600; color: var(--primary); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .header { padding: 32px 16px 28px; }
+    .header h1 { font-size: 22px; }
+    .container { padding: 20px 12px 40px; }
+    .card { padding: 18px 16px; }
+    .card h3 { padding-right: 0; }
+    .card-tag { position: static; display: inline-block; margin-bottom: 8px; }
+    .overview { grid-template-columns: repeat(3, 1fr); }
+    .stat-num { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+  <h1>联慧东城法规觅踪</h1>
+  <div class="subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 <span class="accent-dot">●</span> 每周追踪</div>
+  <div style="margin-top:12px;font-size:14px;opacity:0.75;">2026年06月22日</div>
+</div>
+
+<div class="container">
+
+  <!-- ========== 一、本期概览 ========== -->
+  <div class="overview">
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">🏛 新公布法律</div></div>
+    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">📜 国务院法规</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">⚖ 司法解释</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">📋 批复</div></div>
+    <div class="stat-card"><div class="stat-num">0</div><div class="stat-label">💬 法答网</div></div>
+  </div>
+
+  <div class="highlight">
+    <h3>🔴 本期重点关注</h3>
+    <div class="highlight-item">
+      <strong>1. 国务院令第837号《国务院关于对外投资的规定》</strong>（2026年6月1日公布，7月1日施行）——我国对外投资领域首部系统性行政法规，首次将居民个人纳入对外投资主体，构建安全审查+全要素监管+投资壁垒反制三位一体制度框架。
+    </div>
+    <div class="highlight-item">
+      <strong>2. 国务院令第839号《中华人民共和国矿产资源法实施条例》</strong>（2026年5月15日公布，6月15日已施行）——全面重构矿业权出让、矿区生态修复、战略性矿产储备制度，一次性废止六部旧规。
+    </div>
+  </div>
+
+  <!-- ========== 二、全国人大新公布的法律 ========== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏛</span> 二、全国人大新公布的法律</div>
+    <div class="section-empty">
+      本期暂无新增。<br>
+      <span style="font-size:12px;color:#999;">最近一次公布为2026年4月30日（主席令第74号、第75号）；全国人大常委会第二十次会议将于6月23日至26日召开，届时将审议商标法修订草案等。</span>
+    </div>
+  </div>
+
+  <!-- ========== 三、国务院新发布的法律法规 ========== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📜</span> 三、国务院新发布的法律法规</div>
+
+    <!-- 837号令：对外投资规定 -->
+    <div class="card">
+      <span class="card-tag">国务院令第837号</span>
+      <h3>国务院关于对外投资的规定</h3>
+      <div class="meta">
+        <span>📅 公布：2026年6月1日</span>
+        <span>✅ 施行：2026年7月1日</span>
+        <span>📄 共34条</span>
+      </div>
+      <h4>核心要点</h4>
+      <ul>
+        <li><strong>投资者范围（第二条）：</strong>"投资者，包括中国境内的企业、其他组织和居民个人。"——首次在行政法规层面将居民个人纳入对外投资主体。</li>
+        <li><strong>对外投资定义（第二条）：</strong>"以投入资产、权益或者提供融资、担保等方式，直接或者间接获得其他国家（地区）的企业、资产等所有权、控制权、经营管理权以及其他相关权益的活动。"——定义涵盖直接和间接投资，以及融资、担保等多种方式。</li>
+        <li><strong>分类分级全过程监管（第十条）：</strong>"国家健全对外投资管理体系，完善调控措施，分类分级实施全过程监管，加强风险防控。"</li>
+        <li><strong>技术/数据出境管控（第十三条）：</strong>不得出口或未经许可出口国家禁止/限制出口的货物、技术、服务及相关数据；不得以"跨境派遣技术人员、组织人员赴其他国家（地区）工作、跨境提供技术指导、安排人员跨境培训等方式"向境外转移上述受管控物项。</li>
+        <li><strong>安全审查制度（第十五条）：</strong>"国家健全境外投资安全审查制度，国务院投资主管部门、商务主管部门会同国务院其他有关部门对影响或者可能影响国家安全的境外投资及相关资产、权益等的转让、处分进行安全审查。有关组织、个人应当予以协助、配合，不得拒绝、阻碍，并应当遵守境外投资安全审查决定。"</li>
+        <li><strong>投资壁垒调查（第二十三条）：</strong>投资者遭遇与贸易有关的投资壁垒或其他经营障碍，国务院商务主管部门可自行或会同有关部门组织调查，根据结果可采取调整国别投资政策、禁止或限制有关货物、技术进出口等措施。</li>
+        <li><strong>反制措施（第二十四条、第二十五条）：</strong>对采取歧视性禁止/限制措施的国家或组织，中国政府可采取相应措施并依据《反外国制裁法》列入反制清单；对外国组织、个人危害中国主权安全或采取歧视性措施的，可采取进出口限制、投资限制、交易合作限制、入境限制等措施。</li>
+        <li><strong>违规处罚（第二十七条、第二十八条）：</strong>未履行核准备案手续的，处投资额1‰–5‰罚款，拒不改正的处5‰–10‰罚款，直接责任人处2万–5万元罚款；拒不配合安全审查或危害国家安全的，可禁止1–3年从事对外投资活动。</li>
+      </ul>
+      <div class="impact">
+        <strong>⚡ 实务影响（以下为企业合规建议，非条文原文）：</strong>企业需在7月1日施行前建立覆盖投资全生命周期的合规管理体系，系统梳理存量境外SPV架构、跨境担保等安排；新项目立项阶段须同步完成ODI核准备案、安全审查和技术/数据出境评估三项合规前置。居民个人境外投资的具体办法将由国务院投资、商务主管部门另行制定，建议密切关注。
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:#999;">
+        📎 官方来源：<a class="source-link" href="https://www.gov.cn/zhengce/content/202606/content_7070755.htm" target="_blank">法规原文（中国政府网）</a>｜<a class="source-link" href="https://www.gov.cn/zhengce/202606/content_7070793.htm" target="_blank">三部门负责人答记者问（中国政府网）</a>
+      </div>
+    </div>
+
+    <!-- 839号令：矿产资源法实施条例 -->
+    <div class="card">
+      <span class="card-tag">国务院令第839号</span>
+      <h3>中华人民共和国矿产资源法实施条例</h3>
+      <div class="meta">
+        <span>📅 公布：2026年5月15日</span>
+        <span>✅ 施行：2026年6月15日（已生效）</span>
+        <span>📄 共79条</span>
+      </div>
+      <h4>核心要点</h4>
+      <ul>
+        <li><strong>矿业权竞争性出让（第八条）：</strong>"矿业权应当通过招标、拍卖、挂牌等竞争性方式出让；对紧缺程度高、资源储量规模中型以上的战略性矿产资源……优先通过招标方式出让探矿权。"协议出让仅限于四种法定例外情形；急需开采战略性矿产经国务院同意可直接授予采矿权。</li>
+        <li><strong>生态修复责任人（第四十七条）：</strong>"采矿权人是矿区生态修复的责任人。采矿权人应当协同实施矿区生态修复与污染防治。"采矿权转让的，受让人继受修复义务，但转让人弄虚作假的，其修复义务不因采矿权转让而免除。</li>
+        <li><strong>修复费用保护（第五十三条）：</strong>"矿区生态修复费用由采矿权人按年度提取，除法律另有规定外，矿区生态修复费用不得被查封、冻结或者划拨。"</li>
+        <li><strong>战略性矿产储备（第五十四条至第五十七条）：</strong>构建产品储备、产能储备和产地储备相结合的战略性矿产资源储备体系；产地储备期限原则上不少于5年，纳入产地储备的战略性矿产资源未经国务院自然资源主管部门批准不得开采或压覆。</li>
+        <li><strong>违法行为处罚（第六十七条至第七十三条）：</strong>涉及战略性矿产资源的违法行为从重处罚（第六十九条）；矿业权人未按时缴纳占用费的处应缴费用3倍以下罚款（第七十条）；施工单位自行处置施工采挖砂石黏土的，处矿产品价值3–5倍或10万–30万元罚款（第七十一条）；未经批准开采产地储备矿产的从重处罚（第七十二条）。</li>
+        <li><strong>废止六部旧规（第七十九条）：</strong>施行同时废止《矿产资源监督管理暂行办法》《矿产资源补偿费征收管理规定》《矿产资源法实施细则》《矿产资源勘查区块登记管理办法》《矿产资源开采登记管理办法》《探矿权采矿权转让管理办法》。</li>
+      </ul>
+      <div class="impact">
+        <strong>⚡ 实务影响（以下为企业合规建议，非条文原文）：</strong>矿业企业须关注出让方式变革，提前准备参与竞争性出让；探矿权续期须提前申请且面临勘查面积核减；生态修复费用须按年度提取，合规成本上升；外商投资矿业应符合负面清单规定。建设项目施工采挖砂石黏土不得自行处置（施工自用除外）。
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:#999;">
+        📎 官方来源：<a class="source-link" href="https://www.gov.cn/zhengce/content/202605/content_7069679.htm" target="_blank">法规原文（中国政府网）</a>｜<a class="source-link" href="https://www.cgs.gov.cn/zcjd/202605/t20260521_860444.html" target="_blank">两部门负责人答记者问（中国地质调查局）</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== 四、司法解释 ========== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚖</span> 四、司法解释</div>
+    <div class="section-empty">
+      本期暂无新增。<br>
+      <span style="font-size:12px;color:#999;">最近为法释〔2026〕11号（刑事缺席审判程序规定），2026年5月22日发布，已在上期收录。</span>
+    </div>
+  </div>
+
+  <!-- ========== 五、批复 ========== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📋</span> 五、批复</div>
+    <div class="section-empty">
+      本期暂无新增。<br>
+      <span style="font-size:12px;color:#999;">2026年截至目前仅法释〔2026〕1号（2026年1月6日发布），已超出30天窗口。</span>
+    </div>
+  </div>
+
+  <!-- ========== 六、法答网精选答问 ========== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💬</span> 六、法答网精选答问</div>
+    <div class="section-empty">
+      本期暂无新增。<br>
+      <span style="font-size:12px;color:#999;">最新为第37批（2026年2月5日发布），第38批尚未发布。</span>
+    </div>
+  </div>
+
+  <!-- ========== 七、往期回顾 ========== -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📅</span> 七、往期回顾</div>
+
+    <!-- 第1期：2026-06-12 -->
+    <div class="history-card-wrapper">
+      <a class="history-link" href="2026-06-12.html" target="_blank" title="在线打开完整报告">📄 打开第1期完整报告</a>
+      <details class="history-card" open>
+        <summary class="history-summary">
+          <span class="history-date">2026年06月12日</span>
+          <span class="history-label">第1期</span>
+          <span class="history-tag">司法解释 3件</span>
+        </summary>
+        <div class="history-content">
+          <div class="history-stats">
+            <div class="hstat"><span class="hstat-num">0</span> 法律</div>
+            <div class="hstat"><span class="hstat-num">0</span> 国务院法规</div>
+            <div class="hstat"><span class="hstat-num">3</span> 司法解释</div>
+            <div class="hstat"><span class="hstat-num">0</span> 批复</div>
+            <div class="hstat"><span class="hstat-num">0</span> 法答网</div>
+          </div>
+          <div class="history-items">
+            <div class="history-item">
+              <strong>法释〔2026〕11号</strong> 最高人民法院 最高人民检察院关于适用刑事缺席审判程序若干问题的规定<br>
+              <span class="history-item-meta">2026年5月22日发布 | 2026年5月22日施行</span>
+              <p class="history-item-desc">明确刑事缺席审判适用范围、送达标准、辩护权保障及违法所得没收程序衔接，首次统一"两高"对缺席审判程序的操作规范。</p>
+            </div>
+            <div class="history-item">
+              <strong>法释〔2026〕10号</strong> 最高人民法院 最高人民检察院关于办理非法占用耕地案件适用法律若干问题的规定<br>
+              <span class="history-item-meta">2026年5月11日发布 | 2026年5月11日施行</span>
+              <p class="history-item-desc">明确耕地破坏程度认定标准、单位犯罪责任、行刑衔接及生态修复从宽处理规则。</p>
+            </div>
+            <div class="history-item">
+              <strong>法释〔2026〕9号</strong> 最高人民法院关于审理道路交通事故损害赔偿案件适用法律若干问题的解释（二）<br>
+              <span class="history-item-meta">2026年5月6日发布 | 2026年6月30日施行</span>
+              <p class="history-item-desc">细化自动驾驶/辅助驾驶事故责任划分、网约车平台连带责任、挂车交强险规则等前沿问题。</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="footer">
+    <span class="brand">编制：腾讯云 ｜ WorkBuddy</span><br>
+    <span style="font-size:11px;color:#aaa;">报告内容基于公开官方来源整理，实务建议为企业合规参考，不构成法律意见。</span>
+  </div>
+
+</div>
+
+</body>
+</html>

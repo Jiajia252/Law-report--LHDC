@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年11月13日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+  .card-tag.blue { background: var(--info-bg); color: var(--info-text); }
+  .card-tag.red { background: var(--danger-bg); color: var(--danger-text); }
+  .card-body { padding: 16px 20px; }
+  .card-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .card-meta .meta-item strong { color: var(--primary); }
+  .points-title {
+    font-size: 13px; font-weight: 700;
+    color: var(--accent);
+    margin: 8px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .points { list-style: none; }
+  .points li {
+    font-size: 14px;
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .impact {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--info-bg);
+    border-left: 3px solid var(--info-border);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--info-text);
+  }
+  .impact strong { display: block; margin-bottom: 2px; }
+  .empty-note {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+
+  .link-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.15s ease;
+  }
+  .link-card:hover { border-color: var(--accent); }
+  .link-date { font-weight: 700; color: var(--primary); font-size: 14px; flex-shrink: 0; }
+  .link-desc { font-size: 13px; color: var(--text-light); flex: 1; }
+  .link-btn {
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .link-btn:hover { background: var(--primary-light); }
+
+  .source-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 13px;
+  }
+  .source-item { margin-bottom: 10px; padding-left: 14px; border-left: 3px solid var(--border); }
+  .source-item .s-name { font-weight: 700; color: var(--primary); }
+  .source-item .s-url { word-break: break-all; color: var(--info-text); }
+  .tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 10px; color: #fff; margin: 0 2px; }
+  .tag-search { background: #3182ce; }
+  .tag-fetch { background: #38a169; }
+  .tag-portal { background: #d69e2e; }
+
+  .mini-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .mini-table th, .mini-table td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  .mini-table th { background: #f7fafc; color: var(--primary); font-weight: 700; }
+
+  .footer {
+    text-align: center;
+    padding: 30px 0 10px;
+    color: var(--text-light);
+    font-size: 13px;
+  }
+  .footer .brand { color: var(--primary); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .header-title { font-size: 22px; }
+    .link-card { flex-direction: column; align-items: flex-start; }
+    .link-btn { width: 100%; text-align: center; }
+    .mini-table { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-title">⚖️ 联慧东城法规觅踪</div>
+    <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+    <div class="header-date">第18期 ｜ 2026年11月13日 ｜ 追踪周期：2026年11月7日 — 2026年11月13日</div>
+  </div>
+
+  <!-- 一、本期概览 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span>一、本期概览</div>
+    <div class="overview-grid">
+      <div class="overview-item highlight">
+        <div class="num">5</div>
+        <div class="label">新公布法律（含1件修改决定）</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">2</div>
+        <div class="label">新发布国务院法规</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">新发布司法解释</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">新发布批复</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">法答网精选答问</div>
+      </div>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-title">🔥 本期重点关注</div>
+      <div class="highlight-desc">
+        <strong>① 主席令第八十六号至第九十一号于11月7日正式刊发，《人民日报》同日全文公布。</strong>上期报告"主席令编号待核实"事项已闭环：检察公益诉讼法（第86号）、南极活动与环境保护法（第87号）、水法修订（第88号）、反跨境腐败法（第89号）、关于修改《突发事件应对法》等十五部法律的决定（第90号）、人事任免（第91号）。其中<strong>第90号一揽子修改决定为上期未单列的新内容</strong>——修改15部法律，核心是取消对基层编制专项规划的硬性要求，并将已废止的环境保护法、海洋环境保护法等援引统一改为《中华人民共和国生态环境法典》。<br><br>
+        <strong>② 国务院令第850号《中医药传统知识保护条例》（11月9日公布，2027年1月1日施行，32条）。</strong>我国首部中医药传统知识保护专门行政法规，建立"保护数据库—保护名录—持有人制度"三层架构，并明确<strong>境外组织、个人不得在我国境内开展中医药传统知识调查</strong>（第十四条第三款），违反者最高可处50万元罚款（第二十九条）。<br><br>
+        <strong>③ 国务院令第848号《基金会管理条例》全面修订（11月10日公布，2027年1月1日施行，8章79条）。</strong>2004年国务院令第400号施行22年后首次整体重构：注册资金分档上调（市级200万/省级400万/民政部2000万）、五类领域试点直接登记、机关法人不得发起设立、负责人70周岁与两届上限、非慈善组织基金会公益支出不低于净资产8%。<br><br>
+        <strong>④ 立法动态：最高人民法院11月10日就《民法典继承编解释（二）（征求意见稿）》公开征求意见</strong>（共20条，截止11月20日），涉及放弃继承协议效力、生养死葬扶养协议、继子女继承、自书遗嘱真实性举证责任、遗产管理人诉讼地位等高频争点，<strong>虽非生效司法解释，但已可预判裁判走向</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- 二、全国人大新公布的法律 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏛️</span>二、全国人大新公布的法律（5件）</div>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:14px;">十四届全国人大常委会第二十五次会议于2026年11月6日表决通过，国家主席习近平同日签署主席令，11月7日《人民日报》第2版刊发主席令全文。第91号主席令为免去李乐成工业和信息化部部长职务的人事任免，不属法律文件，不计入本期统计。<br><strong>说明：</strong>第86—89号四部法律的条文内容已在上期（第17期，11月6日）报告中收录，本期系在其基础上补齐官方主席令编号，并补充最高人民法院、最高人民检察院权威解读中的具体程序规则；第90号修改决定为本期首次单列。</p>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">⚖️</div>
+        <div class="card-title">中华人民共和国检察公益诉讼法<span class="card-tag red">首部专门法</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>主席令：</strong>第八十六号</span>
+          <span class="meta-item"><strong>通过：</strong>2026年11月6日</span>
+          <span class="meta-item"><strong>施行：</strong>2027年1月1日</span>
+          <span class="meta-item"><strong>体例：</strong>6章53条</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>章节结构：</strong>总则、管辖、立案调查与提起诉讼、审判、执行、附则；系统整合原分散于26部单行法中的检察公益诉讼条款，为检察机关履职与人民法院审判提供统一程序遵循</li>
+          <li><strong>行政公益诉讼受案领域（10类）：</strong>生态环境和资源保护；食品药品安全；国有财产保护、国有土地使用权出让；安全生产；未成年人、妇女、老年人和残疾人等法律规定的特定群体权益保障；国防利益保护和军人权益保障；无障碍环境建设；反电信网络诈骗；文化遗产保护；促进民族团结进步</li>
+          <li><strong>民事公益诉讼受案情形：</strong>上述9类领域中损害国家利益或社会公共利益的行为，另加经营者实施的垄断行为、用人单位等侵害众多劳动者合法权益的行为、个人信息处理者违法处理个人信息侵害众多个人权益的行为、侵害英雄烈士姓名肖像名誉荣誉的行为</li>
+          <li><strong>管辖：</strong>行政公益诉讼案件由行政机关所在地人民检察院办理，行政机关所在地基层人民法院管辖第一审；民事公益诉讼案件由侵权行为地或行为人住所地人民检察院办理，侵权行为地或被告住所地基层人民法院管辖第一审</li>
+          <li><strong>诉前程序法定化：</strong>提起行政公益诉讼前，应当在沟通后发出公益诉讼检察建议，建议须载明违法或不作为的理由依据、公益受损事实、整改建议与整改期限；提起民事公益诉讼前须公告（公告期30日）或督促、告知法律规定的其他机关和组织起诉</li>
+          <li><strong>起诉期限：</strong>行政公益诉讼——自整改期限届满之日起3个月内或收到书面回复之日起30日内审查行政机关是否仍存在第十三条所指情形，审查完毕后30日内起诉，重大疑难复杂案件经上一级检察院批准可延长3个月；民事公益诉讼——立案之日起1年内起诉，可延长3个月</li>
+          <li><strong>调查权边界：</strong>可询问、勘验、检查、鉴定，查阅复制调取文件资料，<strong>但不得采取限制人身自由或查封、扣押、冻结财产等强制措施</strong>；可采取听证方式听取意见</li>
+          <li><strong>举证责任：</strong>行政公益诉讼中检察机关就行政机关违法行使职权/不作为致公益受损承担举证责任，行政机关可举证证明其不存在该情形；民事公益诉讼中被告可举证免责或减责，并有权申请法院调取检察机关未提交的有利证据</li>
+          <li><strong>涉外条款（附则）：</strong>对外国组织和个人实施的侵害我国国家利益、社会公共利益的违法行为，人民检察院可以依法提起公益诉讼</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：<br>①对行政机关：检察建议的整改期限将成为行政诉讼与监察追责的起算节点，收到建议后应在期限内书面回复并留存整改证据，逾期未整改即面临被诉风险。<br>②对企业：新增的"特定群体权益保障""文化遗产保护""劳动者权益保障""个人信息保护"四类领域，使互联网平台、人力资源服务、文旅开发、医药食品企业的公益诉讼敞口明显扩大；尤其个人信息处理者"侵害众多个人合法权益"的门槛低于私益诉讼，应提前排查批量数据处理合规。<br>③对律师：民事公益诉讼中被告的"申请法院调取检察机关未提交有利证据"系新增抗辩工具，可作为代理要点。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：主席令第八十六号，2026年11月7日《人民日报》第2版（人民网 cpc.people.com.cn 全文转载）；条文要旨经最高人民检察院官网《从"有依据"到"有专法"，检察公益诉讼法要点速览》（2026-11-06）及全国人大常委会法工委行政法室负责人答记者问核实。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🌏</div>
+        <div class="card-title">中华人民共和国南极活动与环境保护法</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>主席令：</strong>第八十七号</span>
+          <span class="meta-item"><strong>通过：</strong>2026年11月6日</span>
+          <span class="meta-item"><strong>施行：</strong>2027年1月1日</span>
+          <span class="meta-item"><strong>体例：</strong>7章59条</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>章节结构：</strong>总则、南极活动许可、南极环境保护、视察观察与检查、保障与监督、法律责任、附则</li>
+          <li><strong>立法目的：</strong>更好认识南极、保护南极、利用南极，规范南极活动，保护南极环境，履行我国缔结或参加的南极相关条约，推动构建人类命运共同体</li>
+          <li><strong>核心制度为"南极活动许可"：</strong>以行政许可作为我国公民、法人及其他组织赴南极开展活动的法定前置条件，并配套环境影响评价与环境保护义务</li>
+          <li><strong>监督机制：</strong>设"视察、观察与检查"专章，落实《南极条约》体系下的视察制度与我国作为协商国的检查权责</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：涉极地旅游、科考合作、渔业与航运的企业应关注许可申请的主体资格、活动范围与环评要求；未经许可赴南极活动将面临法律责任。涉外合作项目需同步评估条约义务与国内许可的衔接。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：主席令第八十七号，2026年11月7日《人民日报》第2版；体例与章节结构经中国法学会环境资源法学研究会转载新华社报道确认。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">💧</div>
+        <div class="card-title">中华人民共和国水法（修订）<span class="card-tag">1988年制定后第二次全面修订</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>主席令：</strong>第八十八号</span>
+          <span class="meta-item"><strong>修订通过：</strong>2026年11月6日</span>
+          <span class="meta-item"><strong>施行：</strong>2027年3月22日</span>
+          <span class="meta-item"><strong>体例：</strong>9章102条</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>章节结构：</strong>总则、水资源规划、水资源保护与开发利用、水资源配置与节约使用、<strong>江河湖泊管理与保护（新增专章）</strong>、水工程建设与运行、水事纠纷处理与监督检查、法律责任、附则</li>
+          <li><strong>确立水资源刚性约束制度：</strong>坚持以水定城、以水定地、以水定人、以水定产，推进水资源节约集约利用；建立健全水资源论证制度</li>
+          <li><strong>国家水网建设入法：</strong>以全面提升水安全保障能力为目标，构建"系统完备、安全可靠，集约高效、绿色智能，循环通畅、调控有序"的国家水网；统筹防治水害，建立水灾害防治体系与水资源安全战略储备体系</li>
+          <li><strong>新增江河湖泊专章：</strong>建立江河湖泊定期普查制度与名录管理，明确河道湖泊管理范围和岸线保护范围的划定要求，禁止非法侵占和违法利用、占用水域岸线，严格规范涉河建设项目，将生态用水调度纳入水工程日常调度</li>
+          <li><strong>地下水管理强化：</strong>细化地下水超采区、禁采区划定标准及程序，建立地下水储备制度</li>
+          <li><strong>节水与市场机制：</strong>将集蓄雨水等非常规水纳入水资源统一配置，鼓励优先使用符合标准的再生水；建立与水资源状况、供水成本、用水户承受能力相适应的水价形成机制；培育和规范用水权交易市场，支持依法开展用水权交易；建立水生态保护补偿机制</li>
+          <li><strong>民生用水优先：</strong>开发利用水资源应当优先满足城乡居民生活用水，加强饮用水水源地保护并实行名录管理</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：取水许可、水资源论证将成为高耗水项目（火电、化工、造纸、数据中心、高尔夫与滑雪场等）立项的实质门槛；涉河建设项目审批趋严，河道管理范围内已建项目需排查合规性；用水权交易市场的规范化，为水权质押融资、水权转让合同提供了上位法依据。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：主席令第八十八号，2026年11月7日《人民日报》第2版；条文要旨经中国人大网《坚持民生为上 筑牢水安全法治根基——解读新修订的水法》（2026-11-10）及全国人大常委会法工委立法规划室负责人答记者问核实。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">中华人民共和国反跨境腐败法<span class="card-tag red">本期重点 · 自公布之日起施行</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>主席令：</strong>第八十九号</span>
+          <span class="meta-item"><strong>通过：</strong>2026年11月6日</span>
+          <span class="meta-item"><strong>施行：</strong>自公布之日起施行（2026年11月6日）</span>
+          <span class="meta-item"><strong>体例：</strong>6章47条</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>跨境腐败的五类法定情形（第二条）：</strong>①境内主体向外国公职人员、国际公共组织官员行贿，或境外主体在境内向外国公职人员行贿；②境外主体向境内公职人员及其特定关系人或国家机关、国有企业、事业单位、人民团体行贿及相关联受贿；③境内主体及其境外分支、子公司在境外实施的贪污贿赂、滥用职权、玩忽职守、权力寻租、利益输送、徇私舞弊、浪费国家资财等职务违法或职务犯罪；④行为或结果部分跨境的同类腐败行为；⑤涉嫌腐败人员逃匿境外、跨境转移腐败资产</li>
+          <li><strong>反制与阻断授权（第六条）：</strong>外国以反腐败为借口或不当域外适用其本国法律，对我国进行遏制打压、采取歧视性限制措施的，我国有权依照《中华人民共和国反外国制裁法》等采取反制、阻断等措施</li>
+          <li><strong>工作机制（第七、八条）：</strong>国家建立反跨境腐败工作机制，由<strong>国家监察委员会牵头</strong>，外交、公安、司法行政、财政、商务、反洗钱、审计、国资、金融监管、证券监管、网信等部门协同；省级监察委员会牵头负责本行政区域工作</li>
+          <li><strong>境内取证阻断（第二十五条）：</strong>非经我国有关机关同意，境外机构、组织和个人不得自行或通过他人在我国境内进行反跨境腐败调查等执法活动；<strong>在我国境内的机构、组织和个人不得向境外机构、组织和个人提供证据材料、数据信息和其他相关协助</strong>，违反的依法采取阻断措施并追究法律责任</li>
+          <li><strong>境外证据效力（第二十二条）：</strong>通过执法司法合作、司法协助渠道获取的证据材料，经审查符合法定要求的可以作为证据使用，但依国际条约、协定或承诺不得作为证据使用的除外</li>
+          <li><strong>十二项司法协助事项（第二十一条）：</strong>查找辨认人员、查询核实涉案财物与金融账户、获取证言陈述、获取文件记录电子数据、获取鉴定意见、勘验检查、搜查、安排证人作证、查封扣押冻结涉案财物、没收返还违法所得、送达法律文书及其他</li>
+          <li><strong>企业廉洁合规义务（第二十九条至第三十四条）：</strong>从事跨境经营的企业应建立廉洁合规管理制度并将合规贯穿决策、执行、监督全过程；合理设置廉洁合规部门或人员，可向境外机构派出廉洁合规专员；开展廉洁风险识别评估并完善内部举报机制，发现涉嫌跨境腐败须依法举报报案；<strong>对聘用的第三方机构或个人开展尽职调查并监督管理，禁止利用第三方实施跨境腐败</strong>；健全国有企业境外重点岗位、重大资金、重大项目风险防控（直派财务负责人、驻外人员轮岗、利益冲突回避）</li>
+          <li><strong>法律责任（第五章）：</strong>分别规定刑事责任（第三十五条）、行政责任（第三十六条）、监察处分责任（第三十七条）、民事责任（第三十八条）、信用记录（第三十九条）、违法所得没收追缴退赔（第四十条），并明确共同实施、教唆帮助的分别处罚（第四十一条）及从重情形（第四十二条）</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：<br>①<strong>施行时点最关键</strong>——本法自公布之日起施行（2026年11月6日），不存在过渡期，存量跨境业务应立即开展合规体检。<br>②有境外子公司、分支机构的"走出去"企业须在制度层面落地廉洁合规体系（而非仅有一纸承诺书），并保留第三方尽调、内部举报处理、培训记录等可验证痕迹；否则一旦涉案，"不履行廉洁合规义务"本身即构成独立的追责事由。<br>③<strong>数据与证据出境的新禁区</strong>：境外母公司、境外监管机构或境外仲裁/诉讼要求提供境内证据材料、数据信息的，须先取得我国有关机关同意，否则面临阻断与追责；跨国企业内部调查（internal investigation）尤其需要重新设计取证路径。<br>④刑事辩护要点：境外取得证据的效力以"经审查符合法定要求"为前提，可就取证程序合法性、条约限制条款提出排除意见。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：主席令第八十九号及法律全文，2026年11月7日《人民日报》第2版、中国人大网；条文要旨经中国人大网《关于〈中华人民共和国反跨境腐败法（草案）〉的说明》及最高人民检察院官网（2026-11-07）、中国法院网（2026-11-06）报道核实。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📜</div>
+        <div class="card-title">全国人民代表大会常务委员会关于修改《中华人民共和国突发事件应对法》等十五部法律的决定<span class="card-tag red">本期新增单列</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>主席令：</strong>第九十号</span>
+          <span class="meta-item"><strong>通过：</strong>2026年11月6日</span>
+          <span class="meta-item"><strong>施行：</strong>自公布之日起施行</span>
+          <span class="meta-item"><strong>体例：</strong>一次性修改15部法律，修改后重新公布</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>两条修改主线：</strong>一是落实党中央整治形式主义为基层减负的决策部署，取消或调整法律中对基层编制专项规划的硬性要求；二是与《中华人民共和国生态环境法典》及已变更的机构名称做好衔接</li>
+          <li><strong>受修改的十五部法律（按决定序号）：</strong>①突发事件应对法 ②安全生产法 ③海岛保护法 ④职业病防治法 ⑤基本医疗卫生与健康促进法 ⑥野生动物保护法 ⑦森林法 ⑧草原法 ⑨湿地保护法 ⑩防沙治沙法 ⑪水土保持法 ⑫黑土地保护法 ⑬动物防疫法 ⑭环境保护税法 ⑮航道法</li>
+          <li><strong>"基层减负"类修改（6部）：</strong>将突发事件应急体系建设规划、安全生产规划、海岛保护专项规划、职业健康保护规划、医疗卫生服务体系规划、野生动物及其栖息地保护规划等，由"县级以上人民政府及其有关部门应当编制"改为"可以根据实际需要编制"或上收至省级以上；如突发事件应对法第二十九条将"县级以上人民政府有关部门"改为"省级以上人民政府有关部门"</li>
+          <li><strong>"规划松绑"类修改（7部）：</strong>森林法第二十五条改为省级以上林业主管部门编制林业发展规划、设区的市和县级"可以根据实际需要"编制；草原法、湿地保护法、防沙治沙法、水土保持法、黑土地保护法、动物防疫法作同向调整；湿地保护法并删去第三十四条第一款、第三十五条第一款</li>
+          <li><strong>"法典衔接"类修改：</strong>海岛保护法第四十六条、野生动物保护法第六十三条、森林法第七十四条第三款、湿地保护法第二条第三款、防沙治沙法第四十六条、环境保护税法第二十三条、航道法第四十四条中援引的《海洋环境保护法》《环境保护法》《土壤污染防治法》《水污染防治法》统一改为<strong>《中华人民共和国生态环境法典》</strong></li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：<br>①<strong>援引条文必须全面改写</strong>——凡代理涉环保、税务、林业、野生动物案件，起诉状、答辩状、代理意见中援引《环境保护法》《海洋环境保护法》《土壤污染防治法》《水污染防治法》的，将因上述法律已废止、援引条款已改指《生态环境法典》而失去依据，须立即更新法条库。<br>②行政案件审查要点：2026年11月6日之后新作出的行政决定，若仍以"县级未编制专项规划"作为处罚或不作为理由，属适用法律错误。<br>③本决定与国务院令第851号（修改14部、废止4部行政法规）形成"法律—行政法规"两层同步清理，实务中须联动核查。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：主席令第九十号；决定全文见中国人大网（2026-11-06 17:55发布）<span class="s-url">http://www.npc.gov.cn/npc/c2/c30834/202611/t20261106_458549.html</span>；立法说明见中国人大网《不再硬性要求基层编制有关专项规划》（2026-11-04）。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、国务院新发布的法律法规 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏢</span>三、国务院新发布的法律法规（2件）</div>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:14px;">国务院令编号按签署时间顺序编排，公布时间可能晚于签署时间。本期两件行政法规的签署日期分别为2026年10月13日（第848号）与10月23日（第850号），但均于11月9日—10日经新华社受权发布，故归入本期追踪周期。</p>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🌿</div>
+        <div class="card-title">中医药传统知识保护条例<span class="card-tag red">首部专门行政法规</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>国务院令：</strong>第850号</span>
+          <span class="meta-item"><strong>常务会议：</strong>2026年9月18日国务院第97次常务会议通过</span>
+          <span class="meta-item"><strong>签署：</strong>2026年10月23日</span>
+          <span class="meta-item"><strong>公布：</strong>2026年11月9日</span>
+          <span class="meta-item"><strong>施行：</strong>2027年1月1日</span>
+          <span class="meta-item"><strong>体例：</strong>32条（不分章）</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>保护对象界定（第二条）：</strong>基于中华民族长期实践积累、世代传承发展形成的中医药理论、技术方法及其相关表现形式，含①预防、保健、诊断、治疗、康复的传统理论技术方法；②经典名方、验方；③中药材品种选育、种植养殖、采集、鉴别的传统技术及中药饮片炮制、中药制剂配制的传统技术和工艺；④中医药古籍文献、特有的传统标记与符号；⑤其他</li>
+          <li><strong>三层保护架构：</strong>①<strong>保护数据库</strong>（第十二条，对纳入者实行分类管理）②<strong>保护名录</strong>（第十九条，从数据库中遴选具有代表性、独特性和重要保护价值者，经专家组评审、公示后发布）③<strong>持有人制度</strong>（第十八条）</li>
+          <li><strong>持有人权利（第十八条）：</strong>持有人对其持有的中医药传统知识享有传承使用的权利，对他人获取、利用其持有的知识享有<strong>知情同意和利益分享</strong>等权利；对处于公共领域且可公开获取的知识（古籍记载的传统理论、技术方法、经典名方等），国家支持合理利用，由国务院中医药主管部门履行持有人职责</li>
+          <li><strong>调查制度（第十四条）：</strong>省级中医药主管部门组织本行政区域内调查；<strong>境外组织、个人不得在我国境内开展中医药传统知识调查</strong>（第三款）；调查须征得调查对象同意、尊重其风俗习惯，濒临消失的知识省级部门应立即记录并采取抢救性保护措施（第十五条）</li>
+          <li><strong>申报与认定（第十六条）：</strong>组织、个人可向所在地省级中医药主管部门申报，经省级初核、国务院中医药主管部门认定后纳入数据库</li>
+          <li><strong>推广应用（第二十三至二十五条）：</strong>依托高水平医疗机构开展临床应用、应用研究、师承教育与培训；对列入名录的中药饮片炮制传统技术和工艺、中药材品种选育种植养殖采集鉴别技术组织研究推广</li>
+          <li><strong>法律责任（第二十九、三十条）：</strong>违反第十四条第三款（境外主体擅自调查）的，责令停止违法行为、警告、<strong>没收违法所得和调查中取得的实物资料，可以并处5万元以上50万元以下罚款</strong>；造成损害的承担民事责任，构成犯罪的追究刑事责任</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：<br>①中药企业开展经典名方开发、道地药材基原研究、炮制工艺改良时，若涉及"持有人"的特定知识，须取得知情同意并约定利益分享，否则可能构成侵权并影响注册申报的证据链完整性。<br>②外资药企、境外研究机构、跨国CRO<strong>不得在境内单独开展中医药传统知识调查</strong>；涉外合作须通过境内主体实施并履行相应程序，合同中应明确调查主体资格条款。<br>③中医药老字号、非遗传承人应尽快完成申报（第十六条）与名录推荐（第二十条第二款），以取得法定保护地位；未进入数据库/名录的知识难以主张本条例项下的权利。<br>④注意第三十一条的竞合条款：属文物、非物质文化遗产项目的，还须同时适用《文物保护法》《非物质文化遗产法》。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：<span class="s-url">https://www.gov.cn/zhengce/content/202611/content_7085591.htm</span>（中国政府网，2026-11-09发布，含条例全文）；新华社2026年11月9日电《李强签署国务院令 公布〈中医药传统知识保护条例〉》。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🏛️</div>
+        <div class="card-title">基金会管理条例（修订）<span class="card-tag red">2004年第400号令后首次整体重构</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>国务院令：</strong>第848号</span>
+          <span class="meta-item"><strong>常务会议：</strong>2026年9月11日国务院第96次常务会议修订通过</span>
+          <span class="meta-item"><strong>成文/签署：</strong>2026年10月13日</span>
+          <span class="meta-item"><strong>公布：</strong>2026年11月10日</span>
+          <span class="meta-item"><strong>施行：</strong>2027年1月1日</span>
+          <span class="meta-item"><strong>体例：</strong>8章79条（原2004年3月8日国务院令第400号公布）</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>党建入章（第三、六、十二条）：</strong>基金会工作坚持中国共产党的领导；章程须载明坚持党的全面领导及党建工作要求（基层组织设置形式、职责任务、基础保障）</li>
+          <li><strong>注册资金分档上调（第八条）：</strong>设区的市级民政部门登记不低于<strong>200万元</strong>；省级不低于<strong>400万元</strong>；国务院民政部门登记不低于<strong>2000万元</strong>；且须为到账货币资金</li>
+          <li><strong>有限度的直接登记（第七条）：</strong>扶弱济困、扶老助残、恤病助医、救孤助学、赈灾五类领域可由发起人申请直接登记，登记机关为省级民政部门，须明确一个行业管理部门；具体办法由省级民政部门会同有关部门制定并报民政部备案</li>
+          <li><strong>发起人限制（第九条）：</strong><strong>机关法人不得发起设立基金会</strong>；主要发起人应担任首届理事会负责人；筹备期间不得以拟设基金会名义开展与筹备无关的活动、不得向非特定对象发布筹备和筹款信息</li>
+          <li><strong>消极资格八项（第十条）：</strong>无/限制民事行为能力；正在或曾受剥夺政治权利刑事处罚；故意犯罪刑罚执行完毕未逾5年（缓刑考验期满未逾2年）；对破产清算组织负个人责任且完结未逾5年；在骗取登记被撤销的组织中任发起人；在被吊销证书或取缔的组织任负责人未逾5年；被列入严重失信主体名单；其他法定情形。违反者选举、选派或聘任无效（第三十七条）</li>
+          <li><strong>公开募捐资格（第十五条）：</strong>可同时申请登记为慈善组织；申请公开募捐资格须<strong>登记为慈善组织满1年</strong>且内部治理健全、运作规范；互联网公开募捐须在慈善法规定的平台进行</li>
+          <li><strong>治理结构（第二十四、三十一、三十五条）：</strong>理事会5—25人，具有公开募捐资格的基金会来自同一组织及关联组织的理事合计不得超过理事总人数1/3；具有公开募捐资格或有3名以上监事的应设监事会（3—7人）；负责人原则上任期内年龄不超过70周岁、同一职务连任不超过两届，职数不超过理事总人数1/3；<strong>理事长不得同时担任其他组织法定代表人，理事长与秘书长不得由同一人兼任，负责人不得由在职公务员兼任</strong></li>
+          <li><strong>关联交易与报酬（第三十九、四十条）：</strong>发起人、主要捐赠人、负责人、理事与基金会交易不得参与该交易决策且交易情况应向社会公开；监事及其近亲属不得与基金会发生交易（捐赠除外）；监事和未担任专职工作的理事不得领取报酬，领取报酬的理事不得超过理事总数1/3</li>
+          <li><strong>财产与支出比例（第四十三、四十五、四十六条）：</strong>财产为公共财产，不得在发起人、捐赠人、负责人、理事、监事中分配，不得资助以营利为目的的活动；投资须遵循合法、安全、审慎、有效原则且收益全部用于公益；<strong>非慈善组织基金会年度公益支出不得低于上年末净资产的8%（或前3年平均数的8%），管理费用不得超过当年总支出10%</strong>；年末净资产不得低于设立时法定注册资金标准</li>
+          <li><strong>账户与财务（第五十一条）：</strong>全部财务收支纳入本会银行账户，<strong>不得开立非银行支付机构支付账户，不得使用其他组织或个人的银行账户</strong>；换届、变更法定代表人须进行财务审计（第五十二条）</li>
+          <li><strong>分支机构（第四十一条）：</strong>专项基金管理委员会等分支、代表机构不具法人资格，全部收支纳入基金会财务统一核算；<strong>不得设立地域性分支机构</strong></li>
+          <li><strong>法律责任（第六十八至七十四条）：</strong>未经登记擅自以基金会名义活动——取缔、没收违法所得、责任人罚2万—10万元；弄虚作假骗取登记——撤销登记、责任人罚2万—20万元；私分挪用截留侵占注册资金——按金额<strong>1倍以上5倍以下</strong>罚款；情节严重可吊销登记证书并禁止责任人1—5年内担任负责人、理事、监事</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为合规建议，非条文原文）：<br>①<strong>存量基金会须在2027年1月1日前完成章程与治理整改</strong>：章程须补入党建条款；理事人数、关联理事比例、监事会设置、负责人年龄与届数、理事长兼任情况需逐项比对，不符合的应换届或改选，否则相关选举、聘任可能被认定无效（第三十七条）。<br>②注册资金分档上调对市级、县级小型基金会压力最大——年末净资产不得低于法定注册资金标准（第四十六条第一款），连续3年违反将被吊销登记证书（第七十二条）。<br>③<strong>企业基金会与家族基金会重点关注</strong>：机关法人不得发起；关联理事1/3上限、关联交易回避与公开、监事及近亲属交易禁止，将直接影响企业通过基金会开展公益营销的结构设计。<br>④<strong>税务与支出合规</strong>：非慈善组织基金会8%/10%的支出比例上限，与慈善组织适用慈善法标准形成双轨；混同将导致公益支出不达标风险。<br>⑤拟新设基金会的委托人：注册资金须为<strong>到账货币资金</strong>（不得以股权、房产等非货币财产出资），这一变化直接影响出资方案设计。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：<span class="s-url">https://www.gov.cn/zhengce/content/202611/content_7085661.htm</span>（中国政府网，2026-11-10发布，含条例全文）；新华社2026年11月10日电；修订要点经司法部、民政部负责人答记者问（gov.cn 2026-11-10）核实。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四、司法解释 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚖️</span>四、司法解释</div>
+    <div class="empty-note" style="margin-bottom:16px;">本期暂无新增司法解释。<br>最高人民法院官网"司法解释"栏目最新条目仍为<strong>法释〔2026〕19号《最高人民法院关于审理涉及刑事犯罪的民事纠纷案件若干问题的规定》</strong>（2026年9月21日发布，9月22日施行，24条），已在本刊第13期（2026年10月9日）收录。</div>
+
+    <div class="card" style="border-left:4px solid var(--highlight-border);">
+      <div class="card-header">
+        <div class="card-icon">📝</div>
+        <div class="card-title">立法动态｜《最高人民法院关于适用〈中华人民共和国民法典〉继承编的解释（二）（征求意见稿）》<span class="card-tag">征求意见 · 非生效司法解释</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>性质：</strong>征求意见稿（尚未成为司法解释，不计入本期统计）</span>
+          <span class="meta-item"><strong>发布：</strong>2026年11月10日</span>
+          <span class="meta-item"><strong>征求意见截止：</strong>2026年11月20日</span>
+          <span class="meta-item"><strong>体例：</strong>20条</span>
+          <span class="meta-item"><strong>起草部门：</strong>最高人民法院民事审判第一庭</span>
+        </div>
+        <div class="points-title">核心要点（条文序号为征求意见稿序号）</div>
+        <ul class="points">
+          <li><strong>放弃继承协议的效力（第一条）：</strong>继承人在继承开始前与被继承人签订的分家析产等协议中对放弃继承等事项的约定，对当事人具有法律约束力，继承开始后请求按约履行的，法院应予支持——实质性承认"继承开始前放弃继承"的效力，突破传统"继承开始前放弃无效"的通说</li>
+          <li><strong>"生养死葬"扶养协议（第二条）：</strong>部分继承人与被继承人约定由其承担生养死葬义务并继承相应财产，其他继承人知道或应当知道而无异议，已全面履行义务者主张继承约定财产，法院应予支持，但应为缺乏劳动能力又无生活来源的继承人保留必要份额；未全面履行的，附义务部分按法定继承办理</li>
+          <li><strong>继子女继承（第三条）：</strong>继父母与生父母离婚后，受其抚养教育的继子女未提供长期稳定经济供养或生活照顾，仅以"曾受抚养教育"为由请求继承的，不予支持（形成收养关系或仍共同生活的除外）；继子女成年后对继父母提供长期稳定供养或照料的，可认定为"有扶养关系的继子女"</li>
+          <li><strong>离婚诉讼中一方死亡的遗产分配（第四条）：</strong>生存配偶存在重婚、与他人同居、家暴等情形，其他继承人主张参照民法典第一千一百三十条第四款（不尽扶养义务应不分或少分）处理的，法院应予支持</li>
+          <li><strong>房改房工龄折价（第五条）：</strong>使用已死亡配偶的工龄、职级购买公有住房，继承人主张对死亡配偶贡献部分折算相应比例财产后作为遗产继承的，法院应予支持</li>
+          <li><strong>自书遗嘱真实性的举证责任（第七条）：</strong>可综合笔迹比对、遗嘱订立原因及发现过程、遗嘱指定继承人与被继承人共同生活情况，运用逻辑推理和日常生活经验法则审查；<strong>确信遗嘱存在具有高度可能性的应认定存在；反驳证据致真伪不明的，由主张以遗嘱证明事实的一方进一步举证，未能完成的应认定遗嘱不存在</strong></li>
+          <li><strong>多份抵触遗嘱（第八条）：</strong>最后一份遗嘱仅因不符合法定形式要件被认定无效，即使有充分证据证明其系遗嘱人撤回或变更在先遗嘱的真实意思表示，当事人请求按在先遗嘱继承相抵触内容的，<strong>不予支持，依法按法定继承办理</strong></li>
+          <li><strong>胎儿预留份（第九条）：</strong>遗嘱未为胎儿保留必要份额，母亲在胎儿娩出前作为法定代理人主张遗嘱违反民法典第一千一百四十一条并请求分割时预留的，法院应予支持（胎儿另有持续稳定生活来源的除外）</li>
+          <li><strong>遗嘱设立居住权（第十条）：</strong>遗嘱指定的居住权人在继承开始后请求继承人或者遗产管理人协助办理居住权登记的，法院应予支持</li>
+          <li><strong>受遗赠表示的期限与方式（第十二、十三条）：</strong>继承开始前受遗赠人已知受遗赠的，自知道被继承人死亡之日起60日内作出接受或放弃表示；继承开始前不知的，自知道受遗赠之日起60日内作出；书面、口头向继承人/遗产管理人/公证机构/法院表示，或已实际占有使用受遗赠物并结合其他证据可证明接受的，均可认定</li>
+          <li><strong>遗产管理人的诉讼地位（第十七、十八条）：</strong>继承人均放弃继承、各方对民政部门或村委会担任遗产管理人无争议的，债权人可申请变更其为被告；对管理人确定有争议的，法院应释明通过特别程序申请指定并裁定中止诉讼；无继承人或均放弃继承时，债权人等直接以民政部门/村委会为被告起诉的应予受理，并在判项中一并指定管理人；<strong>对管理人确定有争议而直接起诉的，不予受理，已受理的裁定驳回起诉</strong></li>
+          <li><strong>被继承人债务清偿（第十六、十七条第三款）：</strong><strong>不能仅以债权人未提供被继承人财产线索为由判决驳回诉讼请求</strong>；继承人书面放弃继承但仍实际占有、使用或处分遗产的，可继续列为当事人，并在判项中明确协助义务或以处分遗产实际价值为限承担责任</li>
+        </ul>
+        <div class="impact"><strong>实务提示</strong>（以下为办案建议，非条文原文）：该征求意见稿若按现文本通过，将对四类案件产生直接影响——①继承开始前签署的"放弃继承承诺书""分家析产协议"将从"效力存疑"转为"可强制执行"；②自书遗嘱真伪之争的举证责任分配被明确（主张遗嘱存在者承担最终举证不能的后果），遗嘱见证、笔迹样本固定应前置；③遗产管理人指定程序的"特别程序前置"规则将改变债务清偿案件的起诉策略；④"不能仅以未提供财产线索驳回"回应了实务中大量被驳回的债权人诉讼，可作为在办案件的上诉/再审理由储备。建议在11月20日前通过指定邮箱提交意见。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：最高人民法院公告（二〇二六年十一月十日），最高人民法院官网"法院资讯"栏目 2026-11-10 发布；征求意见稿全文经央视新闻、澎湃新闻转载核对。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五、批复 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📨</span>五、批复</div>
+    <div class="empty-note">本期暂无新增批复。<br>最高人民法院官网"司法解释"栏目最新批复仍为<strong>《最高人民法院关于事业单位工作人员脱产参加全日制学历教育后违反服务期约定有关问题的批复》</strong>（2026年7月29日发布），已在本刊第8期（2026年8月7日）收录。</div>
+  </div>
+
+  <!-- 六、法答网精选答问 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💬</span>六、法答网精选答问</div>
+    <div class="empty-note">本期暂无新增法答网精选答问。<br>最高人民法院官网最新一批仍为<strong>《法答网精选答问（第三十九批）——立案审判专题》</strong>（2026年10月29日 08:44 发布，共4问），已在本刊第16期（2026年10月30日补发）与第17期（2026年11月6日）收录并作全文卡片展示。<br>第四十批截至2026年11月13日尚未在 court.gov.cn 发布。</div>
+  </div>
+
+  <!-- 其他动态 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📌</span>其他司法动态与生效提醒</div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🗓️</div>
+        <div class="card-title">生效日历（近期）</div>
+      </div>
+      <div class="card-body">
+        <table class="mini-table">
+          <tr><th style="width:26%;">生效日期</th><th>文件名称</th><th style="width:30%;">文号／依据</th></tr>
+          <tr><td>2026年11月1日（已生效）</td><td>市场监督管理所条例</td><td>国务院令第846号</td></tr>
+          <tr><td>2026年12月1日</td><td>事业单位登记管理条例</td><td>国务院令第849号</td></tr>
+          <tr><td rowspan="5">2027年1月1日</td><td>中华人民共和国检察公益诉讼法</td><td>主席令第八十六号</td></tr>
+          <tr><td>中华人民共和国南极活动与环境保护法</td><td>主席令第八十七号</td></tr>
+          <tr><td>中医药传统知识保护条例</td><td>国务院令第850号</td></tr>
+          <tr><td>基金会管理条例（修订）</td><td>国务院令第848号</td></tr>
+          <tr><td>医疗保障法、耕地保护和质量提升法、农业法（修订）等</td><td>主席令第八十至八十二号</td></tr>
+          <tr><td>2027年3月22日</td><td>中华人民共和国水法（修订）</td><td>主席令第八十八号</td></tr>
+        </table>
+        <div class="impact"><strong>提示</strong>：2027年1月1日为近年少见的"多法同日生效"节点，涉及公益诉讼程序、外商投资合规、社会组织治理三条主线，建议在四季度提前完成内部制度与合同文本的更新。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📰</div>
+        <div class="card-title">本期其他动态</div>
+      </div>
+      <div class="card-body">
+        <ul class="points">
+          <li>2026年11月9日，最高人民检察院发布《检察公益诉讼法》要点速览，明确19个法定办案领域；全国人大常委会法工委行政法室负责人就立法背景、案件范围、诉前程序等答记者问</li>
+          <li>2026年11月10日，最高人民法院党组书记、院长张军出席中国法学会审判理论研究会2026年年会暨第三届中国应用法学论坛，主题为"规范司法权力运行"</li>
+          <li>2026年11月10日，最高人民法院启动《民法典继承编解释（二）》征求意见（详见本报告第四部分"立法动态"卡片）</li>
+          <li>2026年11月10日，全国人大常委会发布任免名单（与本期主席令第九十一号人事任免相衔接）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 七、往期回顾 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🗂️</span>七、往期回顾</div>
+    <div class="link-card">
+      <span class="link-date">2026年11月6日 · 第17期</span>
+      <span class="link-desc">常委会第25次会议通过检察公益诉讼法、反跨境腐败法、南极法、水法修订；国务院令第849、851号；法答网第三十九批</span>
+      <a class="link-btn" href="2026-11-06.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月30日 · 第16期（补发）</span>
+      <span class="link-desc">事业单位登记管理条例（国务院令第849号）；法答网第三十九批立案审判专题；常委会第25次会议预告</span>
+      <a class="link-btn" href="2026-10-30.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月23日 · 第15期</span>
+      <span class="link-desc">人民法院司法责任追究条例（法发〔2026〕11号）；常委会第25次会议议程预告</span>
+      <a class="link-btn" href="2026-10-23.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月16日 · 第14期</span>
+      <span class="link-desc">集成电路布图设计保护条例10/15施行；10月新规集中施行期提示</span>
+      <a class="link-btn" href="2026-10-16.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月9日 · 第13期</span>
+      <span class="link-desc">法释〔2026〕19号民刑交叉司法解释；国务院令第846、847号</span>
+      <a class="link-btn" href="2026-10-09.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年9月11日 · 第12期</span>
+      <span class="link-desc">涉人工智能纠纷审理意见；房企破产座谈会纪要；国务院令第845号</span>
+      <a class="link-btn" href="2026-09-11.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月28日 · 第11期</span>
+      <span class="link-desc">一次会议通过5部法律（医保法、耕地保护法、农业法、国防动员法、律师法修正）</span>
+      <a class="link-btn" href="2026-08-28.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月21日 · 第10期</span>
+      <span class="link-desc">住房公积金管理条例大修（国务院令第844号）；著作权司法解释修改</span>
+      <a class="link-btn" href="2026-08-21.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月14日 · 第9期</span>
+      <span class="link-desc">国务院令第843号修改废止12+3部行政法规；生态环境法治"大日"预告</span>
+      <a class="link-btn" href="2026-08-14.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月7日 · 第8期</span>
+      <span class="link-desc">生态环境法典三件配套司法解释；事业单位服务期批复；国务院令第841、842号</span>
+      <a class="link-btn" href="2026-08-07.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月31日 · 第7期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-31.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月24日 · 第6期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-24.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月10日 · 第5期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-10.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月3日 · 第4期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-03.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年6月26日 · 第3期</span>
+      <span class="link-desc">商标法修订、注册会计师法修改（主席令第79号）</span>
+      <a class="link-btn" href="2026-06-26.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年6月22日 · 第2期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-06-22.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年6月12日 · 第1期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-06-12.html" target="_blank">打开完整报告</a>
+    </div>
+  </div>
+
+  <!-- 来源标注 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🔗</span>来源标注</div>
+    <div class="source-block">
+      <p style="margin-bottom:12px;color:var(--text-light);">获取方式标签说明：<span class="tag tag-search">WebSearch</span> 搜索引擎检索 <span class="tag tag-fetch">WebFetch</span> 官方页面抓取 <span class="tag tag-portal">Portal列表</span> 官网栏目列表核实</p>
+
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">主席令第八十六号至第九十一号（编号对应关系与施行日期）</span><br>
+        2026年11月7日《人民日报》第2版，人民网 cpc.people.com.cn 全文转载；同源核实于中央纪委国家监委网站、央视网<br>
+        <span class="s-url">https://cpc.people.com.cn/n1/2026/1107/c64094-40829531.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">全国人大常委会关于修改《突发事件应对法》等十五部法律的决定（全文）</span><br>
+        中国人大网 npc.gov.cn，2026-11-06 17:55 发布<br>
+        <span class="s-url">http://www.npc.gov.cn/npc/c2/c30834/202611/t20261106_458549.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">十五部法律一揽子修改的立法说明（基层减负＋法典衔接两条主线）</span><br>
+        中国人大网《不再硬性要求基层编制有关专项规划》，2026-11-04<br>
+        <span class="s-url">http://www.npc.gov.cn/c2/c30834/202611/t20261104_458367.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">检察公益诉讼法条文要旨（案件范围、管辖、诉前程序、起诉期限、举证责任）</span><br>
+        最高人民检察院官网《从"有依据"到"有专法"，检察公益诉讼法要点速览》，2026-11-06<br>
+        <span class="s-url">https://www.spp.gov.cn/spp/zdgz/202611/t20261106_740372.shtml</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">检察公益诉讼法19个法定办案领域、立法背景（法工委行政法室负责人答记者问）</span><br>
+        最高人民检察院官网转载检察日报·要闻版，2026-11-09<br>
+        <span class="s-url">https://www.spp.gov.cn/spp/xxgcjcgyssf/202611/t20261109_740790.shtml</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">反跨境腐败法条文结构与主要内容（6章47条、五类跨境腐败行为、阻断条款、廉洁合规义务）</span><br>
+        中国法院网，2026-11-06；最高人民检察院官网，2026-11-07；中国人大网《关于〈反跨境腐败法（草案）〉的说明》<br>
+        <span class="s-url">https://www.chinacourt.cn/article/detail/2026/11/id/9562718.shtml</span><br>
+        <span class="s-url">http://www.npc.gov.cn/c2/c30834/202611/t20261105_458485.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">水法修订（9章102条、水资源刚性约束、江河湖泊专章）</span><br>
+        中国人大网《坚持民生为上 筑牢水安全法治根基——解读新修订的水法》，2026-11-10；12309中国检察网转载检察日报，2026-11-07<br>
+        <span class="s-url">http://www.npc.gov.cn/npc/c2/c30834/202611/t20261110_458733.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">南极活动与环境保护法（7章59条、章节结构）</span><br>
+        新华社2026-11-06报道，经中国法学会环境资源法学研究会转载核对<br>
+        <span class="s-url">http://mp.weixin.qq.com/s?__biz=MzU3ODI0MTc5Ng==&amp;mid=2247505697&amp;idx=1</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">中医药传统知识保护条例（国务院令第850号，全文32条）</span><br>
+        中国政府网 gov.cn，2026-11-09 发布，含国务院令原文<br>
+        <span class="s-url">https://www.gov.cn/zhengce/content/202611/content_7085591.htm</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">基金会管理条例（国务院令第848号，全文8章79条）</span><br>
+        中国政府网 gov.cn，2026-11-10 发布，含国务院令原文及索引号 000014349/2026-00082<br>
+        <span class="s-url">https://www.gov.cn/zhengce/content/202611/content_7085661.htm</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">国务院政策文件"最新政策"栏目（核实本周新增行政法规仅第848、850号）</span><br>
+        中国政府网 gov.cn 政策栏目列表<br>
+        <span class="s-url">https://www.gov.cn/zhengce/</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">司法解释、司法文件栏目（核实最新仍为法释〔2026〕19号／法发〔2026〕11号，本周无新增）</span><br>
+        最高人民法院官网 court.gov.cn 权威发布栏目<br>
+        <span class="s-url">https://www.court.gov.cn/fabu.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">法答网精选答问（第三十九批）（核实为本期最新批次，第四十批未发布）</span><br>
+        最高人民法院官网 court.gov.cn，发布时间 2026-10-29 08:44:15<br>
+        <span class="s-url">https://www.court.gov.cn/zixun/xiangqing/515511.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">《民法典继承编解释（二）（征求意见稿）》（20条，2026-11-10 发布，11-20 截止）</span><br>
+        最高人民法院官网"法院资讯"栏目；央视新闻、澎湃新闻转载全文核对<br>
+        <span class="s-url">https://www.court.gov.cn/zixun.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">新华社受权发布消息（国务院令第848、850号签署与公布时间）</span><br>
+        经济日报2026-11-06/11-11 版面（paper.ce.cn）；新华社2026-11-09、11-10电<br>
+        <span class="s-url">http://paper.ce.cn/pad/content/202611/11/content_341692.html</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>本报告仅作法规动态追踪之用，不构成法律意见。所引条文以官方公报文本为准。</p>
+    <p style="margin-top:8px;">编制：<span class="brand">腾讯云 ｜ WorkBuddy</span></p>
+  </div>
+
+</div>
+</body>
+</html>

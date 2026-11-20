@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年08月07日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--accent);
+  }
+  .card-tag-blue {
+    display: inline-block;
+    background: var(--info-bg);
+    color: var(--info-text);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--info-border);
+  }
+  .card-meta {
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    background: #fafbfc;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-body { padding: 16px 20px; }
+  .key-points { padding-left: 20px; }
+  .key-points li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .key-points li strong { color: var(--primary); }
+
+  .practical-note {
+    margin: 12px 20px 16px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border-left: 4px solid var(--info-border);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .practical-note .prefix { color: var(--info-text); font-weight: 600; font-size: 12px; display: block; margin-bottom: 6px; }
+
+  .empty-notice {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  /* 往期回顾 */
+  .prev-reports { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .prev-reports-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prev-report-item {
+    margin-bottom: 8px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .ext-icon { font-size: 12px; }
+  details { margin-top: 4px; margin-left: 4px; }
+  details summary {
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .detail-content {
+    padding: 10px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .hl-item { margin-bottom: 4px; }
+
+  /* 来源标注 */
+  .source-section {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .source-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .source-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .source-table a { color: var(--info-text); word-break: break-all; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .method-tag.websearch { background: #e3f2fd; color: #1565c0; }
+  .method-tag.webfetch { background: #e8f5e9; color: #2e7d32; }
+  .method-tag.portal { background: #fff8e1; color: #e65100; }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 10px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .overview-item { padding: 10px 8px; }
+    .overview-item .num { font-size: 24px; }
+    .card-header { flex-direction: column; gap: 8px; }
+    .card-meta { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+  <div class="header-date">第8期 · 2026年08月07日发布</div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item"><div class="num">0</div><div class="label">新公布法律</div></div>
+    <div class="overview-item highlight"><div class="num">2</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item highlight"><div class="num">3</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">📌 本期重点关注</div>
+    <div class="highlight-desc">
+      <strong>① 生态环境法典8月15日施行 + 最高法三件"绿配"司法解释同日发布：</strong>《中华人民共和国生态环境法典》（主席令第七十号）自2026年8月15日起施行（共5编1242条，环境保护法等10部法律同时废止）；同日施行的还有最高法三件配套司法解释——<strong>法释〔2026〕15号</strong>《关于适用生态环境法典时间效力的若干规定》（首个"绿配"司法解释）、<strong>法释〔2026〕16号</strong>《关于修改〈船舶油污损害赔偿规定〉等九件司法解释的决定》、<strong>法释〔2026〕17号</strong>"两高"《关于修改〈海洋生态环境公益诉讼规定〉等两件司法解释的决定》。最高法对生态环境领域26件司法解释、35件司法规范性文件、45件指导性案例进行了集中清理。<br><br>
+      <strong>② 国务院令第842号《集成电路布图设计保护条例》修订公布：</strong>这是2001年条例实施25年来的首次全面修订，由国务院令第300号修订为第842号，自2026年10月15日起施行（共6章54条）。条例扩展保护范围（含集成光子、量子等功能的集成电路布图设计），加大侵权赔偿力度，促进布图设计运用和流转。<br><br>
+      <strong>③ 国务院令第841号《国务院关于出境入境管理的规定》公布：</strong>共19条，自2026年9月15日起施行。健全出境安全风险防范制度（首次建立中国公民出境安全风险防范制度），完善出境入境限制措施（明确6个月至3年/1年至5年不准出境/入境的具体情形），规范出境入境中介服务备案管理。
+    </div>
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 二、全国人大新公布的法律</div>
+  <div class="empty-notice">
+    本期暂无新公布法律。<br>
+    <span style="font-size:13px;color:#999;">十四届全国人大常委会第二十四次会议尚未召开。但预告：2026年3月12日十四届全国人大四次会议通过的《中华人民共和国生态环境法典》（主席令第七十号）将于<strong>2026年8月15日施行</strong>，是继2020年民法典之后我国第二部以"法典"命名的法律、世界上第一部以"生态环境"命名的法典，共5编1242条，环境保护法等10部法律同时废止。详见上方"本期重点关注①"及下文司法解释栏目（最高法三件配套司法解释同日施行）。</span>
+  </div>
+</div>
+
+<!-- 三、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏢</span> 三、国务院新发布的法律法规</div>
+
+  <!-- 国务院令第841号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🌐</div>
+      <div>
+        <div class="card-title">《国务院关于出境入境管理的规定》<span class="card-tag">国务院令第841号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 常务会议通过：2026年6月29日（国务院第90次常务会议）</span>
+      <span>📣 签署公布：2026年7月22日</span>
+      <span>📰 新华社受权发布：2026年7月31日</span>
+      <span>⏳ 施行日期：2026年9月15日</span>
+      <span>📋 文件性质：行政法规</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>健全出境安全风险防范制度（第二条）：</strong>国务院外交、文化和旅游主管部门以及驻外外交机构应根据有关国家和地区战争或者武装冲突、社会治安、自然灾害、事故灾难、传染病疫情等安全形势，及时公开发布国外安全提醒和旅游目的地安全风险提示。移民管理机构在受理、审批中国公民出境入境证件申请和实施出境边防检查时，应当对准备前往风险等级为最高级别或者严重危及人身安全案件突发高发的国家或者地区的中国公民，必要时予以劝阻。</li>
+        <li><strong>明确出境入境申请要求（第三条）：</strong>出境入境人员申请出境入境、停留居留的事由应当真实、合法，并配合移民管理机构、签证机关核实身份、申请事由；提供虚假材料、作出虚假陈述的，移民管理机构、签证机关有权决定不予签发出境入境证件或者不准其出境、入境。单位或者个人为出境入境人员出具邀请函件或者其他申请材料的，应当对邀请内容和证明事项的真实性负责。</li>
+        <li><strong>完善出境入境限制措施（第四条至第六条）：</strong>中国公民因骗取出境入境证件、非法出境入境受到行政拘留处罚的，移民管理机构可决定自处罚执行完毕之日起6个月至3年以内不准其出境；中国公民在境外从事违法犯罪活动危害国家安全和利益的，可由国务院主管部门或省级人民政府决定自回国之日起6个月至3年以内不准其出境；违反出口管制、技术进出口管理等规定可能危害国家产业安全、技术安全的，国务院商务等主管部门可决定不准其出境。外国人因妨害国（边）境管理受到刑事处罚或被列入反制清单、不可靠实体清单等情形，移民管理机构可决定1年至5年以内不准其入境。</li>
+        <li><strong>规范出境入境中介服务（第七条至第九条）：</strong>国家对从事出境入境中介服务的机构和人员实行备案管理，机构应自设立之日起15日内向所在地移民管理机构备案；境外企业、机构不得在中国境内提供出境入境中介服务。明确从事出境入境中介服务的机构应当具备的条件（依法设立、法定代表人无故意犯罪记录、有专业人员资金场所、管理制度健全等）。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>《规定》是我国出境入境管理领域的重要配套法规，影响如下：①从事出境入境中介服务的机构（含旅行社、移民服务公司、留学中介、签证代办机构等）须按《规定》要求尽快向所在地移民管理机构办理备案（已从业的应在施行之日起90日内备案），并完善法定代表人/负责人无故意犯罪记录审查、人员管理制度、资料保存及数据安全合规管理等内控体系；②拟赴境外开展投资、合作的中国企业应密切关注国务院外交、文化和旅游主管部门发布的国外安全提醒，对高风险国家或地区应重新评估投资可行性及人员外派风险；③拟聘外国人来华的企业应注意核实外籍人员申请材料的真实性，避免因配合虚假申请而承担法律责任；④涉及国家产业安全、技术安全的出口管制领域（如半导体、生物技术、人工智能等）从业人员因《规定》新增不准出境措施，相关企业应配合主管部门做好合规管理与人员出境前审查。
+    </div>
+  </div>
+
+  <!-- 国务院令第842号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">💾</div>
+      <div>
+        <div class="card-title">《集成电路布图设计保护条例》（修订）<span class="card-tag">国务院令第842号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 常务会议通过：2026年7月10日（国务院第91次常务会议）</span>
+      <span>📣 签署公布：2026年7月23日</span>
+      <span>📰 新华社受权发布：2026年8月3日</span>
+      <span>⏳ 施行日期：2026年10月15日</span>
+      <span>📋 文件性质：行政法规</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>扩大保护范围（第三条第二款）：</strong>对集成光子、量子等功能的集成电路的布图设计，可以依照本条例的规定予以保护，将保护范围从传统硅基集成电路扩展至集成光子、量子等前沿领域，体现对集成电路技术创新的全方位保护。</li>
+        <li><strong>完善申请、审查程序：</strong>规制虚假申请，细化材料要求，完善驳回、撤销程序，增加权利恢复程序，进一步规范国家知识产权局布图设计登记的审查流程。</li>
+        <li><strong>加强专有权保护：</strong>明确权利范围界定标准，加大侵权赔偿力度，进一步明确复制、商业利用等侵权行为的认定标准和赔偿计算方式。</li>
+        <li><strong>促进布图设计运用：</strong>加强公共服务，明确奖酬措施，完善转让、许可、出质要求，规范共有人权利行使，构建从创造到运用的全链条保护机制。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>集成电路布图设计专有权保护是集成电路产业知识产权保护的关键环节。本次修订是企业法务和知识产权团队需要重点关注的内容：①集成电路设计企业应尽快对照修订后的条例梳理内部知识产权管理制度，特别是复制、商业利用、对外许可等行为的合规审查；②涉及布图设计委托开发、合作开发的企业，应在合同中明确权属归属、奖酬标准、保密义务及对外许可机制；③集成电路布图设计侵权赔偿力度加大意味着权利人维权收益提高，但也意味着侵权成本增加，企业应加强员工合规培训和供应商合同审核，避免被动侵权；④对集成光子、量子等前沿领域的集成电路设计企业，本次修订扩展保护范围是利好消息，建议及时办理布图设计登记以固化权利；⑤条例施行日为2026年10月15日，企业应预留过渡期内完成合规体系修订。
+    </div>
+  </div>
+</div>
+
+<!-- 四、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 四、司法解释</div>
+
+  <!-- 法释〔2026〕15号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📘</div>
+      <div>
+        <div class="card-title">《最高人民法院关于适用〈中华人民共和国生态环境法典〉时间效力的若干规定》<span class="card-tag">法释〔2026〕15号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 审委会通过：2026年7月27日（最高人民法院审委会第1980次会议）</span>
+      <span>📣 发布日期：2026年8月5日</span>
+      <span>⏳ 施行日期：2026年8月15日（与生态环境法典同日施行）</span>
+      <span>📍 文件性质：首个生态环境法典配套司法解释</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>时间效力一般标准（第一条）：</strong>生态环境法典施行后的法律事实引起的生态环境案件，适用生态环境法典的规定；法典施行前的法律事实引起的生态环境案件，适用当时的法律、司法解释的规定，但是法律、司法解释另有规定的除外。严格遵循立法法第104条规定的法不溯及既往原则和有利溯及例外规则。</li>
+        <li><strong>原则性规定衔接适用（第二条）：</strong>法典施行前的法律事实引起的生态环境民事案件，当时的法律、司法解释仅有原则性规定而法典有具体规定的，适用当时的法律、司法解释的规定，但是可以依据法典的具体规定进行裁判说理。</li>
+        <li><strong>民事合同履行持续情形（第三条）：</strong>法典施行前成立的民事合同，依照法律规定或者当事人约定该合同的履行持续至法典施行后，因法典施行前履行合同发生争议的，适用当时的法律、司法解释；因法典施行后履行合同发生争议的，适用法典有关合同履行的相关规定。</li>
+        <li><strong>侵权行为持续情形（第四条）：</strong>法典施行前的侵权行为持续至法典施行后的，该侵权行为引起的民事纠纷案件适用法典；侵权行为发生在法典施行前但损害后果出现在施行后的特定情形（土壤污染及其相关地下水污染责任人无法认定、受委托从事生态环境服务活动的技术服务机构违反法律规定、获准倾倒海洋废弃物或产生工业固体废物的单位未尽到核实监督义务等），适用法典。</li>
+        <li><strong>其他衔接规则（第五条至第十二条）：</strong>对诉讼时效、生态环境损害赔偿、禁止令保全措施、行政处罚追究、派出机构被告主体资格、终审案件再审适用等问题作出全面衔接规定，明确"新老划断"原则的法律适用边界。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>本规定是生态环境法典施行后人民法院审理生态环境案件新旧法律衔接适用的"裁判指引"，对企业的法律风险评估与争议应对意义重大：①企业在评估涉生态环境案件（包括环境侵权、合同履行、行政处罚等）法律适用时，应首先判断"法律事实"发生时间（侵权行为时间、合同履行时间、行政行为时间等），如发生在2026年8月15日之前的，原则上仍适用旧法，发生在之后的则适用法典；②诉讼时效衔接方面，法典将一般生态环境民事公益诉讼的诉讼时效从民法典的3年延长至5年，但施行前已届满3年时效的不予延长（第六条）；③对在生态环境法典施行前发生的污染行为，仍处于连续或继续状态至施行后终了的，行政责任适用法典（第八条）；④法典施行前已终审的案件不适用法典（第十二条），但施行后人民法院尚未审结的一审、二审案件适用本规定。企业在涉诉后应第一时间委托专业律师结合本规定评估法律适用及诉讼策略。
+    </div>
+  </div>
+
+  <!-- 法释〔2026〕16号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📗</div>
+      <div>
+        <div class="card-title">《最高人民法院关于修改〈最高人民法院关于审理船舶油污损害赔偿纠纷案件若干问题的规定〉等九件司法解释的决定》<span class="card-tag">法释〔2026〕16号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 审委会通过：2026年7月27日（最高人民法院审委会第1980次会议）</span>
+      <span>📣 发布日期：2026年8月5日</span>
+      <span>⏳ 施行日期：2026年8月15日</span>
+      <span>📍 文件性质：最高法单件决定修改9件司法解释</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>全面对接生态环境法典：</strong>对《最高人民法院关于审理船舶油污损害赔偿纠纷案件若干问题的规定》等九件司法解释作适应性修改，将相关引言、表述中"环境保护法"等改为"生态环境法典"（如《环境民事公益诉讼解释》《海洋自然资源与生态环境公益诉讼规定》等引言条款均明确以生态环境法典为依据）。</li>
+        <li><strong>名称同步调整：</strong>《最高人民法院关于审理环境民事公益诉讼案件适用法律若干问题的解释》名称修改为《最高人民法院关于审理生态环境民事公益诉讼案件适用法律若干问题的解释》；《最高人民法院、最高人民检察院关于办理海洋自然资源与生态环境公益诉讼案件若干问题的规定》名称修改为《最高人民法院、最高人民检察院关于办理海洋生态环境公益诉讼案件若干问题的规定》。</li>
+        <li><strong>社会组织范围重新界定（第二条修改）：</strong>将"在设区的市级以上人民政府民政部门登记的社会团体、基金会以及社会服务机构等"明确认定为生态环境法典第一百四十七条规定的社会组织，进一步明确公益诉讼原告主体资格。</li>
+        <li><strong>绿色低碳义务司法适用：</strong>在《最高人民法院关于审理生态环境侵权责任纠纷案件适用法律若干问题的解释》中增加"人民法院审理因违反绿色低碳义务造成他人损害引起的民事纠纷案件，适用本解释"，将绿色低碳义务引发的民事纠纷纳入司法解释适用体系。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>本次"打包修改"涉及九件司法解释，对生态环境领域诉讼实务影响广泛：①以"环境"为名的相关司法解释统一调整为"生态环境"，主体范围可能扩大，企业应关注公益诉讼起诉主体的最新界定；②绿色低碳义务（碳排放管理、节能管理、绿色采购等）首次在侵权责任司法解释中明确纳入适用，企业在ESG/绿色低碳合规方面将面临新的民事责任风险；③船舶油污、海洋自然资源、环境侵权责任纠纷、生态环境损害赔偿等案件的法律依据均已系统对接生态环境法典，相关行业企业（航运、港口、石化、采矿、制造等）应重新评估现有环境责任条款及纠纷处理预案。
+    </div>
+  </div>
+
+  <!-- 法释〔2026〕17号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📙</div>
+      <div>
+        <div class="card-title">《最高人民法院、最高人民检察院关于修改〈最高人民法院、最高人民检察院关于办理海洋自然资源与生态环境公益诉讼案件若干问题的规定〉等两件司法解释的决定》<span class="card-tag">法释〔2026〕17号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 审委会通过：2026年7月27日（最高法第1980次会议）、2026年7月31日（最高检第十四届检察委员会第八十一次会议）</span>
+      <span>📣 发布日期：2026年8月5日</span>
+      <span>⏳ 施行日期：2026年8月15日</span>
+      <span>📍 文件性质："两高"联合决定修改2件司法解释</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>海洋公益诉讼司法解释全面对接：</strong>对《最高人民法院、最高人民检察院关于办理海洋自然资源与生态环境公益诉讼案件若干问题的规定》《最高人民法院、最高人民检察院关于办理环境污染刑事案件适用法律若干问题的解释》等两件"两高"司法解释作适应性修改，将有关引言和依据条款均明确以"中华人民共和国生态环境法典"为依据。</li>
+        <li><strong>案件范围与管辖调整（第一条修改）：</strong>本规定适用于损害行为发生地、损害结果地或者采取预防措施地在生态环境法典第三条规定的海域内，因污染海洋环境、破坏海洋生态而提起的民事公益诉讼、刑事附带民事公益诉讼和行政公益诉讼。</li>
+        <li><strong>刑事附带民事公益诉讼衔接（第四条修改）：</strong>污染海洋环境、破坏海洋生态涉嫌犯罪的，在行使海洋生态环境监督管理权的部门没有另行依据生态环境法典第一千零七十四条规定提出损害赔偿要求或者提起诉讼的情况下，人民检察院可以在提起刑事公诉时一并提起附带民事公益诉讼，也可以单独提起民事公益诉讼。</li>
+        <li><strong>同步废止配套文件：</strong>《人民法院审理人民检察院提起公益诉讼案件试点工作实施办法》同步废止（2026年8月15日起），4件指导性案例不再参照适用，最高法对生态环境领域26件司法解释、35件司法规范性文件、45件指导性案例的集中清理工作全部完成。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>本次"两高"修改重点在于将海洋及环境污染类公益诉讼司法解释与生态环境法典进行系统对接，企业应关注以下变化：①涉海企业（如海洋工程、港口航运、海水养殖、海洋资源开发等）面临民事公益诉讼、刑事附带民事公益诉讼、行政公益诉讼"三诉合一"的风险，执法监督力度进一步加大；②《人民法院审理人民检察院提起公益诉讼案件试点工作实施办法》废止后，相关试点规则不再适用，原试点案件处理逻辑需要更新；③污染环境刑事案件（如环境污染罪、非法倾倒废物罪）的定罪量刑依据发生调整，企业在环境合规管理上需更注重事前预防，避免刑事风险叠加；④检察建议、督促履职程序的法律依据变更，相关行业主管部门及企业法务需关注程序衔接的最新规则。
+    </div>
+  </div>
+</div>
+
+<!-- 五、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📝</span> 五、批复</div>
+  <div class="empty-notice">
+    本期暂无新增批复。<br>
+    <span style="font-size:13px;color:#999;">最新批复为法释〔2026〕14号《最高人民法院关于事业单位工作人员脱产参加全日制学历教育后违反服务期约定有关问题的批复》，已于2026年7月29日发布，7月30日施行，已在第7期（2026-07-31报告）详细收录并附两个典型案例。</span>
+  </div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💡</span> 六、法答网精选答问</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">截至本期发稿（2026年8月7日），最高人民法院尚未发布第三十九批。最新一批仍为法答网精选答问（第三十八批）——刑事审判专题（4条），2026年7月2日发布，已在第4期和第5期报告中收录。提请读者注意：澎湃新闻、网易号、知乎、百度百家号等媒体转载的所谓"法答网精选答问（第一批）"等内容非官方权威来源，请以 court.gov.cn 发布的正式批次为准。</span>
+  </div>
+</div>
+
+<!-- 七、本期其他重要规章及规范性文件 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📚</span> 七、本期其他重要规章及规范性文件</div>
+
+  <!-- 个人贷款业务明示综合融资成本规定 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">💰</div>
+      <div>
+        <div class="card-title">《个人贷款业务明示综合融资成本规定》<span class="card-tag-blue">国家金融监督管理总局·中国人民银行 联合公告</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📣 发布日期：2026年3月3日</span>
+      <span>⏳ 施行日期：2026年8月1日</span>
+      <span>📋 文件性质：部门联合公告（规范性文件）</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>综合融资成本的全口径披露（第一条）：</strong>个人贷款业务综合融资成本包括但不限于贷款利息、分期费用、增信服务费等正常履约成本，以及逾期罚息等违约情形下的或有成本。贷款人应当依法依规合理确定综合融资成本年化水平。</li>
+        <li><strong>综合融资成本明示表（第二条）：</strong>贷款人开展个人贷款业务时，应当向借款人展示"综合融资成本明示表"，逐项列明贷款本金金额、各项息费项目及其收取方式、收取标准和收取主体，并综合计算正常履约情形下借款人承担的年化综合融资成本，明确列示违约情形下的或有成本。</li>
+        <li><strong>操作层面强制阅读（第三条）：</strong>现场办理个人贷款业务的，应在签署贷款合同或办理分期前，由借款人在综合融资成本明示表上签字确认；线上办理个人贷款业务的，应当通过弹窗方式向借款人展示明示表，设置强制阅读时间，由借款人在签署贷款合同或办理分期前确认；线上消费场景下办理分期付款业务的，应当在消费订单支付页面以显著方式清晰展示综合融资成本相关信息。</li>
+        <li><strong>新老划断：</strong>规定施行时，新增业务严格按照规定开展明示综合融资成本工作。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>这一规定对金融消费者权益保护及消费金融机构合规影响重大：①银行、消费金融公司、信托公司、汽车金融公司、互联网平台助贷机构等所有开展个人贷款业务的机构，须在8月1日前完成业务流程及系统改造，建立综合融资成本明示表的标准模板，并强制设置线上阅读时间；②涉及消费分期业务（如教育分期、医疗分期、装修分期、电商分期）的平台，应同步更新订单支付页面的明示信息展示，确保本金、分期安排、服务费用、年化水平、违约责任一目了然；③助贷合作机构管理须重新审查合作协议，明确各方落实综合融资成本明示要求的责任和义务，对合作机构违规违约行为及时采取纠正措施；④自身作为借款人/消费者的企业主、个体工商户，可对照新规对照核实自身贷款合同，防范"低息高费""未明示费用"等风险，已发生的此类纠纷可主张合同条款及收费不透明。
+    </div>
+  </div>
+
+  <!-- 网络数据安全风险评估办法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔐</div>
+      <div>
+        <div class="card-title">《网络数据安全风险评估办法》<span class="card-tag-blue">国家网信办·工信部·公安部 联合公布（令第24号）</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 审议通过：2026年6月1日（国家网信办2026年第12次室务会）</span>
+      <span>📣 发布日期：2026年6月18日</span>
+      <span>⏳ 施行日期：2026年8月20日</span>
+      <span>📋 文件性质：部门联合规章</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>重要数据处理者年度风险评估义务（第五条）：</strong>重要数据处理者应当每年度开展风险评估。重要数据安全状态发生重大变化可能对数据安全造成不利影响的，应当及时对发生变化及其影响的部分开展风险评估。鼓励一般数据处理者至少每3年开展一次风险评估。</li>
+        <li><strong>第三方评估机构管理（第七条、第八条）：</strong>网络数据处理者可以自行或者委托第三方评估机构开展风险评估。评估机构开展风险评估应当遵守法律法规，公正客观地作出风险判断，不得转委托其他机构开展风险评估；发现重大数据安全风险的，应当及时通知网络数据处理者。</li>
+        <li><strong>风险评估报告编制与报送：</strong>重要数据处理者应当依法按照有关主管部门规定和要求编制并报送风险评估报告，有关主管部门将报告通报同级网信部门。国家网信部门汇总相关报告，并与国务院电信、公安、国家安全等有关部门共享。省级以上有关部门可以对重要数据处理者的风险评估报告进行检查核验。</li>
+        <li><strong>双轨监督机制：</strong>国家网信部门和国务院电信、公安等有关部门建立网络数据安全风险评估专项工作机制；省级以上有关部门可以要求网络数据处理者委托通过认证的评估机构开展风险评估；有关部门发现重要数据处理活动可能危害国家安全、公共利益的，应当依据职责责令重要数据处理者进行整改，对拒不整改或者未达到整改要求的重要数据处理者，可以采取要求其停止处理重要数据等措施。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>《办法》将于2026年8月20日起施行，是数据安全治理体系"最后一块拼图"：①处理重要数据的企业（重要数据处理者）应自施行日起建立年度风险评估机制，包括评估工作方案、评估报告模板、内部审批流程，并将评估报告报送主管部门及同级网信部门；②对自身是否构成重要数据处理者存在疑问的企业，可对照行业重要数据识别指南及地方实施细则进行自查，或聘请第三方评估机构开展合规诊断；③处理一般数据的企业虽然法定强制评估周期为每3年一次，但建议同步建立合规审查机制；④委托第三方评估机构时，应选择通过认证的评估机构，并在委托协议中明确发现重大风险的及时通知义务、不转委托义务；⑤对拒不整改或未达整改要求的企业，存在被采取"停止处理重要数据"等强制措施的风险，建议企业法务、数据合规、信息安全部门联动做好整改预案。
+    </div>
+  </div>
+</div>
+
+<!-- 八、往期回顾 -->
+<div class="section prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 八、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-31.html" target="_blank">
+      📅 2026年07月31日（第7期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院规范性文件 2件 · 新发布司法解释 0件 · 新发布批复 1件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 国办发〔2026〕22号《关于国务院行政复议案件处理程序的若干规定》——7月22日施行</div>
+        <div class="hl-item">② 国务院《全民健身计划（2026—2030年）》——7月19日印发</div>
+        <div class="hl-item">③ 法释〔2026〕14号 事业单位工作人员脱产全日制学历教育服务期违约责任批复——7月29日发布，7月30日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-24.html" target="_blank">
+      📅 2026年07月24日（第6期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 0件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 法释〔2026〕13号 "两高"关于修改内幕交易、泄露内幕信息刑事案件司法解释的决定——2026年7月24日发布，7月27日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-10.html" target="_blank">
+      📅 2026年07月10日（第5期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新施行法律 3件 · 新发布国务院法规 0件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 社会救助法（主席令第七十五号）——4月30日通过，7月1日施行</div>
+        <div class="hl-item">② 民用航空法（主席令第六十五号）——2025年12月27日修订，7月1日施行</div>
+        <div class="hl-item">③ 民族团结进步促进法（主席令第七十一号）——3月12日通过，7月1日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">
+      📅 2026年07月03日（第4期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 2件 · 新发布国务院法规 2件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 商标法（2026年修订）主席令第七十七号——6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">② 注册会计师法修正 主席令第七十八号——6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">③ 退役军人就业创业促进条例 国务院令第840号——6月30日公布，8月1日施行</div>
+        <div class="hl-item">④ 行政法规制定程序条例（修订）国务院令第838号——7月1日施行</div>
+        <div class="hl-item">⑤ 法释〔2026〕12号 建工合同纠纷司法解释（二）——6月29日发布，次日施行</div>
+        <div class="hl-item">⑥ 法答网精选答问（第三十八批）——刑事审判专题，7月2日发布</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📅 2026年06月26日（第3期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 1件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 行政法规制定程序条例（修订）国务院令第838号——7月1日施行</div>
+        <div class="hl-item">② 法答网精选答问（第三十七批）——执行工作专题</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📅 2026年06月22日（第2期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 2件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 对外投资的规定 国务院令第837号——7月1日施行</div>
+        <div class="hl-item">② 矿产资源法实施条例 国务院令第839号——6月15日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📅 2026年06月12日（第1期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首期试运行报告，涵盖法律、法规、司法解释、批复、法答网答问五类内容追踪</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr><th>内容条目</th><th>获取方式</th><th>来源URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>生态环境法典 主席令第七十号 全国人大全文及背景</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="http://www.npc.gov.cn/c2/c30834/202604/t20260427_454042.html" target="_blank">npc.gov.cn 法工委文章</a><br><a href="http://www.npc.gov.cn/c2/c30834/202605/t20260525_455034.html" target="_blank">npc.gov.cn 深入贯彻实施生态环境法典</a></td>
+      </tr>
+      <tr>
+        <td>法释〔2026〕15号 时间效力规定</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/zixun/xiangqing/508001.html" target="_blank">court.gov.cn 权威发布</a></td>
+      </tr>
+      <tr>
+        <td>法释〔2026〕16号 修改九件司法解释决定</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/xiangqing/508041.html" target="_blank">court.gov.cn 权威发布</a></td>
+      </tr>
+      <tr>
+        <td>法释〔2026〕17号 "两高"修改两件司法解释决定</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/zixun/xiangqing/508011.html" target="_blank">court.gov.cn 权威发布</a></td>
+      </tr>
+      <tr>
+        <td>最高法8月6日新闻发布会（生态环境法典司法解释清理情况介绍）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/zixun/xiangqing/508061.html" target="_blank">court.gov.cn 新闻发布会</a></td>
+      </tr>
+      <tr>
+        <td>国务院令第841号 《国务院关于出境入境管理的规定》</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gangu.gov.cn/info/3651/798852.htm" target="_blank">gov.cn 中央政府门户网站转载</a></td>
+      </tr>
+      <tr>
+        <td>国务院令第842号 《集成电路布图设计保护条例》</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/content/202608/content_7077398.htm" target="_blank">gov.cn 国务院政策文件库</a></td>
+      </tr>
+      <tr>
+        <td>《个人贷款业务明示综合融资成本规定》</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.nfra.gov.cn/cn/view/pages/ItemDetail.html?docId=1251479&itemId=928&generaltype=0" target="_blank">nfra.gov.cn 国家金融监督管理总局</a></td>
+      </tr>
+      <tr>
+        <td>《网络数据安全风险评估办法》</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.cac.gov.cn/2026-06/18/c_1783525609815499.htm" target="_blank">cac.gov.cn 国家网信办</a></td>
+      </tr>
+      <tr>
+        <td>法答网精选答问最新发布检索</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/search.html?content=%E6%B3%95%E7%AD%94%E7%BD%91%E7%B2%BE%E9%80%89%E7%AD%94%E9%97%AE" target="_blank">court.gov.cn 站内检索</a></td>
+      </tr>
+      <tr>
+        <td>全国人大新公布法律检索（2026年8月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="http://npc.gov.cn" target="_blank">中国人大网</a></td>
+      </tr>
+      <tr>
+        <td>国务院新发布法规检索（2026年7月-8月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/zhengcewenjianku/" target="_blank">中国政府网 国务院政策文件库</a></td>
+      </tr>
+      <tr>
+        <td>最高人民法院司法解释栏目检索（2026年8月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/gengduo/16.html" target="_blank">court.gov.cn 司法解释栏目</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  联慧东城法规觅踪 · 第8期 · 2026年08月07日<br>
+  数据截止至2026年8月7日12:00
+</div>
+
+</div>
+</body>
+</html>

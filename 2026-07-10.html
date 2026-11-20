@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年07月10日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --success: #38a169;
+    --info: #3182ce;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  /* Overview */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  /* Highlight Card */
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .highlight-card::before {
+    content: '⚠️ 本期重点关注';
+    position: absolute;
+    top: -14px; left: 20px;
+    background: var(--highlight-border);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .highlight-title {
+    font-size: 17px; font-weight: 700;
+    color: #b45309;
+    margin-bottom: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .card-icon { font-size: 22px; flex-shrink: 0; }
+  .card-title {
+    font-size: 17px; font-weight: 700;
+    color: var(--primary);
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .card-tag.new-effective {
+    background: var(--success);
+  }
+  .card-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .card-meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .key-points {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .key-points li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .key-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .practical-note {
+    background: #f7fafc;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .practical-note .prefix {
+    font-weight: 600;
+    color: var(--info);
+  }
+
+  /* Fada Card */
+  .fada-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .fada-answer {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .fada-source {
+    font-size: 12px;
+    color: var(--text-light);
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+  }
+
+  /* Empty */
+  .empty-notice {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-light);
+    font-size: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  /* Previous Reports */
+  .prev-reports { margin-top: 32px; }
+  .prev-reports-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+  }
+  .prev-report-item {
+    margin-bottom: 12px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover { color: var(--accent); }
+  .prev-report-link .ext-icon { font-size: 12px; }
+  details {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary-light);
+    font-size: 14px;
+  }
+  details .detail-content {
+    font-size: 13px;
+    color: var(--text-light);
+    padding-top: 8px;
+    line-height: 1.6;
+  }
+  .detail-content .hl-item {
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  /* Source Annotations */
+  .source-section { margin-top: 32px; }
+  .source-title {
+    font-size: 16px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .source-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .source-table tr:nth-child(even) td { background: #f7fafc; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #fff;
+  }
+  .method-tag.websearch { background: #3182ce; }
+  .method-tag.webfetch { background: #38a169; }
+  .method-tag.portal { background: #d69e2e; }
+
+  /* New-effective notice */
+  .effective-notice {
+    background: #e6ffed;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #276749;
+  }
+  .effective-notice strong { color: #22543d; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 12px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">⚖️ 联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网答问</div>
+  <div class="header-date">2026年07月10日 · 第5期</div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item highlight"><div class="num">3</div><div class="label">新施行法律</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">📌 《中华人民共和国社会救助法》《中华人民共和国民用航空法》等法律7月1日起正式施行</div>
+    <div class="highlight-desc">
+      2026年7月1日，一批重要法律集中生效，包括首部统一、基础性、综合性的社会救助专门法，以及首次全面修订并增设低空经济专章的民用航空法。本期重点追踪上述7月1日新施行的全国人大法律，并提示其对政府救助、低空经济、通用航空、航空旅客权益等领域的实务影响。
+    </div>
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 二、全国人大新公布的法律</div>
+
+  <!-- 社会救助法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">《中华人民共和国社会救助法》<span class="card-tag">主席令第七十五号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 通过日期：2026年4月30日</span>
+      <span>⏳ 施行日期：2026年7月1日</span>
+    </div>
+    <ul class="key-points">
+      <li>扩大救助对象范围（第十三条）：在特困人员、最低生活保障家庭基础上，将最低生活保障边缘家庭、刚性支出困难家庭等纳入救助范围，并明确受灾人员、急危重伤病患者、生活无着的流散人员等亦为救助对象</li>
+      <li>建立分层分类救助体系（第十四条、第十五条）：社会救助分为基本生活救助、专项社会救助（医疗、教育、住房、就业、受灾人员救助）和急难社会救助（临时救助、疾病应急救助、流散人员救助）三类</li>
+      <li>规范救助申请与动态管理（第三十七条、第四十二条、第四十六条、第四十七条）：最低生活保障等申请向户籍所在地乡镇人民政府、街道办事处提出；建立跨部门家庭经济状况核对机制；救助对象家庭状况变化应及时告知，管理部门定期核查并调整或终止救助</li>
+      <li>鼓励社会力量参与（第五十四条、第五十五条、第五十七条）：建立政府救助与社会力量参与衔接机制，鼓励社会工作专业力量、慈善组织、志愿服务参与社会救助，并依法享受相关优惠政策</li>
+      <li>明确法律责任（第七十条、第七十三条）：对符合条件救助申请不予受理或不予确认、对不符合条件予以确认等情形，给予处分；采取虚报、隐瞒、伪造等手段骗取救助的，责令退回并处非法获取财物价值二倍以下罚款</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>《社会救助法》是我国首部统一的社会救助专门法，主要影响政府救助行为和社会力量参与。企事业单位应协助员工了解救助政策，依法参与慈善捐赠和社会救助项目，并配合政府开展家庭经济状况核对等合规要求；人力资源管理部门应关注低收入员工的社会救助衔接问题。
+    </div>
+  </div>
+
+  <!-- 民用航空法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">《中华人民共和国民用航空法》（2025年修订）<span class="card-tag">主席令第六十五号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 修订通过：2025年12月27日</span>
+      <span>⏳ 施行日期：2026年7月1日</span>
+    </div>
+    <ul class="key-points">
+      <li>确立低空经济法律地位（新增第十三章“发展促进”，第二百二十五条）：国家优化低空空域资源配置，推动建设民用低空飞行和应用相关监管服务平台，建立健全适应低空经济发展要求的适航审定、飞行管理等制度和标准</li>
+      <li>将无人驾驶航空器纳入适航管理（第三十四条）：从事民用无人驾驶航空器的设计、生产、进口、维修和飞行活动，应当依法申请取得适航许可；生产机构应为其生产的无人驾驶航空器设置唯一产品识别码</li>
+      <li>完善民用机场分类分级管理（新增第二节运输机场、第三节通用机场，第六十五条至第七十二条）：明确运输机场布局规划和运营许可，通用机场实施分类分级管理，由省级政府编制布局规划并按规定审批、核准或备案</li>
+      <li>强化航班延误旅客权益保护（第一百五十三条、第一百五十四条）：公共航空运输企业、运输机场运营人应制定运输总条件等格式条款并备案；航班延误或取消应及时发布信息、做好客票变更和食宿安排等服务</li>
+      <li>明确通用航空运营准入（第一百五十八条）：从事经营性通用航空活动应当具备法定条件并申请取得通用航空运营许可证；从事非经营性通用航空活动应当向国务院民用航空主管部门备案</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>新《民用航空法》是低空经济首次写入国家基础性法律。低空经济、无人机、eVTOL、通用航空企业应重点关注适航许可、空域管理、低空飞行监管服务平台等合规要求；航空公司和机场运营方需完善旅客权益保护格式条款、航班延误处置机制及投诉处理制度；相关投资主体应关注外商投资民用航空业的准入限制。
+    </div>
+  </div>
+
+  <!-- 民族团结进步促进法 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">《中华人民共和国民族团结进步促进法》<span class="card-tag">主席令第七十一号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 通过日期：2026年3月12日</span>
+      <span>⏳ 施行日期：2026年7月1日</span>
+    </div>
+    <ul class="key-points">
+      <li>铸牢中华民族共同体意识为主线（第一条、第六条、第十一条）：以促进民族团结进步、铸牢中华民族共同体意识为立法目的，国家坚持增进共同性、尊重和包容差异性，引导各族人民牢固树立休戚与共、荣辱与共、生死与共、命运与共的共同体理念</li>
+      <li>推广国家通用语言文字（第十五条）：国家全面推广普及国家通用语言文字，学校及其他教育机构以国家通用语言文字为基本教育教学用语用字，同时尊重和保障少数民族语言文字的学习和使用</li>
+      <li>构筑共有精神家园（第十一条至第二十条）：将中华民族共同体意识教育纳入国民教育、干部教育、社会教育，树立和突出各民族共有共享的中华文化符号和中华民族形象</li>
+      <li>促进各民族交往交流交融（第二十二条、第二十六条、第二十九条）：县级以上人民政府推进互嵌式社区环境建设，支持学校促进各族学生共同学习、共同生活，鼓励各民族互相欣赏优秀传统文化、互相学习语言文字</li>
+      <li>保障监督与法律责任（第四十一条、第五十四条、第五十八条、第五十九条）：建立党委统一领导、政府依法管理、统战部门牵头协调、民族工作部门履职尽责的工作格局；破坏民族团结进步的，由有关部门依法制止、处罚；人民检察院可依法提起公益诉讼</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>该法是新时代民族工作的基本法律。企业事业组织应将铸牢中华民族共同体意识融入业务培训和文化建设；教育机构须使用国家统编教材，将共同体意识贯穿教育全过程；网络平台和新闻媒体应加强内容审核，不得制作、传播含有民族仇恨、民族歧视等破坏民族团结进步内容的信息，发现违法信息应及时采取处置措施并报告。
+    </div>
+  </div>
+</div>
+
+<!-- 三、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏢</span> 三、国务院新发布的法律法规</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">最近国务院新发布的行政法规已在往期报告中收录：国务院令第837号《国务院关于对外投资的规定》（2026年6月1日公布，7月1日施行）见第2期；国务院令第838号《行政法规制定程序条例》（修订）（2026年5月19日公布，7月1日施行）、国务院令第840号《退役军人就业创业促进条例》（2026年6月30日公布，8月1日施行）见第4期。</span>
+  </div>
+</div>
+
+<!-- 四、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 四、司法解释</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">最近为《最高人民法院关于审理建设工程施工合同纠纷案件适用法律问题的解释（二）》（法释〔2026〕12号），2026年6月29日发布，已在上期（第4期）收录。</span>
+  </div>
+</div>
+
+<!-- 五、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📝</span> 五、批复</div>
+  <div class="empty-notice">本期暂无新增批复。</div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💡</span> 六、法答网精选答问</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">最新为法答网精选答问（第三十八批）——刑事审判专题，2026年7月2日发布，已在上期（第4期）收录。</span>
+  </div>
+</div>
+
+<!-- 七、往期回顾 -->
+<div class="section prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 七、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">
+      📅 2026年07月03日（第4期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 2件 · 新发布国务院法规 2件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 《中华人民共和国商标法》（2026年修订）主席令第七十七号——2026年6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">② 《全国人民代表大会常务委员会关于修改〈中华人民共和国注册会计师法〉的决定》主席令第七十八号——2026年6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">③ 《退役军人就业创业促进条例》国务院令第840号——2026年6月30日公布，2026年8月1日施行</div>
+        <div class="hl-item">④ 《行政法规制定程序条例》（修订）国务院令第838号——2026年5月19日公布，2026年7月1日施行</div>
+        <div class="hl-item">⑤ 法释〔2026〕12号 建工合同纠纷司法解释（二）——2026年6月29日发布，次日施行</div>
+        <div class="hl-item">⑥ 法答网精选答问（第三十八批）——刑事审判专题，2026年7月2日发布</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📅 2026年06月26日（第3期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 1件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 《行政法规制定程序条例》（修订）国务院令第838号——2026年5月19日公布，2026年7月1日施行</div>
+        <div class="hl-item">② 法答网精选答问（第三十七批）——执行工作专题</div>
+        <div class="hl-item">③ 立法动态：商标法修订草案、注册会计师法修正草案二审</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📅 2026年06月22日（第2期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 2件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 《国务院关于对外投资的规定》国务院令第837号——2026年6月1日公布，2026年7月1日施行</div>
+        <div class="hl-item">② 《中华人民共和国矿产资源法实施条例》国务院令第839号——2026年5月15日公布，2026年6月15日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📅 2026年06月12日（第1期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首期试运行报告</div>
+        <div class="hl-item">涵盖法律、法规、司法解释、批复、法答网答问五类内容追踪</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr><th>内容条目</th><th>获取方式</th><th>来源URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>《中华人民共和国社会救助法》（主席令第七十五号）</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.xinhuanet.com/politics/20260430/0ad205be5a6748b0b17fee6988d338da/c.html" target="_blank">新华网 全文</a>；<a href="https://www.gov.cn/yaowen/liebiao/202604/content_7067516.htm" target="_blank">中国政府网 主席令</a></td>
+      </tr>
+      <tr>
+        <td>《中华人民共和国民用航空法》（2025年修订，主席令第六十五号）</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.news.cn/politics/20251227/a00ca714510447559536477398b6fb4d/c.html" target="_blank">新华网 全文</a>；<a href="https://www.gov.cn/yaowen/liebiao/202512/content_7052927.htm" target="_blank">中国政府网 主席令</a></td>
+      </tr>
+      <tr>
+        <td>《中华人民共和国民族团结进步促进法》（主席令第七十一号）</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.xinhuanet.com/politics/20260313/748e7a2db7764d82b4259c9e1256082e/c.html" target="_blank">新华网 全文</a>；<a href="https://www.gov.cn/yaowen/liebiao/202603/content_7062442.htm" target="_blank">中国政府网 主席令</a></td>
+      </tr>
+      <tr>
+        <td>最高人民法院司法解释列表（2026年）</td>
+        <td><span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/gengduo/16.html" target="_blank">court.gov.cn 司法解释栏目</a></td>
+      </tr>
+      <tr>
+        <td>法答网精选答问发布情况检索</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/search.html?content=%E6%B3%95%E7%AD%94%E7%BD%91%E7%B2%BE%E9%80%89%E7%AD%94%E9%97%AE" target="_blank">court.gov.cn 站内检索</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  <span style="font-size:12px;">数据来源：全国人大官网、国务院官网、最高人民法院官网、新华网等权威渠道</span>
+</div>
+
+</div>
+</body>
+</html>

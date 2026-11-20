@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年07月24日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --success: #38a169;
+    --info: #3182ce;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  /* Overview */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  /* Highlight Card */
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .highlight-card::before {
+    content: '⚠️ 本期重点关注';
+    position: absolute;
+    top: -14px; left: 20px;
+    background: var(--highlight-border);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+  .highlight-title {
+    font-size: 17px; font-weight: 700;
+    color: #b45309;
+    margin-bottom: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .card-icon { font-size: 22px; flex-shrink: 0; }
+  .card-title {
+    font-size: 17px; font-weight: 700;
+    color: var(--primary);
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .card-tag.new-effective {
+    background: var(--success);
+  }
+  .card-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .card-meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .key-points {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .key-points li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .key-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .practical-note {
+    background: #f7fafc;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .practical-note .prefix {
+    font-weight: 600;
+    color: var(--info);
+  }
+
+  /* Fada Card */
+  .fada-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .fada-answer {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .fada-source {
+    font-size: 12px;
+    color: var(--text-light);
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+  }
+
+  /* Empty */
+  .empty-notice {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-light);
+    font-size: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  /* Previous Reports */
+  .prev-reports { margin-top: 32px; }
+  .prev-reports-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+  }
+  .prev-report-item {
+    margin-bottom: 12px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover { color: var(--accent); }
+  .prev-report-link .ext-icon { font-size: 12px; }
+  details {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary-light);
+    font-size: 14px;
+  }
+  details .detail-content {
+    font-size: 13px;
+    color: var(--text-light);
+    padding-top: 8px;
+    line-height: 1.6;
+  }
+  .detail-content .hl-item {
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  /* Source Annotations */
+  .source-section { margin-top: 32px; }
+  .source-title {
+    font-size: 16px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .source-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .source-table tr:nth-child(even) td { background: #f7fafc; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #fff;
+  }
+  .method-tag.websearch { background: #3182ce; }
+  .method-tag.webfetch { background: #38a169; }
+  .method-tag.portal { background: #d69e2e; }
+
+  /* New-effective notice */
+  .effective-notice {
+    background: #e6ffed;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #276749;
+  }
+  .effective-notice strong { color: #22543d; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    margin-top: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 12px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">⚖️ 联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网答问</div>
+  <div class="header-date">2026年07月24日 · 第6期</div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item"><div class="num">0</div><div class="label">新公布法律</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布国务院法规</div></div>
+    <div class="overview-item highlight"><div class="num">1</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">📌 "两高"发布修改内幕交易、泄露内幕信息刑事案件司法解释的决定（法释〔2026〕13号）</div>
+    <div class="highlight-desc">
+      2026年7月24日，最高人民法院、最高人民检察院联合发布《关于修改〈关于办理内幕交易、泄露内幕信息刑事案件具体应用法律若干问题的解释〉的决定》（法释〔2026〕13号），自2026年7月27日起施行。本次修改聚焦三大要点：一是新增控股股东、实际控制人等关键主体透露内幕信息初步意向的时间视为动议初始时间，杜绝利用时间差进行内幕交易；二是完善阻却事由，从严把握不构成内幕交易的抗辩；三是与证券法、期货和衍生品法及立案追诉标准保持协调，构建立体化追责体系。
+    </div>
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 二、全国人大新公布的法律</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">近期法律已在往期报告中收录：《商标法》（2026年修订，主席令第七十七号）、《注册会计师法》修正（主席令第七十八号）均于2026年6月26日通过，见第4期；社会救助法、民用航空法、民族团结进步促进法等7月1日施行的法律见第5期。</span>
+  </div>
+</div>
+
+<!-- 三、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏢</span> 三、国务院新发布的法律法规</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">近期国务院行政法规已在往期报告中收录：国务院令第840号《退役军人就业创业促进条例》（2026年6月30日公布，8月1日施行）见第4期，自2026年8月1日起施行，请关注即将生效的合规要求。</span>
+  </div>
+</div>
+
+<!-- 四、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 四、司法解释</div>
+
+  <!-- 法释〔2026〕13号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📖</div>
+      <div>
+        <div class="card-title">《最高人民法院、最高人民检察院关于修改〈关于办理内幕交易、泄露内幕信息刑事案件具体应用法律若干问题的解释〉的决定》<span class="card-tag">法释〔2026〕13号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 审委会通过：2025年12月13日（第1961次会议）</span>
+      <span>📅 检委会通过：2026年4月17日（第75次会议）</span>
+      <span>📣 发布日期：2026年7月24日</span>
+      <span>⏳ 施行日期：2026年7月27日</span>
+    </div>
+    <ul class="key-points">
+      <li>内幕信息知情人员范围更新（第一条）：第一项修改为"证券法第五十一条规定的内幕信息的知情人员"，第二项修改为"期货和衍生品法第十五条规定的期货交易内幕信息的知情人员"，与新修订的证券法、新出台的期货和衍生品法相关规定保持一致</li>
+      <li>内幕信息敏感期起始时间明确（第六条）：第二款明确证券法第八十条第二款、第八十一条第二款所列"重大事件"的发生时间，期货和衍生品法第十四条第二款规定的"政策""决定"等的形成时间，应当认定为内幕信息的形成之时；新增第四款规定控股股东、实际控制人或者相关决策人员向关系密切人员透露形成内幕信息初步意向的时间，或者根据该初步意向进行相关交易的时间，应当视为动议的初始时间</li>
+      <li>情节严重认定标准（第四条）：证券交易成交额二百万元以上、期货交易占用保证金一百万元以上、获利或避免损失五十万元以上、二年内三次以上从事内幕交易或泄露内幕信息、明示暗示三人以上从事相关交易等情形认定"情节严重"；同时增设降低门槛情形——成交额一百万/保证金五十万/获利二十五万以上，且具有知情人实施、出售或变相出售内幕信息、曾受刑事追究、二年内受过行政处罚等情节的，亦认定为"情节严重"</li>
+      <li>情节特别严重认定标准（第五条）：证券交易成交额二千万元以上、期货交易占用保证金一千万元以上、获利或避免损失五百万元以上，或具有其他特别严重情节的，认定为"情节特别严重"</li>
+      <li>阻却事由完善（第九条）：上市公司收购须符合收购目的，交易行为明显不符合收购目的且无正当理由的除外（防止"暗仓"）；预定交易须按内幕信息形成前订立的含明确交易方式、数量、价格、时间等要素的书面合同、指令、计划从事，且须符合法律规定（防止虚假或违法计划）；第三项明确为"依据已被他人公开披露的信息而交易的"（强调披露的公开性）；保留"其他正当理由或正当信息来源"兜底条款</li>
+      <li>条文结构调整：原第四条（阻却事由）调整至第九条之后，原第五条（内幕信息敏感期）调整至第七条之后，相应调整相关条文序号，修改后全文共十一条</li>
+    </ul>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>本次修改显著前移了内幕信息敏感期的起算时点，上市公司控股股东、实际控制人及相关决策人员向关系密切人员透露内幕信息初步意向的时间将被视为动议初始时间，此类主体面临更严格的刑事责任风险。建议：①上市公司及证券、期货经营机构应更新内幕信息知情人登记管理制度，确保与新修订的证券法第五十一条、期货和衍生品法第十五条衔接；②控股股东、实际控制人应严格管控决策过程中的信息流转，建立"动议即保密"的内部合规机制；③预定交易计划抗辩须确保合同/指令/计划真实、合法、事先订立且含明确交易要素，建议留存完整的决策留痕文件；④上市公司收购方应确保交易行为符合收购目的，避免被认定为"暗仓"内幕交易；⑤关注行刑衔接，立案追诉标准与司法解释保持协调，刑事风险门槛已明确。
+    </div>
+  </div>
+</div>
+
+<!-- 五、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📝</span> 五、批复</div>
+  <div class="empty-notice">
+    本期暂无新增批复。<br>
+    <span style="font-size:13px;color:#999;">最高人民法院近期批复已在往期报告中收录：《关于基本医疗保险基金先行支付申请条件法律适用问题的批复》（2026年1月6日发布）可在第3期附录中查阅。</span>
+  </div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💡</span> 六、法答网精选答问</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">最新为法答网精选答问（第三十八批）——刑事审判专题，2026年7月2日发布，已在第4期收录。截至本期发稿，最高人民法院尚未发布第三十九批。</span>
+  </div>
+</div>
+
+<!-- 七、往期回顾 -->
+<div class="section prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 七、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-10.html" target="_blank">
+      📅 2026年07月10日（第5期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新施行法律 3件 · 新发布国务院法规 0件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 《中华人民共和国社会救助法》主席令第七十五号——2026年4月30日通过，7月1日施行</div>
+        <div class="hl-item">② 《中华人民共和国民用航空法》（2025年修订）主席令第六十五号——2025年12月27日修订，7月1日施行</div>
+        <div class="hl-item">③ 《中华人民共和国民族团结进步促进法》主席令第七十一号——2026年3月12日通过，7月1日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">
+      📅 2026年07月03日（第4期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 2件 · 新发布国务院法规 2件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 《中华人民共和国商标法》（2026年修订）主席令第七十七号——2026年6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">② 《全国人民代表大会常务委员会关于修改〈中华人民共和国注册会计师法〉的决定》主席令第七十八号——2026年6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">③ 《退役军人就业创业促进条例》国务院令第840号——2026年6月30日公布，2026年8月1日施行</div>
+        <div class="hl-item">④ 《行政法规制定程序条例》（修订）国务院令第838号——2026年5月19日公布，2026年7月1日施行</div>
+        <div class="hl-item">⑤ 法释〔2026〕12号 建工合同纠纷司法解释（二）——2026年6月29日发布，次日施行</div>
+        <div class="hl-item">⑥ 法答网精选答问（第三十八批）——刑事审判专题，2026年7月2日发布</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📅 2026年06月26日（第3期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 1件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 《行政法规制定程序条例》（修订）国务院令第838号——2026年5月19日公布，2026年7月1日施行</div>
+        <div class="hl-item">② 法答网精选答问（第三十七批）——执行工作专题</div>
+        <div class="hl-item">③ 立法动态：商标法修订草案、注册会计师法修正草案二审</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📅 2026年06月22日（第2期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 2件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 《国务院关于对外投资的规定》国务院令第837号——2026年6月1日公布，2026年7月1日施行</div>
+        <div class="hl-item">② 《中华人民共和国矿产资源法实施条例》国务院令第839号——2026年5月15日公布，2026年6月15日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📅 2026年06月12日（第1期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首期试运行报告</div>
+        <div class="hl-item">涵盖法律、法规、司法解释、批复、法答网答问五类内容追踪</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr><th>内容条目</th><th>获取方式</th><th>来源URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>法释〔2026〕13号《修改决定》全文及新闻发布会内容</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/xiangqing/506981.html" target="_blank">court.gov.cn 权威发布</a></td>
+      </tr>
+      <tr>
+        <td>最高人民法院司法解释列表（2026年）</td>
+        <td><span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/gengduo/16.html" target="_blank">court.gov.cn 司法解释栏目</a></td>
+      </tr>
+      <tr>
+        <td>全国人大新公布法律检索（2026年7月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gov.cn/yaowen/liebiao/202604/content_7067516.htm" target="_blank">中国政府网 主席令栏目</a></td>
+      </tr>
+      <tr>
+        <td>国务院新发布法规检索（2026年7月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/zhengcewenjianku/" target="_blank">中国政府网 国务院政策文件库</a></td>
+      </tr>
+      <tr>
+        <td>法答网精选答问发布情况检索</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/search.html?content=%E6%B3%95%E7%AD%94%E7%BD%91%E7%B2%BE%E9%80%89%E7%AD%94%E9%97%AE" target="_blank">court.gov.cn 站内检索</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  <span style="font-size:12px;">数据来源：全国人大官网、国务院官网、最高人民法院官网、中国政府网等权威渠道</span>
+</div>
+
+</div>
+</body>
+</html>

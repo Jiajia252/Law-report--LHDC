@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年07月31日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--accent);
+  }
+  .card-tag-blue {
+    display: inline-block;
+    background: var(--info-bg);
+    color: var(--info-text);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+    border: 1px solid var(--info-border);
+  }
+  .card-meta {
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    background: #fafbfc;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-body { padding: 16px 20px; }
+  .key-points { padding-left: 20px; }
+  .key-points li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .key-points li strong { color: var(--primary); }
+
+  .practical-note {
+    margin: 12px 20px 16px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border-left: 4px solid var(--info-border);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .practical-note .prefix { color: var(--info-text); font-weight: 600; font-size: 12px; display: block; margin-bottom: 6px; }
+
+  .empty-notice {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px dashed var(--border);
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  /* 往期回顾 */
+  .prev-reports { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .prev-reports-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prev-report-item {
+    margin-bottom: 8px;
+  }
+  .prev-report-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.15s ease;
+    margin-bottom: 4px;
+  }
+  .prev-report-link:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .ext-icon { font-size: 12px; }
+  details { margin-top: 4px; margin-left: 4px; }
+  details summary {
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .detail-content {
+    padding: 10px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .hl-item { margin-bottom: 4px; }
+
+  /* 来源标注 */
+  .source-section {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .source-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .source-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .source-table th {
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .source-table a { color: var(--info-text); word-break: break-all; }
+  .method-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 1px 2px;
+  }
+  .method-tag.websearch { background: #e3f2fd; color: #1565c0; }
+  .method-tag.webfetch { background: #e8f5e9; color: #2e7d32; }
+  .method-tag.portal { background: #fff8e1; color: #e65100; }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 10px; }
+    .header { padding: 24px 16px; }
+    .header-title { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .overview-item { padding: 10px 8px; }
+    .overview-item .num { font-size: 24px; }
+    .card-header { flex-direction: column; gap: 8px; }
+    .card-meta { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-title">联慧东城法规觅踪</div>
+  <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+  <div class="header-date">第7期 · 2026年07月31日发布</div>
+</div>
+
+<!-- 一、本期概览 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span> 一、本期概览</div>
+  <div class="overview-grid">
+    <div class="overview-item"><div class="num">0</div><div class="label">新公布法律</div></div>
+    <div class="overview-item"><div class="num">2</div><div class="label">新发布国务院规范性文件</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">新发布司法解释</div></div>
+    <div class="overview-item highlight"><div class="num">1</div><div class="label">新发布批复</div></div>
+    <div class="overview-item"><div class="num">0</div><div class="label">法答网精选答问</div></div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="highlight-title">📌 本期重点关注</div>
+    <div class="highlight-desc">
+      <strong>① 最高人民法院批复（法释〔2026〕14号）：</strong>明确事业单位工作人员脱产参加全日制学历教育后违反服务期约定的违约责任规则——全日制学历教育不属劳动合同法第二十二条的"专业技术培训"，违约金不受培训费用限制；劳动者学成后违约离职须依约承担违约责任，事业单位请求支持的，人民法院依法予以支持。<br><br>
+      <strong>② 国务院办公厅印发《关于国务院行政复议案件处理程序的若干规定》（国办发〔2026〕22号）：</strong>取代2001年旧通知，落实2023年修订的行政复议法配套制度衔接，强化国务院法治部门对行政复议工作的指导监督和行政争议实质性化解。
+    </div>
+  </div>
+</div>
+
+<!-- 二、全国人大新公布的法律 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏛️</span> 二、全国人大新公布的法律</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">近期法律已在往期报告中收录：社会救助法（主席令第七十五号）、民族团结进步促进法（主席令第七十一号）、民用航空法（2025年修订，主席令第六十五号）均于2026年7月1日施行；商标法（2026年修订，主席令第七十七号）和注册会计师法修正（主席令第七十八号）于6月26日通过。全国人大常委会第二十四次会议尚未召开。</span>
+  </div>
+</div>
+
+<!-- 三、国务院新发布的法律法规 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🏢</span> 三、国务院新发布的法律法规及规范性文件</div>
+
+  <!-- 国办发〔2026〕22号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📄</div>
+      <div>
+        <div class="card-title">《关于国务院行政复议案件处理程序的若干规定》<span class="card-tag-blue">国办发〔2026〕22号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📣 印发日期：2026年7月22日</span>
+      <span>⏳ 施行日期：2026年7月22日（印发之日施行）</span>
+      <span>📋 文件性质：国务院办公厅规范性文件</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>授权国务院法治部门处理行政复议申请：</strong>授权司法部依法处理向国务院提出的行政复议申请，以及向国务院反映下级行政复议机关无正当理由不予受理、驳回申请或者受理后超过行政复议期限不作答复的行政复议监督申请。</li>
+        <li><strong>加强行政争议实质性化解：</strong>要求各省、自治区、直辖市人民政府和国务院部门加大先行化解、调解、和解工作力度，积极配合国务院法治部门组织开展调解工作，推动将行政争议有效化解在行政复议程序中。</li>
+        <li><strong>强化行政复议指导监督：</strong>要求国务院法治部门完善行政复议体制机制，做好行政复议法律适用问题的答复工作；强化行政复议与政府督查、行政执法监督的协调配合，深化以案促治。</li>
+        <li><strong>取代2001年旧通知：</strong>废止2001年《国务院办公厅关于国务院行政复议案件处理程序若干问题的通知》（国办发〔2001〕38号），适应2023年新修订行政复议法的新程序、新机制、新要求。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>《若干规定》是2023年行政复议法修订后国务院层面行政复议程序配套制度的重要更新。企业应对行政行为（如行政处罚、行政许可等）申请行政复议时，应注意：①向国务院提出行政复议申请及对下级行政复议机关不作为的监督申请，现统一由司法部依法处理；②各省、自治区、直辖市人民政府和国务院部门将加大先行调解、和解力度，企业在行政复议程序中应善用调解和解机制，争取在复议阶段实质性化解争议；③司法部将持续发布行政复议法律适用问题答复，企业可关注相关答复以预判复议审查方向。
+    </div>
+  </div>
+
+  <!-- 全民健身计划 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏃</div>
+      <div>
+        <div class="card-title">国务院关于印发《全民健身计划（2026—2030年）》的通知<span class="card-tag-blue">国发</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📣 印发日期：2026年7月19日</span>
+      <span>📋 文件性质：国务院规范性文件</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>"十五五"全民健身顶层设计：</strong>作为全民健身领域首个专题规划，围绕全民健身公共服务体系、群众体育赛事、科学健身指导等作出系统部署，明确2026—2030年全民健身发展目标和主要任务。</li>
+        <li><strong>推动体卫融合、体教融合：</strong>强调全民健身与医疗卫生、学校教育的深度融合，鼓励社会力量参与全民健身公共服务供给。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>体育产业、健康管理、社区服务等相关企业可关注《计划》中关于社会力量参与全民健身公共服务供给的政策导向，积极把握政府购买服务、PPP等合作机遇。健身场馆运营企业应关注后续地方配套实施的场地、安全、教练资质等监管要求。
+    </div>
+  </div>
+</div>
+
+<!-- 四、司法解释 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span> 四、司法解释</div>
+  <div class="empty-notice">
+    本期暂无新增司法解释。<br>
+    <span style="font-size:13px;color:#999;">往期已收录：法释〔2026〕13号——"两高"关于修改内幕交易、泄露内幕信息刑事案件司法解释的决定（2026年7月24日发布，7月27日施行），已在第6期详细收录。法释〔2026〕14号虽使用法释文号，但文件形式为"批复"，归入本报告"批复"栏目。</span>
+  </div>
+</div>
+
+<!-- 五、批复 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📝</span> 五、批复</div>
+
+  <!-- 法释〔2026〕14号 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📜</div>
+      <div>
+        <div class="card-title">《最高人民法院关于事业单位工作人员脱产参加全日制学历教育后违反服务期约定有关问题的批复》<span class="card-tag">法释〔2026〕14号</span></div>
+      </div>
+    </div>
+    <div class="card-meta">
+      <span>📅 审委会通过：2025年12月15日（第1962次会议）</span>
+      <span>📣 发布日期：2026年7月29日</span>
+      <span>⏳ 施行日期：2026年7月30日</span>
+      <span>📍 请示来源：宁夏回族自治区高级人民法院</span>
+    </div>
+    <div class="card-body">
+      <ul class="key-points">
+        <li><strong>服务期约定有效性认定（第一条）：</strong>事业单位与工作人员就脱产参加全日制学历教育约定服务期，工作人员仅以约定服务期限、违约金违反劳动合同法第二十二条、第二十五条规定为由请求确认约定无效的，<strong>人民法院不予支持</strong>。但工作人员以约定服务期限不合理为由请求确认超过合理比例部分无效的，人民法院应综合考量事业单位支付的相关费用、学习教育时间以及工作人员所获学历、学位等因素，确定服务期限是否合理。</li>
+        <li><strong>违约责任的承担（第二条）：</strong>脱产参加全日制学历教育的工作人员违反服务期约定，事业单位请求其依约承担违约责任的，<strong>人民法院依法予以支持</strong>。违约金过高的，可综合考虑实际损失、已履行年限、过错等因素，根据公平原则和诚信原则予以调整。</li>
+        <li><strong>全日制学历教育≠劳动合同法"专业技术培训"（第二条第二款）：</strong>工作人员主张全日制学历教育属于《事业单位人事管理条例》第二十三条或者《劳动合同法》第二十二条规定的培训范围、违约金应以培训费用为限的，<strong>人民法院不予支持</strong>。此为核心裁判规则：脱产全日制学历教育的服务期约定不属于劳动合同法的专项培训范畴，违约金不受培训费用上限约束。</li>
+      </ul>
+    </div>
+    <div class="card-body" style="border-top:1px solid var(--border); padding-top:12px;">
+      <div style="font-weight:700; color:var(--primary); margin-bottom:8px;">📎 同步发布的两个典型案例：</div>
+      <ul class="key-points">
+        <li><strong>案例一（魏某与某医院人事争议案）：</strong>医院支持工作人员脱产读研，毕业后不返回。法院认定全日制研究生教育不属于劳动合同法第二十二条的专业技术培训，判决返还就读期间发放的工资及五险一金，并酌情将合同约定的5倍奖金赔偿调整为3倍。</li>
+        <li><strong>案例二（某学院与杨某人事争议案）：</strong>学院支持工作人员脱产读博（4年），毕业后入职其他大学。法院认定违约成立，考虑读博期间杨某仍为学院提供科研劳动并取得成果，将违约金酌减为就读期间工资福利总额的70%（约47.4万元）；<strong>录用尚未解除人事关系人员的某大学承担连带赔偿责任</strong>。</li>
+      </ul>
+    </div>
+    <div class="practical-note">
+      <span class="prefix">（以下为企业合规建议，非条文原文）</span>本批复虽直接针对事业单位，但其裁判逻辑对企业人事管理具有重要参考价值：①企业支持员工脱产参加全日制学历教育并约定服务期的，服务期约定的有效性得到司法确认，不适用劳动合同法第二十二条"专业技术培训"的违约金上限约束，企业有更大的违约金约定空间；②但同时违约金过高仍可被法院酌情调减，企业应根据实际投入成本（工资、社保、学费等）合理设定违约金比例，参考案例中3倍奖金或70%工资总额的司法尺度；③用人单位在招聘时应审查候选人是否与原单位存在未解除的人事/劳动关系，如录用尚未解除关系的人员可能承担连带赔偿责任；④建议企业完善脱产学历教育的协议文本，明确约定服务年限、违约金计算方式及学习期间的劳动成果归属。
+    </div>
+  </div>
+</div>
+
+<!-- 六、法答网精选答问 -->
+<div class="section">
+  <div class="section-title"><span class="icon">💡</span> 六、法答网精选答问</div>
+  <div class="empty-notice">
+    本期暂无新增。<br>
+    <span style="font-size:13px;color:#999;">最新为法答网精选答问（第三十八批）——刑事审判专题（4条），2026年7月2日由最高人民法院发布，已在第4期和第5期报告中收录。截至本期发稿，最高人民法院尚未发布第三十九批。提请读者注意：澎湃新闻等媒体转载的"法答网精选答问（第一批）"等内容非官方权威来源，请以 court.gov.cn 发布的正式批次为准。</span>
+  </div>
+</div>
+
+<!-- 七、往期回顾 -->
+<div class="section prev-reports">
+  <div class="prev-reports-title"><span class="icon">📚</span> 七、往期回顾</div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-24.html" target="_blank">
+      📅 2026年07月24日（第6期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 0件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 法释〔2026〕13号 "两高"关于修改内幕交易、泄露内幕信息刑事案件司法解释的决定——2026年7月24日发布，7月27日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-10.html" target="_blank">
+      📅 2026年07月10日（第5期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新施行法律 3件 · 新发布国务院法规 0件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 社会救助法（主席令第七十五号）——4月30日通过，7月1日施行</div>
+        <div class="hl-item">② 民用航空法（主席令第六十五号）——2025年12月27日修订，7月1日施行</div>
+        <div class="hl-item">③ 民族团结进步促进法（主席令第七十一号）——3月12日通过，7月1日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-07-03.html" target="_blank">
+      📅 2026年07月03日（第4期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 2件 · 新发布国务院法规 2件 · 新发布司法解释 1件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 商标法（2026年修订）主席令第七十七号——6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">② 注册会计师法修正 主席令第七十八号——6月26日通过，2027年1月1日施行</div>
+        <div class="hl-item">③ 退役军人就业创业促进条例 国务院令第840号——6月30日公布，8月1日施行</div>
+        <div class="hl-item">④ 行政法规制定程序条例（修订）国务院令第838号——7月1日施行</div>
+        <div class="hl-item">⑤ 法释〔2026〕12号 建工合同纠纷司法解释（二）——6月29日发布，次日施行</div>
+        <div class="hl-item">⑥ 法答网精选答问（第三十八批）——刑事审判专题，7月2日发布</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-26.html" target="_blank">
+      📅 2026年06月26日（第3期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 1件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 4条</div>
+        <div class="hl-item">① 行政法规制定程序条例（修订）国务院令第838号——7月1日施行</div>
+        <div class="hl-item">② 法答网精选答问（第三十七批）——执行工作专题</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-22.html" target="_blank">
+      📅 2026年06月22日（第2期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">本期概览：新公布法律 0件 · 新发布国务院法规 2件 · 新发布司法解释 0件 · 新发布批复 0件 · 法答网精选答问 0条</div>
+        <div class="hl-item">① 对外投资的规定 国务院令第837号——7月1日施行</div>
+        <div class="hl-item">② 矿产资源法实施条例 国务院令第839号——6月15日施行</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="prev-report-item">
+    <a class="prev-report-link" href="2026-06-12.html" target="_blank">
+      📅 2026年06月12日（第1期）<span class="ext-icon">↗</span>
+    </a>
+    <details>
+      <summary>点击展开摘要</summary>
+      <div class="detail-content">
+        <div class="hl-item">首期试运行报告，涵盖法律、法规、司法解释、批复、法答网答问五类内容追踪</div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 来源标注 -->
+<div class="source-section">
+  <div class="source-title">📎 来源标注</div>
+  <table class="source-table">
+    <thead>
+      <tr><th>内容条目</th><th>获取方式</th><th>来源URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>法释〔2026〕14号 批复全文及典型案例</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/xiangqing/507301.html" target="_blank">court.gov.cn 权威发布</a><br><a href="https://www.court.gov.cn/zixun/xiangqing/507291.html" target="_blank">court.gov.cn 典型案例</a></td>
+      </tr>
+      <tr>
+        <td>国办发〔2026〕22号《关于国务院行政复议案件处理程序的若干规定》</td>
+        <td><span class="method-tag websearch">WebSearch</span> + <span class="method-tag webfetch">WebFetch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/202607/content_7077013.htm" target="_blank">中国政府网 政策解读</a></td>
+      </tr>
+      <tr>
+        <td>国务院《全民健身计划（2026—2030年）》</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://zwfw.gansu.gov.cn/kongtong/zczx/zcwj/index.html" target="_blank">中国政府网 政策文件库（转载）</a></td>
+      </tr>
+      <tr>
+        <td>全国人大新公布法律检索（2026年7月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="http://npc.gov.cn" target="_blank">中国人大网</a></td>
+      </tr>
+      <tr>
+        <td>国务院新发布法规检索（2026年7月）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.gov.cn/zhengce/zhengcewenjianku/" target="_blank">中国政府网 国务院政策文件库</a></td>
+      </tr>
+      <tr>
+        <td>最高人民法院司法解释及批复列表检索（2026年）</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/fabu/gengduo/16.html" target="_blank">court.gov.cn 司法解释栏目</a></td>
+      </tr>
+      <tr>
+        <td>法答网精选答问最新发布检索</td>
+        <td><span class="method-tag websearch">WebSearch</span></td>
+        <td><a href="https://www.court.gov.cn/search.html?content=%E6%B3%95%E7%AD%94%E7%BD%91%E7%B2%BE%E9%80%89%E7%AD%94%E9%97%AE" target="_blank">court.gov.cn 站内检索</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  编制：腾讯云 ｜ WorkBuddy<br>
+  联慧东城法规觅踪 · 第7期 · 2026年07月31日<br>
+  数据截止至2026年7月31日12:00
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年06月26日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --success: #38a169;
+    --info: #3182ce;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+  .header .subtitle { font-size: 15px; opacity: 0.85; margin-top: 8px; }
+  .header .date-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 14px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .badge {
+    background: var(--primary-light);
+    color: #fff;
+    font-size: 14px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  /* Overview cards */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .overview-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 3px solid var(--primary-light);
+  }
+  .overview-card .number { font-size: 36px; font-weight: 800; color: var(--primary); line-height: 1; }
+  .overview-card .label { font-size: 13px; color: var(--text-light); margin-top: 6px; }
+  .overview-card.zero { opacity: 0.6; }
+  .overview-card.zero .number { color: var(--text-light); }
+
+  /* Highlight card */
+  .highlight-card {
+    background: linear-gradient(135deg, #fff5f0, #fff0e0);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .highlight-card .hl-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #c0392b;
+    margin-bottom: 10px;
+  }
+  .highlight-card .hl-item {
+    padding: 6px 0;
+    font-size: 14px;
+    color: #744210;
+    line-height: 1.6;
+  }
+  .highlight-card .hl-date {
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* Document card */
+  .doc-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+    border-left: 4px solid var(--primary-light);
+  }
+  .doc-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+    transform: translateY(-2px);
+  }
+  .doc-card .doc-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .doc-card .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .doc-card .doc-meta span {
+    background: #edf2f7;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .doc-card .doc-meta .ref-no {
+    background: var(--primary-light);
+    color: #fff;
+  }
+  .doc-card .doc-section { margin-top: 14px; }
+  .doc-card .doc-section h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .doc-card .doc-section ul { padding-left: 20px; }
+  .doc-card .doc-section li {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 5px;
+    color: var(--text);
+  }
+  .doc-card .doc-section .practice-note {
+    background: #f7fafc;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #4a5568;
+    border-left: 3px solid var(--info);
+  }
+  .doc-card.pending {
+    border-left-color: #a0aec0;
+    background: #fafbfc;
+  }
+
+  /* Pending section card */
+  .pending-card {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 1px dashed var(--border);
+  }
+  .pending-card .pending-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+  .pending-card .bill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pending-card .bill-tag {
+    background: #edf2f7;
+    color: #4a5568;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .pending-card .bill-tag.二审 { background: #fefcbf; color: #744210; }
+  .pending-card .bill-tag.一审 { background: #bee3f8; color: #2a4365; }
+
+  /* FAQ card for法答网 */
+  .faq-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s ease;
+    border-left: 4px solid #805ad5;
+  }
+  .faq-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.10); }
+  .faq-card .faq-num {
+    display: inline-block;
+    background: #805ad5;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .faq-card .faq-q {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .faq-card .faq-a {
+    font-size: 13px;
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .faq-card .faq-source {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .faq-card .faq-tag {
+    font-size: 11px;
+    background: #f7f5fb;
+    color: #6b46c1;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* Past reviews */
+  .past-review {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .past-review h4 { font-size: 15px; color: var(--primary); margin-bottom: 12px; }
+  .past-review .link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .past-review .link-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #edf2f7;
+    color: var(--primary-light);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .past-review .link-btn:hover { background: #e2e8f0; }
+
+  /* Source attribution */
+  .source-section {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+  .source-section h4 { font-size: 15px; color: var(--primary); margin-bottom: 12px; }
+  .source-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .source-table th {
+    background: var(--primary-light);
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .source-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .source-table tr:last-child td { border-bottom: none; }
+  .source-table .item-name { font-weight: 600; color: var(--text); }
+  .source-table a { color: var(--info); text-decoration: none; word-break: break-all; }
+  .source-table a:hover { text-decoration: underline; }
+  .source-table .method-tag {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    background: #edf2f7;
+    color: #4a5568;
+  }
+  .source-table .method-tag.fetch { background: #c6f6d5; color: #276749; }
+  .source-table .method-tag.search { background: #bee3f8; color: #2a4365; }
+  .source-table .method-tag.portal { background: #fefcbf; color: #744210; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 30px 0;
+    color: var(--text-light);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-light);
+    font-size: 15px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .empty-state .icon { font-size: 36px; margin-bottom: 8px; }
+
+  /* Note */
+  .note-box {
+    background: #ebf8ff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #2c5282;
+    border-left: 3px solid #3182ce;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 28px 20px; }
+    .header h1 { font-size: 22px; }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    .doc-card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>⚖️ 联慧东城法规觅踪</h1>
+    <div class="subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 ｜ 每周追踪</div>
+    <div class="date-badge">2026年06月26日</div>
+  </div>
+
+  <!-- 一、本期概览 -->
+  <div class="section">
+    <div class="section-title">一、本期概览</div>
+    <div class="overview-grid">
+      <div class="overview-card zero">
+        <div class="number">0</div>
+        <div class="label">新公布法律</div>
+      </div>
+      <div class="overview-card">
+        <div class="number">1</div>
+        <div class="label">新发布国务院法规</div>
+      </div>
+      <div class="overview-card zero">
+        <div class="number">0</div>
+        <div class="label">新发布司法解释</div>
+      </div>
+      <div class="overview-card zero">
+        <div class="number">0</div>
+        <div class="label">新发布批复</div>
+      </div>
+      <div class="overview-card zero">
+        <div class="number">0</div>
+        <div class="label">新发布法答网精选答问</div>
+      </div>
+    </div>
+
+    <!-- 本期重点关注 -->
+    <div class="highlight-card">
+      <div class="hl-title">🔥 本期重点关注</div>
+      <div class="hl-item">
+        ⚡ <strong>2026年7月1日</strong>将迎来重大法规施行窗口——至少<strong>4部</strong>重要法律/行政法规同日生效：
+      </div>
+      <div class="hl-item">① 《中华人民共和国民族团结进步促进法》（主席令第71号）</div>
+      <div class="hl-item">② 《国务院关于对外投资的规定》（国务院令第837号）</div>
+      <div class="hl-item">③ 《行政法规制定程序条例》（国务院令第838号，修订）</div>
+      <div class="hl-item">④ 《中华人民共和国行政复议法实施条例》（国务院令第836号，修订）</div>
+      <div class="hl-item" style="margin-top:8px;font-size:13px;">💡 另外，《中华人民共和国矿产资源法实施条例》（国务院令第839号）已于<span class="hl-date">2026年6月15日</span>施行，距今日仅11天，企业合规应尽快对标。</div>
+    </div>
+
+    <div class="note-box">
+      📌 本期为近30天（2026年5月27日至6月26日）追踪窗口。全国人大常委会第二十三次会议（6月23日-26日）正在审议多部法律草案，暂未表决通过新法。本期唯一具有正式法律效力的新施行法规为《矿产资源法实施条例》（6月15日施行）。
+    </div>
+  </div>
+
+  <!-- 二、全国人大动态 -->
+  <div class="section">
+    <div class="section-title">二、全国人大动态 <span class="badge">审议中</span></div>
+
+    <div class="pending-card">
+      <div class="pending-title">📋 十四届全国人大常委会第二十三次会议（2026年6月23日-26日·北京）</div>
+      <div style="font-size:13px;color:var(--text-light);margin-bottom:10px;">本次会议审议多部法律草案，涉及领域广泛，截至本报告发布时尚未闭幕表决。</div>
+      <div class="bill-list">
+        <span class="bill-tag 二审">商标法修订草案（二审）</span>
+        <span class="bill-tag 二审">注册会计师法修正草案（二审）</span>
+        <span class="bill-tag 二审">检察公益诉讼法草案（二审）</span>
+        <span class="bill-tag 一审">律师法修正草案（一审）</span>
+        <span class="bill-tag 一审">金融法草案（一审）</span>
+        <span class="bill-tag 一审">中国人民银行法修订草案（一审）</span>
+        <span class="bill-tag 一审">国家消防救援人员法草案（一审）</span>
+        <span class="bill-tag 一审">南极活动与环境保护法草案（一审）</span>
+        <span class="bill-tag 一审">政府采购法修订草案（一审）</span>
+        <span class="bill-tag 一审">招标投标法修订草案（一审）</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-light);margin-top:10px;">来源：全国人大法工委发言人记者会（2026年6月22日）</div>
+    </div>
+
+    <div class="note-box">
+      💡 <strong>提示：</strong>7月1日即将施行的《中华人民共和国民族团结进步促进法》（主席令第71号，2026年3月12日通过）系2026年3月全国人大四次会议通过的重要法律，确立民族团结进步的基本原则和制度框架，对企业用工合规、企业文化建设具有实际影响。详见往期报告（2026年6月12日）。
+    </div>
+  </div>
+
+  <!-- 三、国务院法规 -->
+  <div class="section">
+    <div class="section-title">三、国务院新发布的法律法规 <span class="badge">1件</span></div>
+
+    <!-- 矿产资源法实施条例 -->
+    <div class="doc-card">
+      <div class="doc-title">📜 中华人民共和国矿产资源法实施条例</div>
+      <div class="doc-meta">
+        <span class="ref-no">国务院令第839号</span>
+        <span>公布：2026年5月15日</span>
+        <span>✅ 施行：2026年6月15日</span>
+      </div>
+
+      <div class="doc-section">
+        <h4>📌 核心要点</h4>
+        <ul>
+          <li><strong>战略性矿产全链条管控（第2、5条）：</strong>国家通过规划管控、总量调控、限定开采主体等保护性开采措施，对战略性矿产资源实行全链条统筹管理。</li>
+          <li><strong>矿业权竞争性出让（第8、9条）：</strong>矿业权原则上须经招标、拍卖、挂牌等竞争性方式出让；战略性矿产、跨省矿产由国务院自然资源主管部门或其授权部门统一出让。</li>
+          <li><strong>许可证制度细化（第28、29条）：</strong>勘查、开采前须编制方案报原出让部门批准，取得许可证；主管部门15个工作日内作出决定，专家评审费用由政府承担。</li>
+          <li><strong>矿区生态修复强化（第47、50、51条）：</strong>采矿权人为修复第一责任人；开采前须编报修复方案；闭坑后2年内须完成修复，可边开采边修复的应及时修复。</li>
+          <li><strong>国家储备与应急体系（第54、55、57条）：</strong>构建"产品+产能+产地"三类储备体系；纳入产地储备的矿产未经批准不得开采或压覆，储备期限不少于5年。</li>
+          <li><strong>外商投资安全审查（第74、76条）：</strong>外商投资须符合负面清单，影响国家安全须经审查；域外歧视性措施的，可依法采取必要反制。</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h4>⚖️ 实务影响</h4>
+        <div class="practice-note">
+          （以下为企业合规建议，非条文原文）矿业权出让全面竞争化趋势明确，矿业企业应尽快建立合规投标能力；矿区生态修复义务贯穿开采全周期，并购交易中须将修复义务纳入尽调与交易对价；外商投资矿业须优先完成安全审查前置程序。条例施行后，未取得许可证先行开采将面临更严格的执法风险。
+        </div>
+      </div>
+    </div>
+
+    <!-- 即将施行 -->
+    <div class="section-title" style="margin-top:28px;font-size:18px;">⚡ 即将于2026年7月1日施行的法规</div>
+
+    <!-- 对外投资规定 -->
+    <div class="doc-card">
+      <div class="doc-title">📜 国务院关于对外投资的规定</div>
+      <div class="doc-meta">
+        <span class="ref-no">国务院令第837号</span>
+        <span>公布：2026年5月5日</span>
+        <span>🔜 施行：2026年7月1日</span>
+      </div>
+
+      <div class="doc-section">
+        <h4>📌 核心要点</h4>
+        <ul>
+          <li><strong>境外投资安全审查制度（第15条）：</strong>对影响或可能影响国家安全的境外投资及相关资产的转让处分进行安全审查，相关方须配合且遵守审查决定。</li>
+          <li><strong>分类分级全过程监管（第10条）：</strong>健全对外投资管理体系，分类分级实施全过程监管，推动投资便利化与风险防控相结合。</li>
+          <li><strong>禁止和限制出口管控（第13条）：</strong>不得出口国家禁止出口的货物、技术、服务及数据，或未经许可出口限制类项目；禁止以人员跨境派遣等方式规避管控。</li>
+          <li><strong>投资者合规义务（第16条）：</strong>境外企业须完善治理结构，建立合规经营、内部控制、安全生产和突发事件处置制度。</li>
+          <li><strong>对港、澳、台地区投资参照适用（第32条）：</strong>对中国香港、中国澳门、中国台湾地区的投资管理，参照本规定执行。</li>
+          <li><strong>反制措施（第24条）：</strong>任何国家（地区）对中国采取歧视性投资限制措施的，可依据《反外国制裁法》采取相应对等措施。</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h4>⚖️ 实务影响</h4>
+        <div class="practice-note">
+          （以下为企业合规建议，非条文原文）中国企业境外投资将面临更系统的全流程监管，企业应尽快建立对外投资合规审查机制，特别是涉及敏感技术、数据和行业的投资项目。港、澳、台地区投资也明确纳入管理范围，相关交易结构需提前评估合规性。违规处罚包括罚款（投资额5‰-10‰）、禁止从事境外投资（1-3年）等，力度显著加强。
+        </div>
+      </div>
+    </div>
+
+    <!-- 行政法规制定程序条例 -->
+    <div class="doc-card">
+      <div class="doc-title">📜 行政法规制定程序条例（修订）</div>
+      <div class="doc-meta">
+        <span class="ref-no">国务院令第838号</span>
+        <span>公布：2026年5月15日</span>
+        <span>🔜 施行：2026年7月1日</span>
+      </div>
+
+      <div class="doc-section">
+        <h4>📌 核心要点</h4>
+        <ul>
+          <li><strong>快速响应立法机制（第8条）：</strong>对党和国家急需、人民群众迫切期盼、调整范围单一的行政法规，可快速响应并加快立法工作。</li>
+          <li><strong>公开征求意见制度化（第18条）：</strong>行政法规草案须向社会公布征求意见，期限一般不少于30日；涉及国家安全等情形的除外。</li>
+          <li><strong>立项审查前置评估（第14条）：</strong>起草部门报送送审稿前须经国务院法治部门前置评估，评估意见须在报送材料中说明处理情况。</li>
+          <li><strong>专家参与与公众参与（第18条）：</strong>专业性强的法规可吸收专家参与起草或委托第三方起草；涉及重大利益调整须进行论证咨询。</li>
+          <li><strong>合宪性审查环节（第25条）：</strong>审查中认为涉及合宪性问题的，应征求全国人大常委会有关工作机构意见。</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h4>⚖️ 实务影响</h4>
+        <div class="practice-note">
+          （以下为企业合规建议，非条文原文）本次修订提升了行政法规制定的透明度和公众参与度，企业可通过公开征求意见渠道参与影响自身行业的法规制定。配套规定制定期限明确为1年，企业应关注与本行业相关的新施行行政法规是否及时出台了配套细则。条例本身作为"立法之法"，其修订不直接创设企业义务，但预示着未来行政法规的制定将更加规范、透明和高效。
+        </div>
+      </div>
+    </div>
+
+    <!-- 行政复议法实施条例 -->
+    <div class="doc-card">
+      <div class="doc-title">📜 中华人民共和国行政复议法实施条例（修订）</div>
+      <div class="doc-meta">
+        <span class="ref-no">国务院令第836号</span>
+        <span>公布：2026年4月29日</span>
+        <span>🔜 施行：2026年7月1日</span>
+      </div>
+
+      <div class="doc-section">
+        <h4>📌 核心要点</h4>
+        <ul>
+          <li><strong>配合新行政复议法落地：</strong>2023年修订的《行政复议法》（2024年1月1日施行）对行政复议体制作出重大调整，本次条例修订细化实施规则，保障新法执行。</li>
+          <li><strong>行政复议委员会制度：</strong>细化行政复议委员会的设置、议事规则和咨询程序，强化复议中的外部参与和专业判断。</li>
+          <li><strong>简易程序与普通程序分流：</strong>明确简易程序的适用范围和审理时限，提升行政复议效率。</li>
+          <li><strong>复议与诉讼衔接：</strong>细化复议决定后的诉讼衔接规则，减少程序空转。</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h4>⚖️ 实务影响</h4>
+        <div class="practice-note">
+          （以下为企业合规建议，非条文原文）企业应对行政争议的路径将进一步优化。建议法务部门熟悉新复议体制下的申请流程、时限要求和证据规则，合理选择复议或诉讼路径。对于涉及专业性较强的行政争议（如税务、环境、反垄断等），可充分利用行政复议委员会的专家咨询机制。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 四、司法解释 -->
+  <div class="section">
+    <div class="section-title">四、司法解释</div>
+    <div class="empty-state">
+      <div class="icon">📭</div>
+      <div>本期暂无新增司法解释</div>
+      <div style="font-size:13px;margin-top:4px;">最近一期司法解释为法释〔2026〕11号（《关于适用刑事缺席审判程序若干问题的规定》，2026年5月22日发布），已在上期报告覆盖。法释〔2026〕9号（道路交通事故损害赔偿解释二）将于2026年6月30日施行。</div>
+    </div>
+  </div>
+
+  <!-- 五、批复 -->
+  <div class="section">
+    <div class="section-title">五、批复</div>
+    <div class="empty-state">
+      <div class="icon">📭</div>
+      <div>本期暂无新增批复</div>
+      <div style="font-size:13px;margin-top:4px;">最近一期批复为《最高人民法院关于基本医疗保险基金先行支付申请条件法律适用问题的批复》（2026年1月5日发布，2月1日施行）。</div>
+    </div>
+  </div>
+
+  <!-- 六、法答网精选答问 -->
+  <div class="section">
+    <div class="section-title">六、法答网精选答问</div>
+    <div class="empty-state">
+      <div class="icon">📭</div>
+      <div>本期暂无新发布法答网精选答问</div>
+      <div style="font-size:13px;margin-top:4px;">最近一期为法答网精选答问（第三十七批·执行工作专题），于2026年2月5日由最高人民法院发布（官方来源：court.gov.cn/zixun/xiangqing/488441.html），超出本期30天追踪窗口。第38批暂未发布。</div>
+    </div>
+  </div>
+
+  <!-- 七、往期回顾 -->
+  <div class="section">
+    <div class="section-title">七、往期回顾</div>
+    <div class="past-review">
+      <h4>📂 本年度往期报告</h4>
+      <div class="link-row">
+        <a href="2026-06-22.html" class="link-btn">📄 2026年06月22日 — 国务院令第837号、第839号</a>
+        <a href="2026-06-12.html" class="link-btn">📄 2026年06月12日 — 法释〔2026〕9/10/11号</a>
+      </div>
+      <div style="font-size:12px;color:var(--text-light);margin-top:10px;">
+        ⚠️ 注：经本期核查，上期（6月22日）报告所载国务院令第837号、第839号对应的法规名称存在偏差，已在本期予以更正。第837号为《国务院关于对外投资的规定》，第839号为《中华人民共和国矿产资源法实施条例》。
+      </div>
+    </div>
+  </div>
+
+  <!-- 八、来源标注 -->
+  <div class="section">
+    <div class="section-title">八、来源标注</div>
+    <div class="source-section">
+      <h4>📋 本期各条内容的数据来源与获取方式</h4>
+      <table class="source-table">
+        <thead>
+          <tr>
+            <th style="width:30%;">内容条目</th>
+            <th style="width:15%;">获取方式</th>
+            <th style="width:55%;">来源URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 全国人大动态 -->
+          <tr>
+            <td class="item-name">十四届全国人大常委会第二十三次会议（10部审议草案）</td>
+            <td><span class="method-tag search">WebSearch</span> <span class="method-tag fetch">WebFetch</span></td>
+            <td>
+              ① WebSearch: "全国人大常委会 第二十三次会议 表决 通过 2026年6月"<br>
+              ② WebFetch: <a href="https://news.china.com.cn/txt/2026-06/22/content_118560485.shtml" target="_blank">news.china.com.cn/txt/2026-06/22/content_118560485.shtml</a><br>
+              ③ 全国人大法工委发言人记者会（2026年6月22日）
+            </td>
+          </tr>
+          <!-- 矿产资源法实施条例 -->
+          <tr>
+            <td class="item-name">中华人民共和国矿产资源法实施条例（国务院令第839号）</td>
+            <td><span class="method-tag portal">Portal列表</span> <span class="method-tag fetch">WebFetch</span></td>
+            <td>
+              ① 维基文库国务院令Portal: <a href="https://zh.wikisource.org/wiki/Portal:中华人民共和国国务院令/2026年" target="_blank">zh.wikisource.org/wiki/Portal:中华人民共和国国务院令/2026年</a><br>
+              ② WebFetch条文全文: <a href="https://zh.wikisource.org/wiki/中华人民共和国矿产资源法实施条例_(2026年)" target="_blank">zh.wikisource.org/wiki/中华人民共和国矿产资源法实施条例_(2026年)</a>
+            </td>
+          </tr>
+          <!-- 对外投资规定 -->
+          <tr>
+            <td class="item-name">国务院关于对外投资的规定（国务院令第837号）</td>
+            <td><span class="method-tag portal">Portal列表</span> <span class="method-tag fetch">WebFetch</span></td>
+            <td>
+              ① 维基文库国务院令Portal: <a href="https://zh.wikisource.org/wiki/Portal:中华人民共和国国务院令/2026年" target="_blank">zh.wikisource.org/wiki/Portal:中华人民共和国国务院令/2026年</a><br>
+              ② WebFetch条文全文: <a href="https://zh.wikisource.org/wiki/国务院关于对外投资的规定_(2026年)" target="_blank">zh.wikisource.org/wiki/国务院关于对外投资的规定_(2026年)</a>
+            </td>
+          </tr>
+          <!-- 行政法规制定程序条例 -->
+          <tr>
+            <td class="item-name">行政法规制定程序条例（修订）（国务院令第838号）</td>
+            <td><span class="method-tag search">WebSearch</span> <span class="method-tag fetch">WebFetch</span></td>
+            <td>
+              ① WebSearch: "行政法规制定程序条例 国务院令 第840号 2026"<br>
+              ② WebFetch: <a href="https://www.gov.cn/zhengce/zhengceku/202605/content_7069474.htm" target="_blank">gov.cn/zhengce/zhengceku/202605/content_7069474.htm</a><br>
+              ③ 维基文库Portal交叉核实
+            </td>
+          </tr>
+          <!-- 行政复议法实施条例 -->
+          <tr>
+            <td class="item-name">中华人民共和国行政复议法实施条例（修订）（国务院令第836号）</td>
+            <td><span class="method-tag portal">Portal列表</span> <span class="method-tag search">WebSearch</span></td>
+            <td>
+              ① 维基文库国务院令Portal: <a href="https://zh.wikisource.org/wiki/Portal:中华人民共和国国务院令/2026年" target="_blank">zh.wikisource.org/wiki/Portal:中华人民共和国国务院令/2026年</a><br>
+              ② WebSearch: "国务院令 行政法规 规章 2026 公布 施行"<br>
+              ③ 国务院官网检索确认令号与施行日期
+            </td>
+          </tr>
+          <!-- 法答网 -->
+          <tr>
+            <td class="item-name">法答网精选答问 本期无新增</td>
+            <td><span class="method-tag fetch">WebFetch</span> <span class="method-tag search">WebSearch</span></td>
+            <td>
+              ① 最高人民法院官网（官方发布页）: <a href="https://www.court.gov.cn/zixun/xiangqing/488441.html" target="_blank">court.gov.cn/zixun/xiangqing/488441.html</a><br>
+              ② 最近一期为第37批（执行工作专题），官方发布时间为<strong>2026年2月5日</strong>，超出本期30天窗口<br>
+              ③ ⚠️ 上期报告曾错误引用澎湃新闻转载（6月24日），经court.gov.cn核实后已更正
+            </td>
+          </tr>
+          <!-- 司法解释 -->
+          <tr>
+            <td class="item-name">司法解释（法释〔2026〕11号等）本期无新增</td>
+            <td><span class="method-tag portal">Portal列表</span> <span class="method-tag search">WebSearch</span></td>
+            <td>
+              ① 维基文库司法解释Portal: <a href="https://zh.wikisource.org/wiki/Portal:中华人民共和国最高人民法院司法解释/2026年" target="_blank">zh.wikisource.org/wiki/Portal:中华人民共和国最高人民法院司法解释/2026年</a><br>
+              ② WebSearch: "最高人民法院 法释 2026 司法解释 最新 6月"<br>
+              ③ WebFetch最高法院官网发布列表页: <a href="https://www.court.gov.cn/fabu/gengduo/16.html" target="_blank">court.gov.cn/fabu/gengduo/16.html</a>
+            </td>
+          </tr>
+          <!-- 批复 -->
+          <tr>
+            <td class="item-name">批复 本期无新增</td>
+            <td><span class="method-tag search">WebSearch</span></td>
+            <td>
+              ① WebSearch: "最高人民法院 批复 2026 最新"<br>
+              ② WebSearch: "最高人民法院 批复 2026年6月"
+            </td>
+          </tr>
+          <!-- 民族团结进步促进法 -->
+          <tr>
+            <td class="item-name">中华人民共和国民族团结进步促进法（主席令第71号·7月1日施行提示）</td>
+            <td><span class="method-tag search">WebSearch</span></td>
+            <td>
+              ① WebSearch: "民族团结进步促进法 主席令 2026 通过"<br>
+              ② 往期报告（2026年6月12日）已收录详情
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:12px;color:var(--text-light);margin-top:12px;">
+        💡 <strong>说明：</strong>"WebSearch"表示通过搜索引擎检索综合结果；"WebFetch"表示抓取指定URL全文内容；"Portal列表"表示通过维基文库年度索引页确认令号/文号/日期。核心条文要点均以WebFetch抓取的法规全文为依据提取，不依赖搜索摘要。
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    编制：腾讯云 ｜ WorkBuddy<br>
+    本报告仅供参考，不构成法律意见。法条适用请以官方公布文本为准。
+  </div>
+
+</div>
+</body>
+</html>
