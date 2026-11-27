@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联慧东城法规觅踪 | 2026年11月27日</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5282;
+    --accent: #c5953b;
+    --accent-light: #f0e0c0;
+    --bg: #f5f3ef;
+    --card-bg: #ffffff;
+    --text: #2d3748;
+    --text-light: #718096;
+    --border: #e2e8f0;
+    --danger-bg: #fff5f5;
+    --danger-border: #fc8181;
+    --danger-text: #c53030;
+    --highlight-bg: #fef3e2;
+    --highlight-border: #f0a030;
+    --info-bg: #ebf8ff;
+    --info-border: #90cdf4;
+    --info-text: #2b6cb0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header-subtitle { font-size: 16px; opacity: 0.85; }
+  .header-date { font-size: 14px; opacity: 0.7; margin-top: 12px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--primary);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .overview-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .overview-item .num {
+    font-size: 32px; font-weight: 700;
+    color: var(--primary);
+  }
+  .overview-item .label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .overview-item.highlight .num { color: var(--danger-text); }
+
+  .highlight-card {
+    background: var(--highlight-bg);
+    border: 2px solid var(--highlight-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .highlight-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--danger-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .highlight-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .highlight-desc strong { color: var(--danger-text); }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+  .card-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+  .card-tag.blue { background: var(--info-bg); color: var(--info-text); }
+  .card-tag.red { background: var(--danger-bg); color: var(--danger-text); }
+  .card-body { padding: 16px 20px; }
+  .card-meta {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .card-meta .meta-item strong { color: var(--primary); }
+  .points-title {
+    font-size: 13px; font-weight: 700;
+    color: var(--accent);
+    margin: 8px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .points { list-style: none; }
+  .points li {
+    font-size: 14px;
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .impact {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--info-bg);
+    border-left: 3px solid var(--info-border);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--info-text);
+  }
+  .impact strong { display: block; margin-bottom: 2px; }
+  .empty-note {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+
+  .link-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.15s ease;
+  }
+  .link-card:hover { border-color: var(--accent); }
+  .link-date { font-weight: 700; color: var(--primary); font-size: 14px; flex-shrink: 0; }
+  .link-desc { font-size: 13px; color: var(--text-light); flex: 1; }
+  .link-btn {
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .link-btn:hover { background: var(--primary-light); }
+
+  .source-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 13px;
+  }
+  .source-item { margin-bottom: 10px; padding-left: 14px; border-left: 3px solid var(--border); }
+  .source-item .s-name { font-weight: 700; color: var(--primary); }
+  .source-item .s-url { word-break: break-all; color: var(--info-text); }
+  .tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 10px; color: #fff; margin: 0 2px; }
+  .tag-search { background: #3182ce; }
+  .tag-fetch { background: #38a169; }
+  .tag-portal { background: #d69e2e; }
+
+  .mini-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .mini-table th, .mini-table td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  .mini-table th { background: #f7fafc; color: var(--primary); font-weight: 700; }
+
+  .footer {
+    text-align: center;
+    padding: 30px 0 10px;
+    color: var(--text-light);
+    font-size: 13px;
+  }
+  .footer .brand { color: var(--primary); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .header-title { font-size: 22px; }
+    .link-card { flex-direction: column; align-items: flex-start; }
+    .link-btn { width: 100%; text-align: center; }
+    .mini-table { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-title">⚖️ 联慧东城法规觅踪</div>
+    <div class="header-subtitle">全国人大法律 · 国务院法规 · 司法解释 · 批复 · 法答网精选答问 每周追踪</div>
+    <div class="header-date">第20期 ｜ 2026年11月27日 ｜ 追踪周期：2026年11月21日 — 2026年11月27日</div>
+  </div>
+
+  <!-- 一、本期概览 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📊</span>一、本期概览</div>
+    <div class="overview-grid">
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">新公布法律</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">新发布国务院法规</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">1</div>
+        <div class="label">新发布司法解释</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">新发布批复</div>
+      </div>
+      <div class="overview-item">
+        <div class="num">0</div>
+        <div class="label">法答网精选答问</div>
+      </div>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-title">🔥 本期重点关注</div>
+      <div class="highlight-desc">
+        <strong>① 本期唯一司法解释：法释〔2026〕20号《最高人民法院、最高人民检察院关于办理妨害兴奋剂管理等刑事案件适用法律若干问题的解释》（11月26日发布，12月1日施行，14条）。</strong>细化妨害兴奋剂管理罪"情节严重"的六项入罪情形（第1条）；未成年人、残疾人在非重大竞赛中被使用兴奋剂的按"虐待被监护、看护的人"论处（第2条）；体育、体能测试中组织使用兴奋剂认定为考试"组织作弊"（第3条）；走私兴奋剂目录所列物质适用走私国家禁止进出口的货物、物品罪等（第4至6条）；同时<strong>废止法释〔2019〕16号</strong>（第14条）。<br><br>
+        <strong>② 最高检第六十四批指导性案例（11月21日发布）：性侵害未成年人犯罪抗诉主题，检例第262—266号共5件。</strong>其中2件经抗诉由无罪改判有罪、3件由轻刑改判重刑，提炼被害人陈述采信、违背意志认定、非接触型猥亵入罪等办案规则12条——涉未成年人刑事案件的二审/再审抗诉策略与被害人陈述质证规则值得重点研究。<br><br>
+        <strong>③ 最高检发布检察机关服务新质生产力发展典型案例（5件，11月20日公开发布，本刊补收）：</strong>剑指芯片、操作系统、AI算力、航空航天等关键核心技术领域的侵犯著作权与侵犯商业秘密犯罪，涉及"源代码同源编译比对"鉴定思路、刑事附带民事"一揽子"解决（促赔挽损5860万元）等新型办案经验——对涉科技企业知识产权维权案件具有直接参考价值。
+      </div>
+    </div>
+  </div>
+
+  <!-- 二、全国人大新公布的法律 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏛️</span>二、全国人大新公布的法律</div>
+    <div class="empty-note">本期暂无新公布法律。<br>经中国人大网"权威发布"栏目核实，本周（11月21日—27日）无新公布法律，主席令编号最新仍为第九十一号（2026年11月6日签署）。全国人大常委会公告〔十四届〕第十九号通过的医疗保障法、耕地保护和质量提升法、农业法（修订）、国防动员法（修订）、律师法（修正）等已于本刊第11期收录。<br>刑事诉讼法修正草案、监狱法（修订草案）、社会救助法等正在审议中，按惯例将于下一次常委会会议（预计12月下旬）继续审议。</div>
+  </div>
+
+  <!-- 三、国务院新发布的法律法规 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏢</span>三、国务院新发布的法律法规</div>
+    <div class="empty-note">本期暂无新增国务院令。<br>经中国政府网"最新政策"栏目核实，本周（11月21日—27日）无新的行政法规公布，最新国务院令仍为第851号（11月6日前后公布）。上期及此前收录的多部新规将进入施行期：<strong>12月1日</strong>事业单位登记管理条例（国务院令第849号）施行、法释〔2026〕20号施行（详见本报告第四部分）；<strong>2027年1月1日</strong>中医药传统知识保护条例（国务院令第850号）、基金会管理条例（国务院令第848号，经官网全文核实为2027年1月1日施行）等多法同日生效。</div>
+  </div>
+
+  <!-- 四、司法解释 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚖️</span>四、司法解释</div>
+
+    <div class="card" style="border-left:4px solid var(--danger-border);">
+      <div class="card-header">
+        <div class="card-icon">🏅</div>
+        <div class="card-title">最高人民法院、最高人民检察院关于办理妨害兴奋剂管理等刑事案件适用法律若干问题的解释<span class="card-tag red">法释〔2026〕20号 · 12月1日施行</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>文号：</strong>法释〔2026〕20号</span>
+          <span class="meta-item"><strong>通过：</strong>2026年9月14日最高法审判委员会第1984次会议、2026年10月30日最高检第十四届检察委员会第八十六次会议</span>
+          <span class="meta-item"><strong>公布：</strong>2026年11月25日（2026年11月26日对外发布）</span>
+          <span class="meta-item"><strong>施行：</strong>2026年12月1日</span>
+          <span class="meta-item"><strong>体例：</strong>14条</span>
+          <span class="meta-item"><strong>同时废止：</strong>法释〔2019〕16号（走私、非法经营、非法使用兴奋剂刑事案件解释）</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>妨害兴奋剂管理罪"情节严重"入罪标准（第一条）：</strong>引诱、教唆、欺骗运动员使用兴奋剂参加国内、国际重大体育竞赛，或明知运动员参赛而向其提供兴奋剂，具有以下情形之一的入罪——①多次或针对多名运动员实施；②二年内曾因同类行为受过行业惩戒或行政处罚又实施；③严重损害运动员身心健康；④针对<strong>未成年人运动员、残疾人运动员</strong>实施；⑤违法所得五万元以上；⑥造成恶劣社会影响；⑦其他情节严重情形</li>
+          <li><strong>非重大竞赛场景的转化适用（第二条）：</strong>教练员、体育培训从业人员等对未成年人、残疾人负有监护、看护职责的人，在重大体育竞赛以外的体育运动中对其使用兴奋剂的，认定为<strong>虐待被监护、看护的人</strong>（刑法第二百六十条之一）；组织、强迫使用，引诱、教唆、欺骗在较长期限内使用，或严重损害身心健康的，属"情节恶劣"</li>
+          <li><strong>考试作弊场景（第三条）：</strong>在普通高等学校招生、公务员录用等<strong>法律规定的国家考试</strong>涉及的体育、体能测试中组织使用兴奋剂的，认定为组织考试作弊罪中的"组织作弊"；明知而提供兴奋剂的同罪处罚</li>
+          <li><strong>走私行为的罪名适用（第四至六条）：</strong>走私兴奋剂目录所列国家禁止进出口货物的、未经许可进出口蛋白同化制剂和肽类激素等限制进出口货物的、使用他人许可证进出口的，以走私国家禁止进出口的货物、物品罪定罪处罚——数额五万元以上、一年内受过二次以上行政处罚又实施、造成恶劣社会影响的构罪；不构成前罪但符合刑法第一百五十三条的以走私普通货物、物品罪论处，依处罚较重的规定定罪；未经许可经营限制买卖物品、情节严重的以<strong>非法经营罪</strong>论处（第六条）；单位犯罪双罚</li>
+          <li><strong>涉药品食品场景（第七条）：</strong>生产、销售、提供的药品食品含兴奋剂目录所列物质，构成假药、劣药、不符合安全标准食品、有毒有害食品等犯罪的，以相应犯罪论处；涉案物质属管制麻醉药品、精神药品或易制毒化学品的，构成毒品犯罪、妨害药品管理罪等的以相应犯罪论处</li>
+          <li><strong>渎职场景（第八条）：</strong>国家机关工作人员及受托行使反兴奋剂管理职权的单位工作人员滥用职权、玩忽职守造成严重兴奋剂违规事件的，以滥用职权罪、玩忽职守罪论处</li>
+          <li><strong>专门术语界定（第九至十二条）：</strong>"国内、国际重大体育竞赛"包括决赛、预赛、小组赛；获参赛资格后为参赛而使用兴奋剂即属"使用兴奋剂参加竞赛"，<strong>是否实际参赛不影响妨害兴奋剂管理罪认定</strong>；"组织"指策划、领导、指挥运动员使用兴奋剂且人数在三人以上；"兴奋剂"依国务院体育主管部门会同有关部门公布兴奋剂目录认定；专门性问题结合体育法、《反兴奋剂条例》及体育主管部门认定意见判断</li>
+          <li><strong>行刑衔接（第十三条）：</strong>尚不构成犯罪但违反法律、行政法规需给予行政处罚、政务处分或其他处分的，依法移送有关主管机关处理</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为企业合规建议，非条文原文）：<br>①涉体育培训、青少年体育俱乐部客户应注意：第二条将非竞赛场景下对未成年学员使用兴奋剂的行为纳入虐待被监护、看护的人罪打击范围，培训机构的营养品/补剂采购与使用须建立目录比对合规审查。<br>②体育类考试培训（体考培训、体能测试辅导）机构应警惕第三条——体考"助攻"中使用兴奋剂已明确按组织考试作弊处理，相关服务宣传与产品须合规排查。<br>③涉进出口业务的企业（尤其跨境电商、保健品、原料药贸易）应对蛋白同化制剂、肽类激素类物质建立许可证核验机制，避免触发第四至六条的走私、非法经营条款；单位犯罪双罚制下，直接负责的主管人员个人刑责风险同样存在。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：最高人民法院官网权威发布《"两高"发布〈关于办理妨害兴奋剂管理等刑事案件适用法律若干问题的解释〉》（2026-11-26 10:00发布，含解释全文14条）<span class="s-url">https://www.court.gov.cn/fabu/xiangqing/518571.html</span>。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五、批复 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📨</span>五、批复</div>
+    <div class="empty-note">本期暂无新增批复。<br>最高人民法院官网"司法解释"栏目最新批复仍为<strong>《最高人民法院关于事业单位工作人员脱产参加全日制学历教育后违反服务期约定有关问题的批复》</strong>（2026年7月29日发布），已在本刊第8期（2026年8月7日）收录。</div>
+  </div>
+
+  <!-- 六、法答网精选答问 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💬</span>六、法答网精选答问</div>
+    <div class="empty-note">本期暂无新增法答网精选答问。<br>经最高人民法院官网核实，最新一批仍为<strong>《法答网精选答问（第三十九批）——立案审判专题》</strong>（2026年10月29日发布，共4问），已在本刊第16期（2026年10月30日补发）与第17期（2026年11月6日）收录。<br><strong>第四十批截至2026年11月27日尚未在 court.gov.cn 发布。</strong></div>
+  </div>
+
+  <!-- 七、司法动态 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📌</span>七、司法动态</div>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:14px;">以下内容为最高人民检察院指导性案例、典型案例及其他司法动态，不属于司法解释，不计入本刊概览统计。</p>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">最高检第六十四批指导性案例：性侵害未成年人犯罪抗诉主题<span class="card-tag red">本期重点 · 指导性案例</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>发布机关：</strong>最高人民检察院</span>
+          <span class="meta-item"><strong>发布：</strong>2026年11月21日对外发布（通知落款2026年10月9日，经2026年6月12日第十四届检察委员会第七十八次会议决定）</span>
+          <span class="meta-item"><strong>编号：</strong>检例第262—266号，共5件</span>
+          <span class="meta-item"><strong>主题：</strong>性侵害未成年人犯罪抗诉</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>抗诉成效：</strong>5件案例中<strong>2件经抗诉由无罪改判有罪、3件经抗诉由轻刑改判重刑</strong>；黄某升强奸再审抗诉案系经四级检察机关接续抗诉后改判；孙某刚、孙某飞强奸、猥亵儿童二审抗诉案中，被告人一审量刑四年十一个月，抗诉后改判有期徒刑十四年</li>
+          <li><strong>办案规则12条：</strong>聚焦证明标准把握、<strong>被害人陈述采信</strong>、违背意志认定、主观明知认定、从重情节量刑适用等常见争议问题，破解特殊未成年人（如精神发育迟滞被害人）陈述可采性、被害人翻证后事实认定、长期侵害心理强制评价、非接触型猥亵入罪与加重情节认定、奸淫幼女案件主观明知认定等实践难题</li>
+          <li><strong>被害人保护：</strong>办理此类案件坚持"最有利于未成年人原则"，针对性开展被害人救助，给予未成年被害人特殊、优先保护</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为办案提示，非条文原文）：<br>①涉未成年人刑事案件中，检例第262—266号要旨可直接用于<strong>抗诉申请与再审申请</strong>的论证——尤其被害人陈述真实性审查规则（初始陈述与客观证据印证应予采信、受利诱施压翻证的甄别、排除诬告陷害后的采信标准）。<br>②辩护侧需注意：非接触型猥亵（强迫或诱骗儿童观看裸露、淫秽内容）已明确入罪路径及"其他恶劣情节"的认定标准（与刑法第二百三十七条第三款前三项社会危害性相当即可认定），相关量刑辩护空间收窄。<br>③幼女长期遭受性侵害跨十四周岁前后情形，对已满十四周岁后行为的评价须考虑长期侵害造成的心理强制——此规则对事实认定与罪名评价均有影响。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：最高人民检察院官网《最高检发布第六十四批指导性案例 坚持"零容忍"依法严惩性侵害未成年人犯罪 守护未成年人健康成长》（2026-11-21发布，含通知及检例第262—266号全文）<span class="s-url">https://www.spp.gov.cn/xwfbh/wsfbt/202611/t20261121_741566.shtml</span>。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🔬</div>
+        <div class="card-title">最高检发布检察机关服务新质生产力发展典型案例（5件）<span class="card-tag blue">典型案例 · 11月20日发布补收</span></div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="meta-item"><strong>发布机关：</strong>最高人民检察院</span>
+          <span class="meta-item"><strong>发布：</strong>2026年11月20日公开发布（通知落款2026年11月4日）</span>
+          <span class="meta-item"><strong>数量：</strong>5件（2件侵犯著作权刑事案件 + 3件侵犯商业秘密刑事案件）</span>
+          <span class="meta-item"><strong>涉及领域：</strong>国产芯片、国产计算机操作系统、液冷供电一体化服务器电源、光电连接器、航空航天</span>
+        </div>
+        <div class="points-title">核心要点</div>
+        <ul class="points">
+          <li><strong>芯片软件著作权案（海某半导体案）：</strong>涉及游标卡尺芯片中固化的MCU嵌入式程序，上海检察机关创新提出<strong>权利人源代码与侵权芯片固化二进制代码同源编译比对</strong>的鉴定思路，确立"实质相同"审查路径；销售金额380余万元</li>
+          <li><strong>"内鬼"商业秘密案（黄某来等四人案）：</strong>原硬件开发部门负责人拉拢在职员工带走液冷供电一体化服务器电源（AI场景关键供电部件）技术资料筹备入职新公司，以侵犯商业秘密罪公诉，四人均被判刑</li>
+          <li><strong>刑事附带民事综合履职（姚某等六人案）：</strong>前销售经理与第三方合谋窃取光电连接器核心技术秘密，六人获刑并罚金，附带民事诉讼中另赔偿企业经济损失300余万元——"一揽子"解决刑事、民事诉讼</li>
+          <li><strong>促赔挽损机制：</strong>涉AI算力案中推动侵权方自愿赔付<strong>5860万元</strong>，一并解决系列专利侵权民事诉讼</li>
+        </ul>
+        <div class="impact"><strong>实务影响</strong>（以下为企业合规建议，非条文原文）：<br>①科技企业商业秘密维权可直接援引本批案例的办案经验：同源编译比对鉴定、适时介入机制、刑事附带民事"双轨并行"，报案材料可按此组织证据结构。<br>②企业人员流动环节（离职带走技术资料、竞对入职）是本批案例反映的最主要泄密场景，核心技术岗位的保密协议、脱密期与离职审计应前置部署。</div>
+        <div class="impact" style="background:var(--highlight-bg);border-left-color:var(--highlight-border);color:#7b341e;"><strong>来源</strong>：最高人民检察院官网《最高检发布服务新质生产力发展典型案例》（2026-11-20发布，含5件案例全文）<span class="s-url">https://www.spp.gov.cn/spp/xwfbh/wsfbt/202611/t20261120_741471.shtml</span>。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🗓️</div>
+        <div class="card-title">生效日历（近期）</div>
+      </div>
+      <div class="card-body">
+        <table class="mini-table">
+          <tr><th style="width:26%;">生效日期</th><th>文件名称</th><th style="width:30%;">文号／依据</th></tr>
+          <tr><td>2026年12月1日</td><td>最高人民法院、最高人民检察院关于办理妨害兴奋剂管理等刑事案件适用法律若干问题的解释（法释〔2019〕16号同时废止）</td><td>法释〔2026〕20号</td></tr>
+          <tr><td>2026年12月1日</td><td>事业单位登记管理条例</td><td>国务院令第849号</td></tr>
+          <tr><td>2026年12月1日</td><td>中国—东盟自贸区3.0版升级议定书</td><td>中国—东盟领导人会议共同宣布</td></tr>
+          <tr><td rowspan="4">2027年1月1日</td><td>中华人民共和国检察公益诉讼法</td><td>主席令第八十六号</td></tr>
+          <tr><td>中华人民共和国南极活动与环境保护法</td><td>主席令第八十七号</td></tr>
+          <tr><td>中医药传统知识保护条例</td><td>国务院令第850号</td></tr>
+          <tr><td>基金会管理条例（修订）</td><td>国务院令第848号</td></tr>
+          <tr><td>2027年3月22日</td><td>中华人民共和国水法（修订）</td><td>主席令第八十八号</td></tr>
+        </table>
+        <div class="impact"><strong>提示</strong>：12月1日为三重生效节点（兴奋剂司法解释、事业单位登记管理新规、东盟自贸区3.0），距2027年1月1日"多法同日生效"节点仅剩一个月——涉及公益诉讼、社会组织治理、中医药、基金会业务线的客户应完成最后合规冲刺。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📰</div>
+        <div class="card-title">本期其他动态</div>
+      </div>
+      <div class="card-body">
+        <ul class="points">
+          <li><strong>11月20日，最高人民法院印发《关于进一步加强人民法庭规范化建设的意见》</strong>（经最高法官网"司法文件"栏目核实，2026-11-20发布；属司法文件·非法释，不计入司法解释统计）——涉基层法庭诉讼业务的立案、送达实践可关注后续落实口径（court.gov.cn）</li>
+          <li><strong>11月24日，央视报道最高检"聚焦关键核心技术保护"5起典型案例</strong>（即上述11月20日发布的检察机关服务新质生产力发展典型案例的集中报道，两者为同一批）</li>
+          <li><strong>11月21日、27日，最高检先后发布/开展：第六十四批指导性案例（详见上文卡片）</strong>；11月27日应勇赴湖南、海南就学习贯彻党的二十届五中全会精神开展宣讲调研（工作动态，不涉及新法律文件）</li>
+          <li><strong>上期回顾补遗：</strong>11月20日《民法典继承编解释（二）（征求意见稿）》征求意见已如期截止（第19期已作闭环提示），正式解释出台前，征求意见稿内容不得作为裁判依据引用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 八、往期回顾 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🗂️</span>八、往期回顾</div>
+    <div class="link-card">
+      <span class="link-date">2026年11月20日 · 第19期</span>
+      <span class="link-desc">党内法规《中国共产党地方委员会工作条例》修订（十条禁止+终身追责）；"两高一部"拒执罪典型案例5件；空窗周</span>
+      <a class="link-btn" href="2026-11-20.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年11月13日 · 第18期</span>
+      <span class="link-desc">主席令第86—91号闭环；国务院令第850号中医药传统知识保护条例、第848号基金会管理条例修订；继承编解释（二）征求意见稿单列</span>
+      <a class="link-btn" href="2026-11-13.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年11月6日 · 第17期</span>
+      <span class="link-desc">常委会第25次会议通过检察公益诉讼法、反跨境腐败法、南极法、水法修订；国务院令第849、851号；法答网第三十九批</span>
+      <a class="link-btn" href="2026-11-06.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月30日 · 第16期（补发）</span>
+      <span class="link-desc">事业单位登记管理条例（国务院令第849号）；法答网第三十九批立案审判专题；常委会第25次会议预告</span>
+      <a class="link-btn" href="2026-10-30.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月23日 · 第15期</span>
+      <span class="link-desc">人民法院司法责任追究条例（法发〔2026〕11号）；常委会第25次会议议程预告</span>
+      <a class="link-btn" href="2026-10-23.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月16日 · 第14期</span>
+      <span class="link-desc">集成电路布图设计保护条例10/15施行；10月新规集中施行期提示</span>
+      <a class="link-btn" href="2026-10-16.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年10月9日 · 第13期</span>
+      <span class="link-desc">法释〔2026〕19号民刑交叉司法解释；国务院令第846、847号</span>
+      <a class="link-btn" href="2026-10-09.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年9月11日 · 第12期</span>
+      <span class="link-desc">涉人工智能纠纷审理意见；房企破产座谈会纪要；国务院令第845号</span>
+      <a class="link-btn" href="2026-09-11.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月28日 · 第11期</span>
+      <span class="link-desc">一次会议通过5部法律（医保法、耕地保护法、农业法、国防动员法、律师法修正）</span>
+      <a class="link-btn" href="2026-08-28.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月21日 · 第10期</span>
+      <span class="link-desc">住房公积金管理条例大修（国务院令第844号）；著作权司法解释修改</span>
+      <a class="link-btn" href="2026-08-21.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月14日 · 第9期</span>
+      <span class="link-desc">国务院令第843号修改废止12+3部行政法规；生态环境法治"大日"预告</span>
+      <a class="link-btn" href="2026-08-14.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年8月7日 · 第8期</span>
+      <span class="link-desc">生态环境法典三件配套司法解释；事业单位服务期批复；国务院令第841、842号</span>
+      <a class="link-btn" href="2026-08-07.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月31日 · 第7期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-31.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月24日 · 第6期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-24.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月10日 · 第5期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-10.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年7月3日 · 第4期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-07-03.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年6月26日 · 第3期</span>
+      <span class="link-desc">商标法修订、注册会计师法修改（主席令第79号）</span>
+      <a class="link-btn" href="2026-06-26.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年6月22日 · 第2期</span>
+      <span class="link-desc">当期法律法规追踪</span>
+      <a class="link-btn" href="2026-06-22.html" target="_blank">打开完整报告</a>
+    </div>
+    <div class="link-card">
+      <span class="link-date">2026年6月12日 · 第1期</span>
+      <span class="link-desc">创刊号</span>
+      <a class="link-btn" href="2026-06-12.html" target="_blank">打开完整报告</a>
+    </div>
+  </div>
+
+  <!-- 来源标注 -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🔗</span>来源标注</div>
+    <div class="source-block">
+      <p style="margin-bottom:12px;color:var(--text-light);">获取方式标签说明：<span class="tag tag-search">WebSearch</span> 搜索引擎检索 <span class="tag tag-fetch">WebFetch</span> 官方页面抓取 <span class="tag tag-portal">Portal列表</span> 官网栏目列表核实</p>
+
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">法释〔2026〕20号《关于办理妨害兴奋剂管理等刑事案件适用法律若干问题的解释》（含解释全文14条、废止法释〔2019〕16号、施行日期2026-12-01）</span><br>
+        最高人民法院官网权威发布，2026-11-26 10:00:00 发布<br>
+        <span class="s-url">https://www.court.gov.cn/fabu/xiangqing/518571.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">最高检第六十四批指导性案例（检例第262—266号，通知落款2026-10-09，2026-11-21对外发布，含5件案例全文及办案规则）</span><br>
+        最高人民检察院官网，2026-11-21 发布<br>
+        <span class="s-url">https://www.spp.gov.cn/xwfbh/wsfbt/202611/t20261121_741566.shtml</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">最高检发布服务新质生产力发展典型案例（5件：2件著作权+3件商业秘密，发布日期2026-11-20）</span><br>
+        最高人民检察院官网，2026-11-20 发布<br>
+        <span class="s-url">https://www.spp.gov.cn/spp/xwfbh/wsfbt/202611/t20261120_741471.shtml</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-fetch">WebFetch</span> <span class="s-name">《基金会管理条例》（国务院令第848号）施行日期核实（第七十九条：自2027年1月1日起施行）</span><br>
+        中国政府网 gov.cn，发布日期2026-11-10<br>
+        <span class="s-url">https://www.gov.cn/zhengce/content/202611/content_7085661.htm</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-portal">Portal列表</span> <span class="s-name">中国人大网"权威发布"栏目（核实本周无新公布法律，主席令最新为第91号，11月6日签署）</span><br>
+        中国人大网 npc.gov.cn<br>
+        <span class="s-url">http://www.npc.gov.cn/npc/c2/c12435/index.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-portal">Portal列表</span> <span class="s-name">中国政府网"最新政策"栏目（核实本周无新国务院令、无新行政法规）</span><br>
+        中国政府网 gov.cn<br>
+        <span class="s-url">https://www.gov.cn/zhengce/zuixin/</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-portal">Portal列表</span> <span class="s-name">最高人民法院官网"权威发布"栏目（核实司法解释/司法文件/批复栏目新增情况：本周仅法释〔2026〕20号；司法文件《关于进一步加强人民法庭规范化建设的意见》2026-11-20发布）</span><br>
+        最高人民法院官网 court.gov.cn<br>
+        <span class="s-url">https://www.court.gov.cn/fabu.html</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">法答网精选答问第四十批核实（截至2026-11-27未在 court.gov.cn 发布）</span><br>
+        site:court.gov.cn 检索，无第四十批官方条目<br>
+        <span class="s-url">https://www.court.gov.cn/</span>
+      </div>
+      <div class="source-item">
+        <span class="tag tag-search">WebSearch</span> <span class="s-name">最高检新闻栏目列表（核实本周检察动态发布时间线：64批指导性案例11-21、新质生产力典型案例11-20等）</span><br>
+        最高人民检察院官网 spp.gov.cn<br>
+        <span class="s-url">https://www.spp.gov.cn/gjybs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>本报告仅作法规动态追踪之用，不构成法律意见。所引条文以官方公报文本为准。</p>
+    <p style="margin-top:8px;">编制：<span class="brand">腾讯云 ｜ WorkBuddy</span></p>
+  </div>
+
+</div>
+</body>
+</html>
